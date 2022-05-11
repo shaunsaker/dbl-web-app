@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "env:dev": "cp ./env/development/.env .env",
+    "env:prod": "cp ./env/production/.env .env",
     "start": "parcel ./public/index.html",
     "build": "parcel build ./public/index.html",
     "lint": "npm-run-all --parallel lint:*",
@@ -29,6 +31,7 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
+    "@sentry/browser": "^6.19.7",
     "axios": "^0.27.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
