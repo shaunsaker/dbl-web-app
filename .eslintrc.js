@@ -21,4 +21,9 @@ module.exports = {
     'no-async-promise-executor': 0,
     '@typescript-eslint/no-unused-vars': 0,
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
