@@ -17,13 +17,15 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {
-    'no-async-promise-executor': 0,
-    '@typescript-eslint/no-unused-vars': 0,
-  },
   settings: {
     react: {
       version: 'detect',
     },
   },
-};
+  rules: {
+    'no-async-promise-executor': 0,
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-empty-function': 0,
+  },
+}
