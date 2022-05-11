@@ -17,5 +17,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    'no-async-promise-executor': 0,
+    '@typescript-eslint/no-unused-vars': 0,
+  },
 };
