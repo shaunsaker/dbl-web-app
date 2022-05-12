@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
 export const getBtcRate = async (currency: string): Promise<number> => {
   return new Promise(async (resolve, reject) => {
@@ -9,7 +9,7 @@ export const getBtcRate = async (currency: string): Promise<number> => {
       const rate = parseInt(response.data.bitcoin[currency.toLowerCase()])
 
       resolve(rate)
-    } catch (error: Error | AxiosError | unknown) {
+    } catch (error: Error | unknown) {
       if (axios.isAxiosError(error) && error.response) {
         reject(new Error(JSON.stringify(error.response.data)))
       }

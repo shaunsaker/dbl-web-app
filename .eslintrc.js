@@ -25,8 +25,10 @@ module.exports = {
   rules: {
     'no-async-promise-executor': 0,
     'no-case-declarations': 0,
-    '@typescript-eslint/no-unused-vars': 0,
+    'no-empty-pattern': 0,
+    'react/display-name': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/no-empty-interface': 0,
   },
 }

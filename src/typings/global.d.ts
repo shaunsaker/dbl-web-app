@@ -4,6 +4,7 @@ declare const process: {
     SUPPORT_EMAIL: string
     BLOCKCHAIN_EXPLORER_URL: string
     APP_NAME: string
+    APP_DOWNLOAD_URL: string
     SENTRY_DSN: string
     FIREBASE_API_KEY: string
     FIREBASE_AUTH_DOMAIN: string
