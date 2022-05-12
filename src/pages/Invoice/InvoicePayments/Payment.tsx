@@ -4,7 +4,7 @@ import { Payment as PaymentType } from '../../../store/payments/models'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
 import { Typography } from '../../../components/Typography'
 import { useLinking } from '../../../components/useLinking'
-import OpenIcon from '../../../icons/open.svg'
+import { OpenIcon } from '../../../components/icons/OpenIcon'
 
 type PaymentProps = PaymentType
 

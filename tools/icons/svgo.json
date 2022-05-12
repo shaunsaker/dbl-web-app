@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    {
+      "addAttributesToSVGElement": {
+        "attributes": [{ "fill": "currentColor" }, { "overflow": "visible" }]
+      }
+    },
+    { "convertColors": { "currentColor": true } }
+  ]
+}

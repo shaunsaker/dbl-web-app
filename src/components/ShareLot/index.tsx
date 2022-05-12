@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import styled from 'styled-components'
 import { LotId } from '../../store/lots/models'
-import ShareIcon from '../../icons/share.svg'
 import { colors } from '../../theme/colors'
 import { getTicketOdds } from '../../utils/getTicketOdds'
 import { useSharing } from '../useSharing'
@@ -9,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { ApplicationState } from '../../store/reducers'
 import { selectLotById } from '../../store/lots/selectors'
 import { maybePluralise } from '../../utils/maybePluralise'
+import { ShareIcon } from '../icons/ShareIcon'
 
 interface ShareLotProps {
   lotId: LotId

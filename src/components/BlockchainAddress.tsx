@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
-import { CopyIcon } from './CopyIcon'
+import { CopyButton } from './CopyButton'
 import { Typography } from './Typography'
 
 interface BlockchainAddressProps {
@@ -15,7 +15,7 @@ export const BlockchainAddress = ({
       <Typography>
         {address}
 
-        <CopyIcon value={address} />
+        <CopyButton value={address} />
       </Typography>
     </Container>
   )

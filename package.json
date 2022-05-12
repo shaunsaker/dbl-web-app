@@ -11,7 +11,8 @@
     "lint:prettier": "prettier -c \"**/*.{ts,tsx}\"",
     "lint:eslint": "eslint --ext [.ts,.tsx] .",
     "lint:ts": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "genicons": "npx @svgr/cli@5 --template tools/icons/svgr.template.js --typescript --memo --icon -d src/components/icons --svgo-config ./tools/icons/svgo.json --ignore-existing"
   },
   "author": "",
   "license": "ISC",

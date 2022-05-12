@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
-import CloseIcon from '../icons/close.svg'
 import { colors } from '../theme/colors'
+import { CloseIcon } from './icons/CloseIcon'
 
 const ICON_SIZE = 24
 

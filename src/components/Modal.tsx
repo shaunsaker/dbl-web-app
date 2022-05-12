@@ -5,8 +5,7 @@ import { RHYTHM } from '../theme/rhythm'
 import { HEADER_BAR_HEIGHT } from './HeaderBar'
 import { BORDER_RADIUS } from '../theme/borderRadius'
 import { Typography } from './Typography'
-
-import CloseIcon from '../icons/close.svg'
+import { CloseButton } from './CloseButton'
 
 const CLOSE_ICON_SIZE = 24
 
@@ -53,13 +52,7 @@ export const Modal = ({
 
         {children}
 
-        <StyledCloseButton onClick={onClose}>
-          <CloseIcon
-            width={CLOSE_ICON_SIZE}
-            height={CLOSE_ICON_SIZE}
-            fill={colors.primaryText}
-          />
-        </StyledCloseButton>
+        <StyledCloseButton onClick={onClose} />
       </ContentContainer>
     </StyledModal>
   )
@@ -73,7 +66,7 @@ const StyledModal = styled.div`
   border-top-right-radius: ${BORDER_RADIUS}px;
 `
 
-const StyledCloseButton = styled.button`
+const StyledCloseButton = styled(CloseButton)`
   position: absolute;
   top: 0;
   right: 0;

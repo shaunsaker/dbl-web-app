@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
-import ChevronLeftIcon from '../icons/chevron-left.svg'
 import { colors } from '../theme/colors'
+import { ChevronLeftIcon } from './icons/ChevronLeftIcon'
 
 const ICON_SIZE = 24
 

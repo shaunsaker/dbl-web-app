@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { colors } from '../../theme/colors'
 import { RHYTHM } from '../../theme/rhythm'
 import { Typography } from '../Typography'
-import ChevronLeftIcon from '../../icons/chevron-left.svg'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateBack } from '../../store/navigation/actions'
-import MenuIcon from '../../icons/menu.svg'
 import { RouteKey } from '../../router/models'
+import { MenuIcon } from '../icons/MenuIcon'
+import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
 
 interface HeaderBarProps {
   showBackButton?: boolean

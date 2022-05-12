@@ -7,9 +7,9 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 
-import VisibilityOnIcon from '../icons/visibility-on.svg'
-import VisibilityOffIcon from '../icons/visibility-off.svg'
 import { colors } from '../theme/colors'
+import { VisibilityOffIcon } from './icons/VisibilityOffIcon'
+import { VisibilityOnIcon } from './icons/VisibilityOnIcon'
 import { TextInputProps } from './TextInput'
 
 const VISIBILITY_ICON_SIZE = 24
