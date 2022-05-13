@@ -1,11 +1,12 @@
 import React, { ReactElement, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { CloseButton } from '../../components/CloseButton'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
 import { RoutePath } from '../../router/models'
+import { selectHasUserSignedUp } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 
@@ -13,6 +14,7 @@ interface WelcomeProps {}
 
 export const Welcome = ({}: WelcomeProps): ReactElement => {
   const dispatch = useDispatch()
+  const hasUserSignedUp = useSelector(selectHasUserSignedUp)
 
   const onLearnMoreClick = useCallback(() => {
     dispatch(navigate(RoutePath.onboarding))
@@ -20,7 +22,9 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
 
   const onCloseClick = useCallback(() => {
     dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
-  }, [dispatch])
+
+    dispatch(navigate(hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp))
+  }, [dispatch, hasUserSignedUp])
 
   return (
     <Page>

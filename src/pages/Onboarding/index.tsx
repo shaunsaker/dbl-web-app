@@ -1,6 +1,6 @@
-import React, { createRef, ReactElement, useCallback, useState } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { OnboardingOne } from './OnboardingOne'
 import { OnboardingTwo } from './OnboardingTwo'
 import { OnboardingThree } from './OnboardingThree'
@@ -9,17 +9,18 @@ import { CloseButton } from '../../components/CloseButton'
 import { colors } from '../../theme/colors'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 import { BackButton } from '../../components/BackButton'
-import { navigateBack } from '../../store/navigation/actions'
+import { navigate, navigateBack } from '../../store/navigation/actions'
+import { selectHasUserSignedUp } from '../../store/auth/selectors'
+import { RoutePath } from '../../router/models'
 
 const SLIDES = [OnboardingOne, OnboardingTwo, OnboardingThree]
 
 interface OnboardingProps {}
 
-// TODO: SS implement pager
 export const Onboarding = ({}: OnboardingProps): ReactElement => {
   const dispatch = useDispatch()
 
-  const pagerViewRef = createRef<HTMLDivElement>()
+  const hasUserSignedUp = useSelector(selectHasUserSignedUp)
 
   const [pageIndex, setPageIndex] = useState(0)
 
@@ -29,27 +30,19 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
     if (isInitialSlide) {
       dispatch(navigateBack())
     } else {
-      // pagerViewRef.current?.setPage(pageIndex - 1)
+      setPageIndex(pageIndex - 1)
     }
-  }, [dispatch, pageIndex, pagerViewRef])
+  }, [dispatch, pageIndex])
 
-  // const onPageSelected = useCallback(
-  //   event => {
-  //     setPageIndex(event.nativeEvent.position)
-  //   },
-  //   [setPageIndex],
-  // )
-
-  const onNavigateClick = useCallback(
-    (newPageIndex: number) => {
-      // pagerViewRef.current?.setPage(newPageIndex)
-    },
-    [pagerViewRef],
-  )
+  const onNavigateClick = useCallback((newPageIndex: number) => {
+    setPageIndex(newPageIndex)
+  }, [])
 
   const markCompletedOnboarding = useCallback(() => {
     dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
-  }, [dispatch])
+
+    dispatch(navigate(hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp))
+  }, [dispatch, hasUserSignedUp])
 
   const onSubmitClick = useCallback(
     (slideIndex: number) => {
@@ -58,23 +51,23 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
       if (isFinalSlide) {
         markCompletedOnboarding()
       } else {
-        // pagerViewRef.current?.setPage(slideIndex + 1)
+        setPageIndex(slideIndex + 1)
       }
     },
-    [markCompletedOnboarding, pagerViewRef],
+    [markCompletedOnboarding],
   )
 
   const onCloseClick = useCallback(() => {
     markCompletedOnboarding()
   }, [markCompletedOnboarding])
 
+  const CurrentSlide = SLIDES[pageIndex]
+
   return (
     <Page>
-      <StyledPagerView>
-        {SLIDES.map((Slide, index) => (
-          <Slide key={index + 1} onSubmit={() => onSubmitClick(index)} />
-        ))}
-      </StyledPagerView>
+      <Container>
+        <CurrentSlide onSubmit={() => onSubmitClick(pageIndex)} />
+      </Container>
 
       <DotsContainer>
         {SLIDES.map((_, index) => {
@@ -99,7 +92,7 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
   )
 }
 
-const StyledPagerView = styled.div`
+const Container = styled.div`
   flex: 1;
 `
 
