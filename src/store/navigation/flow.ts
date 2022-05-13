@@ -1,7 +1,7 @@
 import { SagaIterator } from 'redux-saga'
 import { fork, takeLatest } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
-import { Navigation } from '../../router/Navigation'
+import { Navigation } from './Navigation'
 import { navigate, navigateBack } from './actions'
 
 function* onNavigateBackFlow(): SagaIterator {

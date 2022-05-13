@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Navigation } from '../router/Navigation'
+import { Navigation } from '../store/navigation/Navigation'
 
 interface NavigateSetterProps {}
 

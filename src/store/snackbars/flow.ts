@@ -1,13 +1,21 @@
 import { fork, takeLatest } from '@redux-saga/core/effects'
 import { SagaIterator } from 'redux-saga'
-import { call } from '../../utils/call'
+import { ActionType } from 'typesafe-actions'
 import { showSnackbar } from './actions'
+import { Snackbar } from './Snackbar'
 
 function* onShowSnackbarFlow(): SagaIterator {
-  yield takeLatest(showSnackbar, function* (): SagaIterator {
-    // TODO: replace react-native-notifier
-    yield* call(() => {})
-  })
+  yield takeLatest(
+    showSnackbar,
+    function* (action: ActionType<typeof showSnackbar>): SagaIterator {
+      if (Snackbar.enqueueSnackbar) {
+        Snackbar.enqueueSnackbar(action.payload.title, {
+          variant: action.payload.type,
+          content: action.payload.description,
+        })
+      }
+    },
+  )
 }
 
 export function* snackbarsFlow(): SagaIterator {
