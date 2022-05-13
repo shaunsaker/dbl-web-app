@@ -15,7 +15,7 @@ export const CopyButton = ({ value }: CopyIconProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onCopyClick = useCallback(async () => {
-    // TODO: SS copy to clipboard
+    navigator.clipboard.writeText(value)
 
     dispatch(
       showSnackbar({
