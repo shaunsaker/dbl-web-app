@@ -56,6 +56,13 @@ export const Router = () => {
     hasCompletedOnboarding,
   })
 
+  const unauthenticatedStack = (
+    <>
+      <Route path={RoutePath.signIn} element={<SignIn />} />
+      <Route path={RoutePath.signUp} element={<SignUp />} />
+    </>
+  )
+
   const authenticatedStack = (
     <>
       <Route path={RoutePath.home} element={<Home />} />
@@ -76,11 +83,9 @@ export const Router = () => {
       <Routes>
         <Route path={RoutePath.welcome} element={<Welcome />} />
         <Route path={RoutePath.onboarding} element={<Onboarding />} />
-        <Route path={RoutePath.signIn} element={<SignIn />} />
-        <Route path={RoutePath.signUp} element={<SignUp />} />
         <Route path={RoutePath.forgotPassword} element={<ForgotPassword />} />
 
-        {isAuthenticated && authenticatedStack}
+        {isAuthenticated ? authenticatedStack : unauthenticatedStack}
 
         <Route path="*" element={<Navigate to={initialRoute} replace />} />
       </Routes>

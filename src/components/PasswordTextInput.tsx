@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { colors } from '../theme/colors'
 import { VisibilityOffIcon } from './icons/VisibilityOffIcon'
 import { VisibilityOnIcon } from './icons/VisibilityOnIcon'
-import { TextInputProps } from './TextInput'
+import { TextInput, TextInputProps } from './TextInput'
 
 const VISIBILITY_ICON_SIZE = 24
 
@@ -29,7 +29,7 @@ export const PasswordTextInput = forwardRef(
 
     return (
       <Container>
-        <input {...props} ref={ref} />
+        <TextInput {...props} ref={ref} />
 
         <VisibilityButton onClick={onVisibilityButtonClick}>
           {passwordHidden ? (

@@ -18,7 +18,6 @@ function* onNavigateFlow(): SagaIterator {
   yield takeLatest(
     navigate,
     function* (action: ActionType<typeof navigate>): SagaIterator {
-      console.log('HERE')
       if (!Navigation.navigate) {
         return
       }
