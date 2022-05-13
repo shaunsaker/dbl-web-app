@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { colors } from '../../theme/colors'
 import { RHYTHM } from '../../theme/rhythm'
@@ -8,6 +8,7 @@ import { navigate, navigateBack } from '../../store/navigation/actions'
 import { RoutePath } from '../../router/models'
 import { MenuIcon } from '../icons/MenuIcon'
 import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
+import { PrimaryDrawer } from './PrimaryDrawer'
 
 interface HeaderBarProps {
   showBackButton?: boolean
@@ -15,6 +16,8 @@ interface HeaderBarProps {
 
 export const HeaderBar = ({ showBackButton }: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
+
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const onLogoClick = useCallback(() => {
     dispatch(navigate(RoutePath.home))
@@ -25,7 +28,11 @@ export const HeaderBar = ({ showBackButton }: HeaderBarProps): ReactElement => {
   }, [dispatch])
 
   const onMenuClick = useCallback(() => {
-    // TODO: SS open the drawer
+    setDrawerOpen(true)
+  }, [])
+
+  const onCloseDrawer = useCallback(() => {
+    setDrawerOpen(false)
   }, [])
 
   return (
@@ -49,6 +56,8 @@ export const HeaderBar = ({ showBackButton }: HeaderBarProps): ReactElement => {
       <button onClick={onMenuClick}>
         <MenuIcon />
       </button>
+
+      <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
     </Container>
   )
 }

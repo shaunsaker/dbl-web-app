@@ -5,9 +5,9 @@ import { RHYTHM } from '../theme/rhythm'
 import { BORDER_RADIUS } from '../theme/borderRadius'
 import { Typography } from './Typography'
 import { CloseButton } from './CloseButton'
-import { Dialog, DialogProps } from '@mui/material'
+import { CustomDialog, CustomDialogProps } from './CustomDialog'
 
-export interface ModalProps extends DialogProps {
+export interface ModalProps extends CustomDialogProps {
   title: string
   subtitle?: string
   onClose: () => void
@@ -37,7 +37,7 @@ export const Modal = ({
   )
 }
 
-const StyledDialog = styled(Dialog)``
+const StyledDialog = styled(CustomDialog)``
 
 const StyledCloseButton = styled(CloseButton)`
   position: absolute;

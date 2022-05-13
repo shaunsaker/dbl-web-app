@@ -1,24 +1,8 @@
-import React, { ReactElement, useCallback } from 'react'
+import { Drawer, DrawerProps } from '@mui/material'
+import React, { ReactElement } from 'react'
 
-import { Typography } from './Typography'
-import { useLinking } from './useLinking'
+export interface CustomDrawerProps extends DrawerProps {}
 
-interface CustomDrawerProps {}
-
-export const CustomDrawer = ({}: CustomDrawerProps): ReactElement => {
-  const { openLink } = useLinking()
-
-  const onContactSupportClick = useCallback(async () => {
-    const link = `mailto:${process.env.SUPPORT_EMAIL}`
-
-    await openLink(link)
-  }, [openLink])
-
-  return (
-    <div>
-      <button onClick={onContactSupportClick}>
-        <Typography bold>Contact Support</Typography>
-      </button>
-    </div>
-  )
+export const CustomDrawer = ({ ...props }: CustomDrawerProps): ReactElement => {
+  return <Drawer {...props} />
 }
