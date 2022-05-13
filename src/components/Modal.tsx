@@ -1,48 +1,27 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import { colors } from '../theme/colors'
 import { RHYTHM } from '../theme/rhythm'
-import { HEADER_BAR_HEIGHT } from './HeaderBar'
 import { BORDER_RADIUS } from '../theme/borderRadius'
 import { Typography } from './Typography'
 import { CloseButton } from './CloseButton'
+import { Dialog, DialogProps } from '@mui/material'
 
-const CLOSE_ICON_SIZE = 24
-
-const BACKDROP_COLOR = colors.backdrop
-
-export interface ModalProps {
+export interface ModalProps extends DialogProps {
   title: string
   subtitle?: string
-  isVisible: boolean
-  disableSwipeAway?: boolean // useful for when you have a ScrollView in the Modal
-  children: ReactNode
   onClose: () => void
 }
 
-// TODO:
 export const Modal = ({
   title,
   subtitle,
-  isVisible,
-  disableSwipeAway,
+  open,
   children,
   onClose,
 }: ModalProps): ReactElement => {
   return (
-    <StyledModal
-    // isVisible={isVisible}
-    // backdropColor={BACKDROP_COLOR}
-    // backdropOpacity={1}
-    // useNativeDriver
-    // useNativeDriverForBackdrop
-    // hideModalContentWhileAnimating
-    // coverScreen={false}
-    // swipeDirection={disableSwipeAway ? undefined : 'down'}
-    // propagateSwipe={disableSwipeAway}
-    // onBackdropClick={onClose}
-    // onBackButtonClick={onClose}
-    >
+    <StyledDialog open={open} onClose={onClose}>
       <ContentContainer>
         <Typography large bold>
           {title}
@@ -54,17 +33,11 @@ export const Modal = ({
 
         <StyledCloseButton onClick={onClose} />
       </ContentContainer>
-    </StyledModal>
+    </StyledDialog>
   )
 }
 
-const StyledModal = styled.div`
-  margin: 0;
-  flex: 1;
-  margin-top: ${HEADER_BAR_HEIGHT + RHYTHM * 4}px;
-  border-top-left-radius: ${BORDER_RADIUS}px;
-  border-top-right-radius: ${BORDER_RADIUS}px;
-`
+const StyledDialog = styled(Dialog)``
 
 const StyledCloseButton = styled(CloseButton)`
   position: absolute;

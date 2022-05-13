@@ -38,6 +38,8 @@
   },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
+    "@mui/material": "^5.7.0",
+    "@mui/styled-engine-sc": "^5.7.0",
     "@sentry/browser": "^6.19.7",
     "axios": "^0.27.2",
     "firebase": "8.10.1",
