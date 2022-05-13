@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { CloseButton } from '../../components/CloseButton'
 import { LotStats } from '../../components/LotStats'
 import { Page } from '../../components/Page'
-import { ShareLot } from '../../components/ShareLot'
 import { TicketsSummary } from '../../components/TicketsSummary'
 import { RouteParams } from '../../router/models'
 import { fetchInvoices } from '../../store/invoices/actions'
@@ -44,10 +43,6 @@ export const Result = (): ReactElement | null => {
         <LotStats lotId={lotId} />
 
         <TicketsSummary lotId={lotId} />
-
-        <ShareLotContainer>
-          <ShareLot lotId={lotId} />
-        </ShareLotContainer>
       </Container>
 
       <CloseButtonContainer>
@@ -59,12 +54,6 @@ export const Result = (): ReactElement | null => {
 
 const Container = styled.div`
   flex: 1;
-`
-
-const ShareLotContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
 `
 
 const CloseButtonContainer = styled.div`

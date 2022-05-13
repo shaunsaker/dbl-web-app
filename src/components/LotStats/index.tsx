@@ -12,7 +12,6 @@ import { ApplicationState } from '../../store/reducers'
 import { getFormattedTime } from '../../utils/getFormattedTime'
 import { maybePluralise } from '../../utils/maybePluralise'
 import { CountdownTimer } from '../CountdownTimer'
-import { ShareLot } from '../ShareLot'
 import { Typography } from '../Typography'
 
 interface LotStatsProps {
@@ -65,10 +64,6 @@ export const LotStats = ({
         </ActivityIndicatorContainer>
       )}
 
-      <ShareLotContainer>
-        <ShareLot lotId={lotId} />
-      </ShareLotContainer>
-
       {children}
     </Container>
   )
@@ -81,11 +76,5 @@ const Container = styled.div`
 const ActivityIndicatorContainer = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
-`
-
-const ShareLotContainer = styled.div`
-  position: absolute;
-  bottom: 0;
   right: 0;
 `
