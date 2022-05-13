@@ -7,6 +7,7 @@ import {
 } from '@redux-saga/core/effects'
 import { SagaIterator } from '@redux-saga/types'
 import { ActionType, getType } from 'typesafe-actions'
+import { lotIdParam, RoutePath } from '../../router/models'
 import { firebaseSyncUserProfile } from '../../services/firebase/firestore/firebaseSyncUserProfile'
 import { firebaseUpdateUserProfile } from '../../services/firebase/firestore/firebaseUpdateUserProfile'
 import { call } from '../../utils/call'
@@ -15,6 +16,7 @@ import { getTimeAsISOString } from '../../utils/getTimeAsISOString'
 import { select } from '../../utils/typedSelect'
 import { signOut, signUp } from '../auth/actions'
 import { selectUid } from '../auth/selectors'
+import { navigate } from '../navigation/actions'
 import { showSnackbar } from '../snackbars/actions'
 import { SnackbarType } from '../snackbars/models'
 import { fetchUserProfile, createUser, updateUserProfile } from './actions'
@@ -133,7 +135,7 @@ export function* checkUserWinnerFlow(): SagaIterator {
       return
     }
 
-    // TODO: SS navigate to the winner modal
+    yield put(navigate(RoutePath.winner.replace(lotIdParam, winningLotId)))
 
     // toggle hasSeenLink so that we don't show the Winner modal automatically again
     const newWinnings: UserWinnings = {
