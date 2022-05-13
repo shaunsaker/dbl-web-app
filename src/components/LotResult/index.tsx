@@ -1,5 +1,5 @@
 import moment from 'moment'
-import React, { ReactElement, useCallback } from 'react'
+import React, { HTMLAttributes, ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { lotIdParam, RoutePath } from '../../router/models'
@@ -14,11 +14,14 @@ import { numberToDigits } from '../../utils/numberToDigits'
 
 import { Typography } from '../Typography'
 
-interface LotResultProps {
+interface LotResultProps extends HTMLAttributes<HTMLButtonElement> {
   lotId: LotId
 }
 
-export const LotResult = ({ lotId }: LotResultProps): ReactElement | null => {
+export const LotResult = ({
+  lotId,
+  ...props
+}: LotResultProps): ReactElement | null => {
   const dispatch = useDispatch()
 
   const lot = useSelector((state: ApplicationState) =>
@@ -51,7 +54,7 @@ export const LotResult = ({ lotId }: LotResultProps): ReactElement | null => {
   }
 
   return (
-    <Container disabled={!onClick} onClick={onClick}>
+    <Container disabled={!onClick} onClick={onClick} {...props}>
       <Typography>{moment(lotDate).format('dddd, DD MMMM YYYY')}</Typography>
 
       <Typography large bold>
