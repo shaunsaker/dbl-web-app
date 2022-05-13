@@ -2,7 +2,6 @@ import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { HeaderBar } from '../../components/HeaderBar'
-import { InputContainer } from '../../components/InputContainer'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TextButton } from '../../components/TextButton'
@@ -48,29 +47,27 @@ export const Profile = ({}: ProfileProps): ReactElement => {
     <Page>
       <HeaderBar />
 
-      <InputContainer>
-        <Container>
-          <Typography>Email</Typography>
+      <Container>
+        <Typography>Email</Typography>
 
-          <Typography bold>{userEmail}</Typography>
+        <Typography bold>{userEmail}</Typography>
 
-          <TextInput
-            label="What should we call you?"
-            placeholder="E.g. Nighthawk"
-            value={username}
-            onChangeText={onChangeUsername}
-            onSubmit={!isSaveDisabled ? onSubmit : undefined}
-          />
+        <TextInput
+          label="What should we call you?"
+          placeholder="E.g. Nighthawk"
+          value={username}
+          onChangeText={onChangeUsername}
+          onSubmit={!isSaveDisabled ? onSubmit : undefined}
+        />
 
-          <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
+        <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
 
-          <ButtonsContainer>
-            <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
-              SAVE
-            </PrimaryButton>
-          </ButtonsContainer>
-        </Container>
-      </InputContainer>
+        <ButtonsContainer>
+          <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
+            SAVE
+          </PrimaryButton>
+        </ButtonsContainer>
+      </Container>
     </Page>
   )
 }

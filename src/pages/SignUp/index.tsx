@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { InputContainer } from '../../components/InputContainer'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
@@ -67,51 +66,47 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
 
   return (
     <Page>
-      <InputContainer>
-        <Container>
-          <StyledImage src="" />
+      <Container>
+        <StyledImage src="" />
 
-          <Typography large bold center>
-            Welcome to the Daily Bitcoin Lottery
-          </Typography>
+        <Typography large bold center>
+          Welcome to the Daily Bitcoin Lottery
+        </Typography>
 
-          <Typography center>Creating one millionaire a day!</Typography>
+        <Typography center>Creating one millionaire a day!</Typography>
 
-          <TextInput
-            ref={emailInputRef}
-            label="Email*"
-            placeholder="Enter your email"
-            value={email}
-            onChangeText={onChangeEmail}
-            onSubmit={onSubmitEmail}
-          />
+        <TextInput
+          ref={emailInputRef}
+          label="Email*"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={onChangeEmail}
+          onSubmit={onSubmitEmail}
+        />
 
-          <TextInput
-            label="What should we call you?*"
-            placeholder="E.g. Nighthawk, Sandra, Xolisi, Kobus"
-            value={username}
-            onChangeText={onChangeUsername}
-            onSubmit={onSubmitUsername}
-          />
+        <TextInput
+          label="What should we call you?*"
+          placeholder="E.g. Nighthawk, Sandra, Xolisi, Kobus"
+          value={username}
+          onChangeText={onChangeUsername}
+          onSubmit={onSubmitUsername}
+        />
 
-          <PasswordTextInput
-            ref={passwordInputRef}
-            label="Password*"
-            placeholder="Enter your password"
-            value={password}
-            onChangeText={onChangePassword}
-            onSubmit={onSubmit}
-          />
+        <PasswordTextInput
+          ref={passwordInputRef}
+          label="Password*"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={onChangePassword}
+          onSubmit={onSubmit}
+        />
 
-          <PrimaryButton disabled={isSignUpDisabled} onClick={onSubmit}>
-            SIGN UP
-          </PrimaryButton>
+        <PrimaryButton disabled={isSignUpDisabled} onClick={onSubmit}>
+          SIGN UP
+        </PrimaryButton>
 
-          <TextButton onClick={onSignInInsteadClick}>
-            Sign in instead?
-          </TextButton>
-        </Container>
-      </InputContainer>
+        <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
+      </Container>
 
       {isAuthLoading && <LoadingModal />}
     </Page>

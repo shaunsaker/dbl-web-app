@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { BackButton } from '../../components/BackButton'
-import { InputContainer } from '../../components/InputContainer'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
@@ -44,32 +43,30 @@ export const ForgotPassword = (): ReactElement => {
 
   return (
     <Page>
-      <InputContainer>
-        <Container>
-          <StyledImage src="" />
+      <Container>
+        <StyledImage src="" />
 
-          <Typography large bold center>
-            Title
-          </Typography>
+        <Typography large bold center>
+          Title
+        </Typography>
 
-          <Typography center>Creating one millionaire a day!</Typography>
+        <Typography center>Creating one millionaire a day!</Typography>
 
-          <TextInput
-            label="Email*"
-            placeholder="Enter your email"
-            value={email}
-            onChangeText={onChangeEmail}
-            onSubmit={onSubmitClick}
-          />
+        <TextInput
+          label="Email*"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={onChangeEmail}
+          onSubmit={onSubmitClick}
+        />
 
-          <PrimaryButton
-            disabled={isForgotPasswordDisabled}
-            onClick={onSubmitClick}
-          >
-            SUBMIT
-          </PrimaryButton>
-        </Container>
-      </InputContainer>
+        <PrimaryButton
+          disabled={isForgotPasswordDisabled}
+          onClick={onSubmitClick}
+        >
+          SUBMIT
+        </PrimaryButton>
+      </Container>
 
       <BackButtonContainer>
         <BackButton onClick={onBackClick} />

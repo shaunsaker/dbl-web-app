@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { InputContainer } from '../../components/InputContainer'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
@@ -61,48 +60,44 @@ export const SignIn = ({}: SignInProps): ReactElement => {
 
   return (
     <Page>
-      <InputContainer>
-        <Container>
-          <StyledImage src="" />
+      <Container>
+        <StyledImage src="" />
 
-          <Typography large bold center>
-            {`Welcome back to the Daily Bitcoin Lottery${
-              existingUsername ? `, ${existingUsername}` : ''
-            }`}
-          </Typography>
+        <Typography large bold center>
+          {`Welcome back to the Daily Bitcoin Lottery${
+            existingUsername ? `, ${existingUsername}` : ''
+          }`}
+        </Typography>
 
-          <Typography center>Creating one millionaire a day!</Typography>
+        <Typography center>Creating one millionaire a day!</Typography>
 
-          <TextInput
-            label="Email*"
-            placeholder="Enter your email"
-            value={email}
-            onChangeText={onChangeEmail}
-            onSubmit={onSubmitEmail}
-          />
+        <TextInput
+          label="Email*"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={onChangeEmail}
+          onSubmit={onSubmitEmail}
+        />
 
-          <PasswordTextInput
-            ref={passwordInputRef}
-            label="Password*"
-            placeholder="Enter your password"
-            value={password}
-            onChangeText={onChangePassword}
-            onSubmit={onSubmit}
-          />
+        <PasswordTextInput
+          ref={passwordInputRef}
+          label="Password*"
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={onChangePassword}
+          onSubmit={onSubmit}
+        />
 
-          <TextButton onClick={onForgotPasswordClick}>
-            Forgot Password?
-          </TextButton>
+        <TextButton onClick={onForgotPasswordClick}>
+          Forgot Password?
+        </TextButton>
 
-          <PrimaryButton disabled={isSignInDisabled} onClick={onSubmit}>
-            SIGN IN
-          </PrimaryButton>
+        <PrimaryButton disabled={isSignInDisabled} onClick={onSubmit}>
+          SIGN IN
+        </PrimaryButton>
 
-          <TextButton onClick={onSignUpInsteadClick}>
-            Sign up instead?
-          </TextButton>
-        </Container>
-      </InputContainer>
+        <TextButton onClick={onSignUpInsteadClick}>Sign up instead?</TextButton>
+      </Container>
 
       {isAuthLoading && <LoadingModal />}
     </Page>
