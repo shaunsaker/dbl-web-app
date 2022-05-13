@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { RouteKey } from '../../router/models'
+import { lotIdParam, RoutePath } from '../../router/models'
 import { fetchInvoices } from '../../store/invoices/actions'
 import { InvoiceStatus } from '../../store/invoices/models'
 import {
@@ -59,7 +59,7 @@ export const TicketsSummary = ({
   )
 
   const onClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.tickets, props: { lotId } }))
+    dispatch(navigate(RoutePath.tickets.replace(lotIdParam, lotId)))
   }, [dispatch, lotId])
 
   return (

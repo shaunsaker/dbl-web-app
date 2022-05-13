@@ -9,7 +9,7 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
-import { RouteKey } from '../../router/models'
+import { RoutePath } from '../../router/models'
 import { signIn } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -46,7 +46,7 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   }, [])
 
   const onForgotPasswordClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.forgotPassword, props: { email } }))
+    dispatch(navigate(RoutePath.forgotPassword))
   }, [dispatch, email])
 
   const onSubmit = useCallback(() => {
@@ -56,7 +56,7 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   }, [dispatch, email, password, isSignInDisabled])
 
   const onSignUpInsteadClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.signUp }))
+    dispatch(navigate(RoutePath.signUp))
   }, [dispatch])
 
   return (

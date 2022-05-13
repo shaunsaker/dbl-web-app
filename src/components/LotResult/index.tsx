@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { RouteKey } from '../../router/models'
+import { lotIdParam, RoutePath } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { LotId } from '../../store/lots/models'
@@ -39,11 +39,11 @@ export const LotResult = ({ lotId }: LotResultProps): ReactElement | null => {
   const lotDate = lot?.lastCallTime
 
   const onClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.result, props: { lotId } }))
+    dispatch(navigate(RoutePath.result.replace(lotIdParam, lotId)))
   }, [dispatch, lotId])
 
   const onViewWinningDetailsClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.winner, props: { lotId } }))
+    dispatch(navigate(RoutePath.winner.replace(lotIdParam, lotId)))
   }, [dispatch, lotId])
 
   if (!lot) {

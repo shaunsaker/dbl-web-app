@@ -5,7 +5,7 @@ import { CloseButton } from '../../components/CloseButton'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
-import { RouteKey } from '../../router/models'
+import { RoutePath } from '../../router/models'
 import { navigate } from '../../store/navigation/actions'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 
@@ -15,7 +15,7 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onLearnMoreClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.onboarding }))
+    dispatch(navigate(RoutePath.onboarding))
   }, [dispatch])
 
   const onCloseClick = useCallback(() => {

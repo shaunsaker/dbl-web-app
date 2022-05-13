@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import { CloseButton } from '../../components/CloseButton'
 import { MyTickets } from './MyTickets'
 import { Page } from '../../components/Page'
-import { RouteParams, RouteKey } from '../../router/models'
+import { RouteParams } from '../../router/models'
 import { navigateBack } from '../../store/navigation/actions'
 import { useParams } from 'react-router-dom'
 
 export const Tickets = (): ReactElement | null => {
-  const { lotId } = useParams<RouteParams[RouteKey.tickets]>()
+  const { lotId } = useParams<RouteParams['tickets']>()
 
   const dispatch = useDispatch()
 

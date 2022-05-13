@@ -7,12 +7,12 @@ import { LotStats } from '../../components/LotStats'
 import { Page } from '../../components/Page'
 import { ShareLot } from '../../components/ShareLot'
 import { TicketsSummary } from '../../components/TicketsSummary'
-import { RouteParams, RouteKey } from '../../router/models'
+import { RouteParams } from '../../router/models'
 import { fetchInvoices } from '../../store/invoices/actions'
 import { navigateBack } from '../../store/navigation/actions'
 
 export const Result = (): ReactElement | null => {
-  const { lotId } = useParams<RouteParams[RouteKey.result]>()
+  const { lotId } = useParams<RouteParams['result']>()
 
   const dispatch = useDispatch()
 

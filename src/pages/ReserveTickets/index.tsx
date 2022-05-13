@@ -5,7 +5,7 @@ import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
 import { firebaseReserveTickets } from '../../services/firebase/functions/firebaseReserveTickets'
-import { RouteKey } from '../../router/models'
+import { invoiceIdParam, lotIdParam, RoutePath } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { InvoiceId, InvoiceStatus } from '../../store/invoices/models'
@@ -97,13 +97,11 @@ export const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
       dispatch(navigateBack())
 
       dispatch(
-        navigate({
-          route: RouteKey.invoice,
-          props: {
-            lotId: activeLot.id,
-            invoiceId: reserveTicketsResponse.data as InvoiceId,
-          },
-        }),
+        navigate(
+          RoutePath.result
+            .replace(lotIdParam, activeLot.id)
+            .replace(invoiceIdParam, reserveTicketsResponse.data as InvoiceId),
+        ),
       )
     } catch (error) {
       console.error(error)

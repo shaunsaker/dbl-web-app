@@ -6,7 +6,7 @@ import { LotStats } from '../../components/LotStats'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TicketsSummary } from '../../components/TicketsSummary'
-import { RouteKey } from '../../router/models'
+import { RoutePath } from '../../router/models'
 import { selectHasTicketsForLotId } from '../../store/invoices/selectors'
 import { selectActiveLotId } from '../../store/lots/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -25,7 +25,7 @@ export const Home = ({}: HomeProps): ReactElement => {
   )
 
   const onBuyTicketsClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.reserveTickets }))
+    dispatch(navigate(RoutePath.reserveTickets))
   }, [dispatch])
 
   return (

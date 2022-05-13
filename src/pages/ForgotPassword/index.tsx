@@ -9,7 +9,7 @@ import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
-import { RouteKey, RouteParams } from '../../router/models'
+import { RouteParams } from '../../router/models'
 import { resetPassword } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigateBack } from '../../store/navigation/actions'
@@ -21,7 +21,7 @@ export const ForgotPassword = (): ReactElement => {
   const dispatch = useDispatch()
 
   const { email: initialEmail = '' } =
-    useParams<RouteParams[RouteKey.forgotPassword]>()
+    useParams<RouteParams['forgotPassword']>()
 
   const isAuthLoading = useSelector(selectAuthLoading)
 

@@ -1,45 +1,40 @@
 import { InvoiceId } from '../store/invoices/models'
 import { LotId } from '../store/lots/models'
 
-export enum RouteKey {
-  welcome = 'welcome',
-  onboarding = 'onboarding',
-  signUp = 'sign-up',
-  signIn = 'sign-in',
-  forgotPassword = 'forgot-password',
-  drawer = 'drawer',
-  home = 'home',
-  reserveTickets = 'reserve-tickets',
-  invoice = 'invoice',
-  tickets = 'tickets',
-  results = 'results',
-  result = 'result',
-  winner = 'winner',
-  profile = 'profile',
+export const emailParam = ':email'
+export const lotIdParam = ':lotId'
+export const invoiceIdParam = ':invocieId'
+
+export const RoutePath = {
+  welcome: '/welcome',
+  onboarding: '/onboarding',
+  signUp: '/sign-up',
+  signIn: '/sign-in',
+  forgotPassword: `/forgot-password/${emailParam}`,
+  drawer: '/drawer',
+  home: '/',
+  reserveTickets: '/reserve-tickets',
+  invoice: `/invoice/${lotIdParam}/${invoiceIdParam}`,
+  tickets: `/tickets/${lotIdParam}`,
+  results: '/results',
+  result: `/result/${lotIdParam}`,
+  winner: `/winner/${lotIdParam}`,
+  profile: '/profile',
 }
 
 export type RouteParams = {
-  [RouteKey.welcome]: undefined
-  [RouteKey.onboarding]: undefined
-  [RouteKey.signUp]: undefined
-  [RouteKey.signIn]: undefined
-  [RouteKey.forgotPassword]: { email: string }
-  [RouteKey.drawer]: undefined
-  [RouteKey.home]: undefined
-  [RouteKey.reserveTickets]: undefined
-  [RouteKey.invoice]: {
+  forgotPassword: { email: string }
+  invoice: {
     lotId: LotId
     invoiceId: InvoiceId
   }
-  [RouteKey.tickets]: {
+  tickets: {
     lotId: LotId
   }
-  [RouteKey.results]: undefined
-  [RouteKey.result]: {
+  result: {
     lotId: LotId
   }
-  [RouteKey.winner]: {
+  winner: {
     lotId: LotId
   }
-  [RouteKey.profile]: undefined
 }

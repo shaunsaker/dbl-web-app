@@ -26,6 +26,7 @@ module.exports = {
     'no-async-promise-executor': 0,
     'no-case-declarations': 0,
     'no-empty-pattern': 0,
+    'require-yield': 0,
     'react/display-name': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-empty-function': 0,

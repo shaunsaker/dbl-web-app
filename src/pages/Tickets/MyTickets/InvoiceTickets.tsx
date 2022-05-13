@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { RouteKey } from '../../../router/models'
+import { invoiceIdParam, lotIdParam, RoutePath } from '../../../router/models'
 import { LotId } from '../../../store/lots/models'
 import { navigate } from '../../../store/navigation/actions'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
@@ -24,13 +24,11 @@ export const InvoiceTickets = ({
 
   const onClick = useCallback(() => {
     dispatch(
-      navigate({
-        route: RouteKey.invoice,
-        props: {
-          lotId,
-          invoiceId: id,
-        },
-      }),
+      navigate(
+        RoutePath.invoice
+          .replace(lotIdParam, lotId)
+          .replace(invoiceIdParam, id),
+      ),
     )
   }, [dispatch, lotId, id])
 

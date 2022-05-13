@@ -5,7 +5,7 @@ import { RHYTHM } from '../../theme/rhythm'
 import { Typography } from '../Typography'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateBack } from '../../store/navigation/actions'
-import { RouteKey } from '../../router/models'
+import { RoutePath } from '../../router/models'
 import { MenuIcon } from '../icons/MenuIcon'
 import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
 
@@ -17,7 +17,7 @@ export const HeaderBar = ({ showBackButton }: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onLogoClick = useCallback(() => {
-    dispatch(navigate({ route: RouteKey.home }))
+    dispatch(navigate(RoutePath.home))
   }, [dispatch])
 
   const onBackClick = useCallback(() => {

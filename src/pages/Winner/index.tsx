@@ -8,14 +8,14 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
 import { useLinking } from '../../components/useLinking'
 import { useSharing } from '../../components/useSharing'
-import { RouteParams, RouteKey } from '../../router/models'
+import { RouteParams } from '../../router/models'
 import { selectLotById } from '../../store/lots/selectors'
 import { navigateBack } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { selectUserWinningByLotId } from '../../store/userProfile/selectors'
 
 export const Winner = (): ReactElement => {
-  const { lotId } = useParams<RouteParams[RouteKey.winner]>()
+  const { lotId } = useParams<RouteParams['winner']>()
 
   const dispatch = useDispatch()
 

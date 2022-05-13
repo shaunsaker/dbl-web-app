@@ -10,10 +10,12 @@ import { lotsFlow } from './lots/flow'
 import { btcRateFlow } from './btcRate/flow'
 import { invoicesFlow } from './invoices/flow'
 import { paymentsFlow } from './payments/flow'
+import { navigationFlow } from './navigation/flow'
 
 function* omnipresentFlows() {
   yield fork(authFlow)
   yield fork(createUserFlow) // user may not be authenticated in the store by this stage
+  yield fork(navigationFlow)
   yield fork(snackbarsFlow)
 }
 
