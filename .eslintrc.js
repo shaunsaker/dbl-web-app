@@ -1,3 +1,7 @@
+const IGNORE = 'off'
+const WARNING = 'warn'
+const ERROR = 'error'
+
 module.exports = {
   env: {
     browser: true,
@@ -7,6 +11,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,13 +28,14 @@ module.exports = {
     },
   },
   rules: {
-    'no-async-promise-executor': 0,
-    'no-case-declarations': 0,
-    'no-empty-pattern': 0,
-    'require-yield': 0,
-    'react/display-name': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/no-empty-interface': 0,
+    'no-async-promise-executor': IGNORE,
+    'no-case-declarations': IGNORE,
+    'no-empty-pattern': IGNORE,
+    'require-yield': IGNORE,
+    'react/display-name': IGNORE,
+    'react-hooks/exhaustive-deps': ERROR,
+    '@typescript-eslint/no-explicit-any': IGNORE,
+    '@typescript-eslint/no-empty-function': IGNORE,
+    '@typescript-eslint/no-empty-interface': IGNORE,
   },
 }
