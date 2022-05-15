@@ -23,8 +23,7 @@ export function* signUpSaga(): SagaIterator {
         yield put(
           showSnackbar({
             type: SnackbarType.success,
-            title: 'Success',
-            description: 'You were signed up succesfully.',
+            title: 'You were signed up succesfully.',
           }),
         )
       } catch (error) {
@@ -46,8 +45,7 @@ export function* signInSaga(): SagaIterator {
         yield put(
           showSnackbar({
             type: SnackbarType.success,
-            title: 'Success',
-            description: 'You were signed in succesfully.',
+            title: 'You were signed in succesfully.',
           }),
         )
       } catch (error) {
@@ -69,8 +67,7 @@ export function* resetPasswordSaga(): SagaIterator {
         yield put(
           showSnackbar({
             type: SnackbarType.success,
-            title: 'Success',
-            description: 'We sent you a password reset email succesfully.',
+            title: 'We sent you a password reset email succesfully.',
           }),
         )
       } catch (error) {
@@ -90,8 +87,7 @@ export function* signOutSaga(): SagaIterator {
       yield put(
         showSnackbar({
           type: SnackbarType.success,
-          title: 'Success',
-          description: 'You were signed out succesfully.',
+          title: 'You were signed out succesfully.',
         }),
       )
     } catch (error) {

@@ -102,8 +102,7 @@ export function* updateUserProfileFlow(): SagaIterator {
           yield put(
             showSnackbar({
               type: SnackbarType.success,
-              title: 'Success',
-              description: 'We successfully updated your profile.',
+              title: 'We successfully updated your profile.',
             }),
           )
         }

@@ -20,8 +20,7 @@ export const CopyButton = ({ value }: CopyIconProps): ReactElement => {
     dispatch(
       showSnackbar({
         type: SnackbarType.success,
-        title: 'Copied to Clipboard',
-        description: value,
+        title: `Copied to Clipboard: ${value}`,
       }),
     )
   }, [value, dispatch])

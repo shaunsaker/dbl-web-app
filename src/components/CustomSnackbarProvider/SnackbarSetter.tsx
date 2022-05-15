@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack'
-import { Snackbar } from '../store/snackbars/Snackbar'
+import { Snackbar } from '../../store/snackbars/Snackbar'
 
 interface SnackbarSetterProps {}
 

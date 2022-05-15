@@ -109,8 +109,7 @@ export const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
       dispatch(
         showSnackbar({
           type: SnackbarType.error,
-          title: 'Error',
-          description: (error as Error).message,
+          title: (error as Error).message,
         }),
       )
     }

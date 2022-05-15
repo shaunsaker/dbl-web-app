@@ -11,8 +11,9 @@ function* onShowSnackbarFlow(): SagaIterator {
       if (Snackbar.enqueueSnackbar) {
         Snackbar.enqueueSnackbar(action.payload.title, {
           variant: action.payload.type,
-          content: action.payload.description,
         })
+      } else {
+        console.error('No Snackbar provider.')
       }
     },
   )

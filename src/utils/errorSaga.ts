@@ -19,8 +19,7 @@ export function* errorSaga(error: unknown, action?: any): SagaIterator {
     yield put(
       showSnackbar({
         type: SnackbarType.error,
-        title: 'Error',
-        description: error.message,
+        title: error.message,
       }),
     )
   }
