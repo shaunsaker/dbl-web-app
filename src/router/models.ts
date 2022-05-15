@@ -3,7 +3,7 @@ import { LotId } from '../store/lots/models'
 
 export const emailParam = ':email'
 export const lotIdParam = ':lotId'
-export const invoiceIdParam = ':invocieId'
+export const invoiceIdParam = ':invoiceId'
 
 export const RoutePath = {
   welcome: '/welcome',
