@@ -25,7 +25,6 @@ export interface UserProfileData {
   dateCreated: string
   username: Username
   email: string
-  fcmTokens: string[]
   winnings?: UserWinnings
   testimonials?: UserTestimonials
 }
