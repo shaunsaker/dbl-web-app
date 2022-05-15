@@ -12,7 +12,8 @@ export const firebaseReserveTickets = async (
   return new Promise(async (resolve, reject) => {
     try {
       const { data } = await fb
-        .functions()
+        .app()
+        .functions('europe-west1')
         .httpsCallable(FirebaseCallableFunctions.bookie)(payload)
 
       resolve(data)
