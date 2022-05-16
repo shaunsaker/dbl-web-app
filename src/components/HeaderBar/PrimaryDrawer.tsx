@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { RoutePath } from '../../router/models'
+import { pageParam, RoutePath } from '../../router/models'
 import { navigate } from '../../store/navigation/actions'
 import { CustomDrawer, CustomDrawerProps } from '../CustomDrawer'
 
@@ -8,7 +8,7 @@ import { Typography } from '../Typography'
 import { useLinking } from '../useLinking'
 
 const DRAWER_ROUTES: { label: string; path: string }[] = [
-  { label: 'Results', path: RoutePath.results },
+  { label: 'Results', path: RoutePath.results.replace(pageParam, '1') },
   { label: 'Profile', path: RoutePath.profile },
 ]
 

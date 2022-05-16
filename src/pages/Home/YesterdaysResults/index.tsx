@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { RoutePath } from '../../../router/models'
+import { pageParam, RoutePath } from '../../../router/models'
 import {
   selectLatestInactiveLotId,
   selectLotsDataLoading,
@@ -20,7 +20,7 @@ export const YesterdaysResults =
     const yesterdaysLotId = useSelector(selectLatestInactiveLotId)
 
     const onViewMoreResultsClick = useCallback(() => {
-      dispatch(navigate(RoutePath.results))
+      dispatch(navigate(RoutePath.results.replace(pageParam, '1')))
     }, [dispatch])
 
     return (

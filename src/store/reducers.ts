@@ -11,6 +11,8 @@ import { OnboardingState } from './onboarding/models'
 import { onboardingReducer } from './onboarding/reducer'
 import { PaymentsState } from './payments/models'
 import { paymentsReducer } from './payments/reducer'
+import { StatsState } from './stats/models'
+import { statsReducer } from './stats/reducer'
 import { UserProfileState } from './userProfile/models'
 import { userProfileReducer } from './userProfile/reducer'
 
@@ -21,6 +23,7 @@ export interface ApplicationState {
   lots: LotsState
   onboarding: OnboardingState
   payments: PaymentsState
+  stats: StatsState
   userProfile: UserProfileState
 }
 
@@ -31,6 +34,7 @@ export const rootReducer = combineReducers({
   lots: lotsReducer,
   onboarding: onboardingReducer,
   payments: paymentsReducer,
+  stats: statsReducer,
   userProfile: userProfileReducer,
 })
 

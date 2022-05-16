@@ -1,71 +1,61 @@
-import React, { ReactElement, useCallback, useState } from 'react'
+import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import {
-  CustomList,
-  CustomListCellProps,
-  CustomListOnScrollProps,
-} from '../../components/CustomList'
+import { CustomPagination } from '../../components/CustomPagination'
 import { HeaderBar } from '../../components/HeaderBar'
 import { LotResult } from '../../components/LotResult'
 import { Page } from '../../components/Page'
 import { Typography } from '../../components/Typography'
+import { pageParam, RouteParams, RoutePath } from '../../router/models'
 import { fetchInactiveLots } from '../../store/lots/actions'
-import { Lot } from '../../store/lots/models'
 import {
-  selectInactiveLotsSortedByDate,
   selectLotsDataLoading,
+  selectSortedInactiveLotsByPage,
 } from '../../store/lots/selectors'
+import { navigate } from '../../store/navigation/actions'
+import { ApplicationState } from '../../store/reducers'
+import { selectStatsData } from '../../store/stats/selectors'
+
+export const LOT_RESULTS_PER_PAGE = 10
 
 interface ResultsProps {}
 
 export const Results = ({}: ResultsProps): ReactElement => {
+  const { page: pageString = '1' } = useParams<RouteParams['results']>()
+  const page = parseInt(pageString)
+
   const dispatch = useDispatch()
 
   const loading = useSelector(selectLotsDataLoading)
-  const lots = useSelector(selectInactiveLotsSortedByDate)
+  const lots = useSelector((state: ApplicationState) =>
+    selectSortedInactiveLotsByPage(state, page),
+  )
+  const stats = useSelector(selectStatsData)
 
-  const [oldestLotDate, setOldestLotDate] = useState('')
-
-  const onListScroll = useCallback(
-    async ({
-      scrollDirection,
-      scrollOffset,
-      scrollUpdateWasRequested,
-    }: CustomListOnScrollProps) => {
-      // TODO: fetch the result if the bottom of the list was reached
-
-      // fetch the results in a paginated fashion
-      // based on the lots in the store, get the oldest date and fetch from there
+  useLayoutEffect(
+    () => {
       const oldestDate =
         lots && lots.length ? lots[lots.length - 1].drawTime : ''
-      const hasFetchedAllLots = oldestDate === oldestLotDate
-
-      if (!oldestDate) {
-        return
-      }
-
-      setOldestLotDate(oldestDate)
-
-      if (hasFetchedAllLots) {
-        return
-      }
 
       dispatch(
         fetchInactiveLots.request({
           startAfter: oldestDate,
-          limit: 10,
+          limit: LOT_RESULTS_PER_PAGE,
         }),
       )
     },
-    [lots, dispatch, oldestLotDate],
+    // eslint-disable-next-line
+    [page],
   )
 
-  const renderLotResult = useCallback(
-    ({ item: lot, style }: CustomListCellProps<Lot>) => {
-      return <LotResult lotId={lot.id} style={style} />
+  const onPaginationClick = useCallback(
+    (_, newPage: number) => {
+      dispatch(
+        navigate(RoutePath.results.replace(pageParam, newPage.toString())),
+      )
     },
-    [],
+    [dispatch],
   )
 
   return (
@@ -75,20 +65,21 @@ export const Results = ({}: ResultsProps): ReactElement => {
       <Container>
         <Typography bold>Results</Typography>
 
-        {lots && lots.length ? (
-          <>
-            <CustomList
-              rowHeight={40}
-              data={lots}
-              renderItem={renderLotResult}
-              onScroll={onListScroll}
-            />
-
-            {loading && <div>Loading</div>}
-          </>
+        {loading ? (
+          <div>Loading</div>
+        ) : lots && lots.length ? (
+          lots.map(lot => <LotResult key={lot.id} lotId={lot.id} />)
         ) : (
           <Typography>No Results Yet</Typography>
         )}
+
+        <CustomPagination
+          count={
+            stats?.resultsCount ? stats?.resultsCount / LOT_RESULTS_PER_PAGE : 1
+          }
+          page={page}
+          onChange={onPaginationClick}
+        />
       </Container>
     </Page>
   )

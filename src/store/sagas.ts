@@ -11,6 +11,7 @@ import { btcRateFlow } from './btcRate/flow'
 import { invoicesFlow } from './invoices/flow'
 import { paymentsFlow } from './payments/flow'
 import { navigationFlow } from './navigation/flow'
+import { statsFlow } from './stats/flow'
 
 function* omnipresentFlows() {
   yield fork(authFlow)
@@ -22,10 +23,11 @@ function* omnipresentFlows() {
 function* authenticatedFlows() {
   const isAuthenticated = yield* select(selectIsAuthenticated)
   if (isAuthenticated) {
+    yield fork(lotsFlow)
     yield fork(btcRateFlow)
     yield fork(invoicesFlow)
-    yield fork(lotsFlow)
     yield fork(paymentsFlow)
+    yield fork(statsFlow)
     yield fork(userProfileFlow)
   }
 }

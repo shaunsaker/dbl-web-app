@@ -1,3 +1,4 @@
+import { LOT_RESULTS_PER_PAGE } from '../../pages/Results'
 import { objectToArray } from '../../utils/objectToArray'
 import { sortArrayOfObjectsByKey } from '../../utils/sortArrayOfObjectsByKey'
 import { ApplicationState } from '../reducers'
@@ -86,4 +87,21 @@ export const selectLatestInactiveLotId = (state: ApplicationState) => {
   const lot = selectLatestInactiveLot(state)
 
   return lot?.id
+}
+
+export const selectSortedInactiveLotsByPage = (
+  state: ApplicationState,
+  page: number,
+) => {
+  const sortedInactiveLots = selectInactiveLotsSortedByDate(state)
+
+  if (!sortedInactiveLots) {
+    return []
+  }
+
+  const startIndex = (page - 1) * LOT_RESULTS_PER_PAGE
+  const endIndex = startIndex + LOT_RESULTS_PER_PAGE
+  const lots = sortedInactiveLots.slice(startIndex, endIndex)
+
+  return lots
 }

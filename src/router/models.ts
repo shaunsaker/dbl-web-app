@@ -4,6 +4,7 @@ import { LotId } from '../store/lots/models'
 export const emailParam = ':email'
 export const lotIdParam = ':lotId'
 export const invoiceIdParam = ':invoiceId'
+export const pageParam = ':page'
 
 export const RoutePath = {
   welcome: '/welcome',
@@ -16,7 +17,7 @@ export const RoutePath = {
   reserveTickets: '/reserve-tickets',
   invoice: `/invoice/lot/${lotIdParam}/invoice/${invoiceIdParam}`,
   tickets: `/tickets/lot/${lotIdParam}`,
-  results: '/results',
+  results: `/results/page/${pageParam}`,
   result: `/result/lot/${lotIdParam}`,
   winner: `/winner/lot/${lotIdParam}`,
   profile: '/profile',
@@ -30,6 +31,9 @@ export type RouteParams = {
   }
   tickets: {
     lotId: LotId
+  }
+  results: {
+    page: string
   }
   result: {
     lotId: LotId

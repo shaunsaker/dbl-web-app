@@ -37,5 +37,9 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': IGNORE,
     '@typescript-eslint/no-empty-function': IGNORE,
     '@typescript-eslint/no-empty-interface': IGNORE,
+    '@typescript-eslint/no-unused-vars': [
+      ERROR,
+      { args: 'all', argsIgnorePattern: '^_' },
+    ],
   },
 }
