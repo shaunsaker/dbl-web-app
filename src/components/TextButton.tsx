@@ -26,4 +26,6 @@ export const TextButton = ({
 
 interface ContainerProps {}
 
-const Container = styled.button<ContainerProps>``
+const Container = styled.button<ContainerProps>`
+  align-self: center;
+`

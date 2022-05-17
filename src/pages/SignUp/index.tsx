@@ -1,10 +1,12 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
@@ -67,13 +69,21 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
   return (
     <Page>
       <Container>
-        <StyledImage src="" />
+        <StyledImage />
+
+        <Spacer />
 
         <Typography large bold center>
           Welcome to the Daily Bitcoin Lottery
         </Typography>
 
-        <Typography center>Creating one millionaire a day!</Typography>
+        <Spacer />
+
+        <Typography secondary center>
+          Creating one millionaire a day!
+        </Typography>
+
+        <Spacer />
 
         <TextInput
           ref={emailInputRef}
@@ -84,6 +94,8 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
           onSubmit={onSubmitEmail}
         />
 
+        <Spacer size="small" />
+
         <TextInput
           label="What should we call you?*"
           placeholder="E.g. Nighthawk, Sandra, Xolisi, Kobus"
@@ -91,6 +103,8 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
           onChangeText={onChangeUsername}
           onSubmit={onSubmitUsername}
         />
+
+        <Spacer size="small" />
 
         <PasswordTextInput
           ref={passwordInputRef}
@@ -101,12 +115,16 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
           onSubmit={onSubmit}
         />
 
-        <PrimaryButton disabled={isSignUpDisabled} onClick={onSubmit}>
-          SIGN UP
-        </PrimaryButton>
-
-        <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
+        <Spacer />
       </Container>
+
+      <PrimaryButton disabled={isSignUpDisabled} onClick={onSubmit}>
+        SIGN UP
+      </PrimaryButton>
+
+      <Spacer />
+
+      <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
 
       {isAuthLoading && <LoadingModal />}
     </Page>
@@ -119,9 +137,4 @@ const Container = styled.div`
   padding: ${RHYTHM}px;
 `
 
-const StyledImage = styled.img`
-  width: 120px;
-  height: 120px;
-  background-color: ${colors.border};
-  align-self: center;
-`
+const StyledImage = styled(Image)``

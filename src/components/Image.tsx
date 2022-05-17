@@ -11,7 +11,7 @@ export const Image = ({ ...props }: ImageProps): ReactElement => {
 
 const Container = styled.img`
   max-width: 360px;
-  max-height: 320px;
+  max-height: 240px;
   width: 100%;
   height: 100%;
   border-radius: ${BORDER_RADIUS}px;

@@ -108,7 +108,7 @@ const DotsContainer = styled.div`
   justify-content: center;
 `
 
-const DOT_SIZE = 16
+const DOT_SIZE = 12
 
 const Dot = styled.button<{ active: boolean }>`
   width: ${DOT_SIZE}px;
