@@ -11,11 +11,6 @@ export const GlobalStyles = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
-	div {
-		display: flex;
-		flex-direction: column;
-	}
-
 	#app {
 		height: 100vh;
 	}
