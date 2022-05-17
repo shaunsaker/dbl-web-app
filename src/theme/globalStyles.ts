@@ -7,11 +7,6 @@ export const GlobalStyles = createGlobalStyle`
 		margin: 0;
 	}
 
-	a {
-		color: inherit;
-		text-decoration: none;
-	}
-
 	* {
 		box-sizing: border-box;
 	}

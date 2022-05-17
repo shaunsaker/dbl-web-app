@@ -18,7 +18,10 @@ export interface Lot {
   dateCreated: string
   lastCallTime: string
   drawTime: string
+  latestBlockHashAtDrawTime?: string
   winnerUsername?: Username
+  winningBlockHash?: string
+  winningTicketIndex?: number
 }
 
 export interface LotsState {

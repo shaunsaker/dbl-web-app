@@ -11,10 +11,11 @@ import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { selectUserWinningByLotId } from '../../store/userProfile/selectors'
 import { numberToDigits } from '../../utils/numberToDigits'
+import { PrimaryButton } from '../PrimaryButton'
 
 import { Typography } from '../Typography'
 
-interface LotResultProps extends HTMLAttributes<HTMLButtonElement> {
+interface LotResultProps extends HTMLAttributes<HTMLDivElement> {
   lotId: LotId
 }
 
@@ -40,8 +41,9 @@ export const LotResult = ({
 
   // we use the last call time because drawTime is midnight (technically the next day)
   const lotDate = lot?.lastCallTime
+  const didLotHaveWinner = Boolean(lot?.winnerUsername)
 
-  const onClick = useCallback(() => {
+  const onViewMoreClick = useCallback(() => {
     dispatch(navigate(RoutePath.result.replace(lotIdParam, lotId)))
   }, [dispatch, lotId])
 
@@ -49,12 +51,20 @@ export const LotResult = ({
     dispatch(navigate(RoutePath.winner.replace(lotIdParam, lotId)))
   }, [dispatch, lotId])
 
+  const onVerifyResultClick = useCallback(() => {
+    if (!lot) {
+      return
+    }
+
+    dispatch(navigate(RoutePath.verifyResult.replace(lotIdParam, lot.id)))
+  }, [lot, dispatch])
+
   if (!lot) {
     return null
   }
 
   return (
-    <Container disabled={!onClick} onClick={onClick} {...props}>
+    <Container {...props}>
       <Typography>{moment(lotDate).format('dddd, DD MMMM YYYY')}</Typography>
 
       <Typography large bold>
@@ -66,19 +76,29 @@ export const LotResult = ({
         {numberToDigits(lot?.totalBTC * rate, 0)})
       </Typography>
 
+      <button disabled={!onViewMoreClick} onClick={onViewMoreClick}>
+        <Typography bold>View More</Typography>
+      </button>
+
       {didUserWinThisLot && (
         <>
           <Typography>You won this one 🎉</Typography>
 
           <button onClick={onViewWinningDetailsClick}>
-            <Typography bold>View Details</Typography>
+            <Typography bold>View Winning Details</Typography>
           </button>
         </>
+      )}
+
+      {didLotHaveWinner && (
+        <PrimaryButton small onClick={onVerifyResultClick}>
+          Verify Result
+        </PrimaryButton>
       )}
     </Container>
   )
 }
 
-const Container = styled.button`
+const Container = styled.div`
   border-width: 1px;
 `

@@ -8,6 +8,8 @@ import { call } from './call'
 // FIXME: type the action correctly
 export function* errorSaga(error: unknown, action?: any): SagaIterator {
   if (error instanceof Error) {
+    const message = error.message || 'Unknown error occured.'
+
     console.error(error)
 
     yield* call(sentry.captureException, error)
@@ -19,7 +21,7 @@ export function* errorSaga(error: unknown, action?: any): SagaIterator {
     yield put(
       showSnackbar({
         type: SnackbarType.error,
-        title: error.message,
+        title: message,
       }),
     )
   }

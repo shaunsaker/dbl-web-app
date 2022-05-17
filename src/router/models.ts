@@ -12,14 +12,15 @@ export const RoutePath = {
   signUp: '/sign-up',
   signIn: '/sign-in',
   forgotPassword: `/forgot-password/email/${emailParam}`,
-  drawer: '/drawer',
   home: '/',
   reserveTickets: '/reserve-tickets',
-  invoice: `/invoice/lot/${lotIdParam}/invoice/${invoiceIdParam}`,
-  tickets: `/tickets/lot/${lotIdParam}`,
+  invoice: `/lot/${lotIdParam}/invoice/${invoiceIdParam}`,
+  tickets: `/lot/${lotIdParam}/tickets`,
   results: `/results/page/${pageParam}`,
-  result: `/result/lot/${lotIdParam}`,
-  winner: `/winner/lot/${lotIdParam}`,
+  result: `/lot/${lotIdParam}`,
+  verifyResult: `/lot/${lotIdParam}/verify`,
+  verifyResultCalculator: `/lot/${lotIdParam}/verify/calculator`,
+  winner: `/lot/${lotIdParam}/winner`,
   profile: '/profile',
 }
 
@@ -36,6 +37,12 @@ export type RouteParams = {
     page: string
   }
   result: {
+    lotId: LotId
+  }
+  verifyResult: {
+    lotId: LotId
+  }
+  verifyResultCalculator: {
     lotId: LotId
   }
   winner: {

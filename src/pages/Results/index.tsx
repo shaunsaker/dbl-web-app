@@ -35,12 +35,12 @@ export const Results = ({}: ResultsProps): ReactElement => {
 
   useLayoutEffect(
     () => {
-      const oldestDate =
-        lots && lots.length ? lots[lots.length - 1].drawTime : ''
+      // this will fetch the latest n + 1 lots (we already fetch the latest inactive lot by default)
+      const earliestDate = lots && lots.length ? lots[0].drawTime : ''
 
       dispatch(
         fetchInactiveLots.request({
-          startAfter: oldestDate,
+          startAfter: earliestDate,
           limit: LOT_RESULTS_PER_PAGE,
         }),
       )
@@ -50,7 +50,7 @@ export const Results = ({}: ResultsProps): ReactElement => {
   )
 
   const onPaginationClick = useCallback(
-    (_, newPage: number) => {
+    (_: any, newPage: number) => {
       dispatch(
         navigate(RoutePath.results.replace(pageParam, newPage.toString())),
       )

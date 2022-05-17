@@ -48,5 +48,5 @@ const Container = styled.button<ContainerProps>`
   justify-content: center;
 
   background-color: ${({ disabled, secondary }) =>
-    disabled ? colors.disabled : secondary ? colors.secondary : colors.primary};
+    disabled ? colors.disabled : secondary ? colors.secondary : 'blue'};
 `

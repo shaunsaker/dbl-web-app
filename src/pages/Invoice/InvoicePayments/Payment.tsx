@@ -16,7 +16,7 @@ export const Payment = ({
   const { openLink } = useLinking()
 
   const onClick = useCallback(() => {
-    const url = `${process.env.BLOCKCHAIN_EXPLORER_URL}/${txId}`
+    const url = `${process.env.BLOCKCHAIN_TRANSACTION_EXPLORER_URL}/${txId}`
 
     openLink(url)
   }, [openLink, txId])

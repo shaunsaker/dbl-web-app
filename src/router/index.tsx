@@ -13,6 +13,8 @@ import { Results } from '../pages/Results'
 import { SignIn } from '../pages/SignIn'
 import { SignUp } from '../pages/SignUp'
 import { Tickets } from '../pages/Tickets'
+import { VerifyResult } from '../pages/VerifyResult'
+import { VerifyResultCalculator } from '../pages/VerifyResultCalculator'
 import { Welcome } from '../pages/Welcome'
 import { Winner } from '../pages/Winner'
 import {
@@ -71,6 +73,11 @@ export const Router = () => {
       <Route path={RoutePath.tickets} element={<Tickets />} />
       <Route path={RoutePath.results} element={<Results />} />
       <Route path={RoutePath.result} element={<Result />} />
+      <Route path={RoutePath.verifyResult} element={<VerifyResult />} />
+      <Route
+        path={RoutePath.verifyResultCalculator}
+        element={<VerifyResultCalculator />}
+      />
       <Route path={RoutePath.profile} element={<Profile />} />
       <Route path={RoutePath.winner} element={<Winner />} />
     </>

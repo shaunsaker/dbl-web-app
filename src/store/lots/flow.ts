@@ -25,6 +25,16 @@ function* fetchActiveLotSaga(): SagaIterator {
     yield takeEvery(channel, function* (lotsArray: Lot[]) {
       const activeLot = lotsArray[0] // there can only be one active lot
 
+      if (!activeLot) {
+        yield* call(
+          errorSaga,
+          new Error('There is no currently active lot.'),
+          fetchActiveLot.failure,
+        )
+
+        return
+      }
+
       yield put(
         fetchActiveLot.success({
           data: activeLot,

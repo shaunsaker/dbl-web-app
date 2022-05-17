@@ -15,6 +15,7 @@ export const Typography = ({
   return <StyledText {...props}>{children}</StyledText>
 }
 
+// FIXME: use static types instead e.g kind="primary" size="small"
 interface StyledTextProps {
   bold?: boolean
   small?: boolean
@@ -25,8 +26,8 @@ interface StyledTextProps {
   underline?: boolean
 }
 
-// BRANDING: add line-height
 const StyledText = styled.div<StyledTextProps>`
+  display: block;
   font-size: ${({ small, large }) => (small ? 12 : large ? 20 : 14)}px;
   font-weight: ${({ bold }) => (bold ? 700 : 400)};
   color: ${({ primary, secondary }) =>
@@ -37,4 +38,7 @@ const StyledText = styled.div<StyledTextProps>`
       : colors.primaryText};
   text-align: ${({ center }) => (center ? 'center' : 'left')};
   text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `

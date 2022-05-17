@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
 import { CountdownTimer } from '../../../components/CountdownTimer'
+import { InfoBox } from '../../../components/InfoBox'
 import { Typography } from '../../../components/Typography'
 import {
   InvoiceId,
@@ -49,14 +49,10 @@ export const InvoiceStatus = ({
   }
 
   return (
-    <Container>
+    <InfoBox>
       <Typography>{renderStatusText()}</Typography>
 
       <CountdownTimer timestamp={invoice.expiry} />
-    </Container>
+    </InfoBox>
   )
 }
-
-const Container = styled.div`
-  background-color: lightgray;
-`

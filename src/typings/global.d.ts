@@ -2,7 +2,8 @@ declare const process: {
   env: {
     NODE_ENV: 'development' | 'production'
     SUPPORT_EMAIL: string
-    BLOCKCHAIN_EXPLORER_URL: string
+    BLOCKCHAIN_BLOCK_HASH_EXPLORER_URL: string
+    BLOCKCHAIN_TRANSACTION_EXPLORER_URL: string
     APP_NAME: string
     APP_DOWNLOAD_URL: string
     SENTRY_DSN: string
