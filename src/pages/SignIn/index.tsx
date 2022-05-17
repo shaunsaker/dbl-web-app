@@ -1,10 +1,12 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
@@ -61,7 +63,9 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   return (
     <Page>
       <Container>
-        <StyledImage src="" />
+        <StyledImage />
+
+        <Spacer />
 
         <Typography large bold center>
           {`Welcome back to the Daily Bitcoin Lottery${
@@ -69,7 +73,11 @@ export const SignIn = ({}: SignInProps): ReactElement => {
           }`}
         </Typography>
 
+        <Spacer />
+
         <Typography center>Creating one millionaire a day!</Typography>
+
+        <Spacer />
 
         <TextInput
           label="Email*"
@@ -78,6 +86,8 @@ export const SignIn = ({}: SignInProps): ReactElement => {
           onChangeText={onChangeEmail}
           onSubmit={onSubmitEmail}
         />
+
+        <Spacer size="small" />
 
         <PasswordTextInput
           ref={passwordInputRef}
@@ -88,16 +98,20 @@ export const SignIn = ({}: SignInProps): ReactElement => {
           onSubmit={onSubmit}
         />
 
+        <Spacer />
+
         <TextButton onClick={onForgotPasswordClick}>
           Forgot Password?
         </TextButton>
-
-        <PrimaryButton disabled={isSignInDisabled} onClick={onSubmit}>
-          SIGN IN
-        </PrimaryButton>
-
-        <TextButton onClick={onSignUpInsteadClick}>Sign up instead?</TextButton>
       </Container>
+
+      <PrimaryButton disabled={isSignInDisabled} onClick={onSubmit}>
+        SIGN IN
+      </PrimaryButton>
+
+      <Spacer />
+
+      <TextButton onClick={onSignUpInsteadClick}>Sign up instead?</TextButton>
 
       {isAuthLoading && <LoadingModal />}
     </Page>
@@ -110,9 +124,4 @@ const Container = styled.div`
   padding: ${RHYTHM}px;
 `
 
-const StyledImage = styled.img`
-  width: 120px;
-  height: 120px;
-  background-color: ${colors.border};
-  align-self: center;
-`
+const StyledImage = styled(Image)``
