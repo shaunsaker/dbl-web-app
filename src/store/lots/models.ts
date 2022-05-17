@@ -18,9 +18,11 @@ export interface Lot {
   dateCreated: string
   lastCallTime: string
   drawTime: string
+  initialTicketIdBlockHeight: number // set when the lot is created
+  latestTicketIdBlockHeight: number // updated with each ticket that is issued
   latestBlockHashAtDrawTime?: string
   winnerUsername?: Username
-  winningBlockHash?: string
+  winningTicketId?: string
   winningTicketIndex?: number
 }
 

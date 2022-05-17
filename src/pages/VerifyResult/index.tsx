@@ -52,7 +52,7 @@ export const VerifyResult = (): ReactElement | null => {
       return
     }
 
-    const url = `${process.env.BLOCKCHAIN_BLOCK_HASH_EXPLORER_URL}/${lot.winningBlockHash}`
+    const url = `${process.env.BLOCKCHAIN_BLOCK_HASH_EXPLORER_URL}/${lot.winningTicketId}`
     openLink(url)
   }, [openLink, lot])
 
@@ -102,7 +102,7 @@ export const VerifyResult = (): ReactElement | null => {
           <DataSummary
             icon={<CopyIcon />}
             title="WINNING BLOCK HASH (TICKET ID)"
-            value={lot.winningBlockHash}
+            value={lot.winningTicketId}
           >
             <TextButton onClick={onViewWinningBlockHashClick}>
               View on Blockchain
