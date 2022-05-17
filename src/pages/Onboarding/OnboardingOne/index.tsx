@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react'
 import styled from 'styled-components'
+import { Image } from '../../../components/Image'
 import { PrimaryButton } from '../../../components/PrimaryButton'
+import { Spacer } from '../../../components/Spacer'
 
 import { Typography } from '../../../components/Typography'
 
@@ -12,26 +14,37 @@ export const OnboardingOne = ({
   onSubmit,
 }: OnboardingOneProps): ReactElement => {
   return (
-    <Container>
-      <Typography large bold>
-        Onboarding One
-      </Typography>
+    <>
+      <Container>
+        <StyledImage />
 
-      <StyledImage />
+        <Spacer />
 
-      <Typography bold>Entrancing Subheading</Typography>
+        <Typography large bold center>
+          Entrancing Subheading
+        </Typography>
 
-      <Typography>Physics-defying Explanation</Typography>
+        <Spacer />
+
+        <Typography secondary center>
+          Physics-defying Explanation
+        </Typography>
+
+        <Spacer />
+      </Container>
 
       <PrimaryButton onClick={onSubmit}>CONTINUE</PrimaryButton>
-    </Container>
+    </>
   )
 }
 
-const Container = styled.div``
-
-const StyledImage = styled.div`
-  width: 368px;
-  height: 368px;
-  background-color: black;
+const Container = styled.div`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
+
+const StyledImage = styled(Image)``

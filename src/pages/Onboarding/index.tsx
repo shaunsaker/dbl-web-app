@@ -5,13 +5,14 @@ import { OnboardingOne } from './OnboardingOne'
 import { OnboardingTwo } from './OnboardingTwo'
 import { OnboardingThree } from './OnboardingThree'
 import { Page } from '../../components/Page'
-import { CloseButton } from '../../components/CloseButton'
 import { colors } from '../../theme/colors'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
-import { BackButton } from '../../components/BackButton'
 import { navigate, navigateBack } from '../../store/navigation/actions'
 import { selectHasUserSignedUp } from '../../store/auth/selectors'
 import { RoutePath } from '../../router/models'
+import { HeaderBar } from '../../components/HeaderBar'
+import { Spacer } from '../../components/Spacer'
+import { TRANSITION } from '../../theme/transition'
 
 const SLIDES = [OnboardingOne, OnboardingTwo, OnboardingThree]
 
@@ -65,9 +66,18 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
 
   return (
     <Page>
+      <HeaderBar
+        showBack
+        showClose
+        onBack={onBackClick}
+        onClose={onCloseClick}
+      />
+
       <Container>
         <CurrentSlide onSubmit={() => onSubmitClick(pageIndex)} />
       </Container>
+
+      <Spacer />
 
       <DotsContainer>
         {SLIDES.map((_, index) => {
@@ -80,36 +90,22 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
           )
         })}
       </DotsContainer>
-
-      <BackButtonContainer>
-        <BackButton onClick={onBackClick} />
-      </BackButtonContainer>
-
-      <CloseButtonContainer>
-        <CloseButton onClick={onCloseClick} />
-      </CloseButtonContainer>
     </Page>
   )
 }
 
 const Container = styled.div`
   flex: 1;
-`
-
-const BackButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const CloseButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const DotsContainer = styled.div`
+  display: flex;
   flex-direction: row;
+  justify-content: center;
 `
 
 const DOT_SIZE = 16
@@ -119,6 +115,11 @@ const Dot = styled.button<{ active: boolean }>`
   height: ${DOT_SIZE}px;
   border-radius: ${DOT_SIZE / 2}px;
   background-color: ${({ active }) =>
-    active ? colors.primary : colors.background};
+    active ? colors.primary : colors.lightTransWhite};
   margin: 10px;
+  transition: background-color ${TRANSITION};
+
+  &:hover {
+    background-color: ${colors.primary};
+  }
 `

@@ -30,7 +30,7 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
 
   return (
     <Page>
-      <HeaderBar onClose={onCloseClick} />
+      <HeaderBar showClose onClose={onCloseClick} />
 
       <Container>
         <StyledImage />

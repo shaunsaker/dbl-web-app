@@ -1,5 +1,6 @@
 export const colors = {
   white: '#ffffff',
+  lightTransWhite: 'rgba(255, 255, 255, 0.1)',
   border: '#000000',
   divider: 'grey',
   primaryText: '#ffffff',

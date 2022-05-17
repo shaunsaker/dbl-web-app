@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { RHYTHM } from '../../theme/rhythm'
 import { Typography } from '../Typography'
 import { useDispatch } from 'react-redux'
@@ -15,6 +15,8 @@ interface HeaderBarProps {
   showBack?: boolean
   showLogo?: boolean
   showMenu?: boolean
+  showClose?: boolean
+  onBack?: () => void
   onClose?: () => void
 }
 
@@ -22,6 +24,8 @@ export const HeaderBar = ({
   showBack,
   showLogo,
   showMenu,
+  showClose,
+  onBack,
   onClose,
 }: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
@@ -39,8 +43,12 @@ export const HeaderBar = ({
   }, [dispatch])
 
   const onBackClick = useCallback(() => {
-    dispatch(navigateBack())
-  }, [dispatch])
+    if (onBack) {
+      onBack()
+    } else {
+      dispatch(navigateBack())
+    }
+  }, [onBack, dispatch])
 
   const onMenuClick = useCallback(() => {
     setDrawerOpen(true)
@@ -51,31 +59,32 @@ export const HeaderBar = ({
   }, [])
 
   const onCloseClick = useCallback(() => {
-    onClose && onClose()
+    if (onClose) {
+      onClose()
+    }
   }, [onClose])
 
   return (
     <Container itemsDisplayed={itemsDisplayed}>
-      {showBack ||
-        (showMenu && (
-          <LogoContainer>
-            {showBack && (
-              <StyledBackButton onClick={onBackClick}>
-                <StyledChevronLeftIcon />
-              </StyledBackButton>
-            )}
+      {(showBack || showLogo) && (
+        <LogoContainer>
+          {showBack && (
+            <StyledBackButton onClick={onBackClick}>
+              <StyledChevronLeftIcon />
+            </StyledBackButton>
+          )}
 
-            {showLogo && (
-              <button onClick={onLogoClick}>
-                <LogoContainer>
-                  <Logo />
+          {showLogo && (
+            <button onClick={onLogoClick}>
+              <LogoContainer>
+                <Logo />
 
-                  <Typography bold>DBL</Typography>
-                </LogoContainer>
-              </button>
-            )}
-          </LogoContainer>
-        ))}
+                <Typography bold>DBL</Typography>
+              </LogoContainer>
+            </button>
+          )}
+        </LogoContainer>
+      )}
 
       {showMenu && (
         <>
@@ -87,7 +96,7 @@ export const HeaderBar = ({
         </>
       )}
 
-      {onClose && (
+      {showClose && (
         <button onClick={onCloseClick}>
           <StyledCloseIcon />
         </button>
