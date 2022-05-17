@@ -13,5 +13,14 @@ export const GlobalStyles = createGlobalStyle`
 
 	#app {
 		height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	button {
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
 	}
 `

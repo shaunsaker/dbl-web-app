@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { colors } from '../theme/colors'
 
 interface TypographyProps
@@ -15,7 +15,6 @@ export const Typography = ({
   return <StyledText {...props}>{children}</StyledText>
 }
 
-// FIXME: use static types instead e.g kind="primary" size="small"
 interface StyledTextProps {
   bold?: boolean
   small?: boolean
@@ -24,11 +23,12 @@ interface StyledTextProps {
   primary?: boolean
   secondary?: boolean
   underline?: boolean
+  ellipsis?: boolean
 }
 
 const StyledText = styled.div<StyledTextProps>`
   display: block;
-  font-size: ${({ small, large }) => (small ? 12 : large ? 20 : 14)}px;
+  font-size: ${({ small, large }) => (small ? 12 : large ? 32 : 16)}px;
   font-weight: ${({ bold }) => (bold ? 700 : 400)};
   color: ${({ primary, secondary }) =>
     primary
@@ -38,7 +38,13 @@ const StyledText = styled.div<StyledTextProps>`
       : colors.primaryText};
   text-align: ${({ center }) => (center ? 'center' : 'left')};
   text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+  ${({ ellipsis }) =>
+    ellipsis
+      ? css`
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        `
+      : ''}
 `

@@ -1,3 +1,4 @@
+import { color } from '@mui/system'
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import styled from 'styled-components'
 import { BORDER_RADIUS } from '../theme/borderRadius'
@@ -42,11 +43,11 @@ interface ContainerProps {
 
 const Container = styled.button<ContainerProps>`
   align-self: stretch;
-  padding: ${({ small }) => (small ? RHYTHM / 4 : RHYTHM / 2)}px
-    ${({ small }) => (small ? RHYTHM / 2 : RHYTHM)}px;
+  padding: ${({ small }) =>
+    small ? `${RHYTHM / 2}px ${RHYTHM / 4}px` : `${RHYTHM}px ${RHYTHM * 2}px`};
   border-radius: ${BORDER_RADIUS}px;
   justify-content: center;
 
   background-color: ${({ disabled, secondary }) =>
-    disabled ? colors.disabled : secondary ? colors.secondary : 'blue'};
+    disabled ? colors.disabled : secondary ? colors.secondary : colors.primary};
 `

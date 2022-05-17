@@ -1,9 +1,11 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { CloseButton } from '../../components/CloseButton'
+import { HeaderBar } from '../../components/HeaderBar'
+import { Image } from '../../components/Image'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { Spacer } from '../../components/Spacer'
 import { Typography } from '../../components/Typography'
 import { RoutePath } from '../../router/models'
 import { selectHasUserSignedUp } from '../../store/auth/selectors'
@@ -28,38 +30,36 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
 
   return (
     <Page>
+      <HeaderBar onClose={onCloseClick} />
+
       <Container>
         <StyledImage />
 
-        <Typography large bold>
-          Welcome
+        <Spacer />
+
+        <Typography large bold center>
+          Ready to change your life for the better...forever?
         </Typography>
 
-        <Typography>
+        <Spacer />
+
+        <Typography secondary center>
           This is a gravity-defying explanation that welcomes the user and gets
           them excited and eager to buy their first tickets.
         </Typography>
-
-        <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
       </Container>
 
-      <CloseButtonContainer>
-        <CloseButton onClick={onCloseClick} />
-      </CloseButtonContainer>
+      <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
     </Page>
   )
 }
 
-const Container = styled.div``
-
-const StyledImage = styled.div`
-  width: 350px;
-  height: 311px;
-  background-color: black;
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
-const CloseButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
+const StyledImage = styled(Image)``
