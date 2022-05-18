@@ -14,14 +14,16 @@ import { Spacer } from './Spacer'
 import { Typography } from './Typography'
 
 export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
+  type?: 'text' | 'password'
   label: string
   value: string
   onChangeText: (text: string) => void
+  children?: React.ReactNode
 }
 
 export const TextInput = forwardRef(
   (
-    { label, onChangeText, ...props }: TextInputProps,
+    { type = 'text', label, onChangeText, children, ...props }: TextInputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ): ReactElement => {
     const onChange = useCallback(
@@ -37,7 +39,16 @@ export const TextInput = forwardRef(
 
         <Spacer size="small" />
 
-        <StyledTextInput onChange={onChange} {...props} ref={ref} />
+        <InputContainer>
+          <StyledTextInput
+            type={type}
+            onChange={onChange}
+            {...props}
+            ref={ref}
+          />
+
+          {children}
+        </InputContainer>
       </Container>
     )
   },
@@ -46,6 +57,10 @@ export const TextInput = forwardRef(
 const Container = styled.div`
   border-bottom-width: 1px;
   border-color: ${colors.border};
+`
+
+const InputContainer = styled.div`
+  position: relative;
 `
 
 const StyledTextInput = styled.input`

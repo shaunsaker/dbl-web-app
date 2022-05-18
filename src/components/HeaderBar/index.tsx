@@ -32,12 +32,6 @@ export const HeaderBar = ({
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const itemsDisplayed =
-    (showBack ? 1 : 0) +
-    (showLogo ? 1 : 0) +
-    (showMenu ? 1 : 0) +
-    (onClose ? 1 : 0)
-
   const onLogoClick = useCallback(() => {
     dispatch(navigate(RoutePath.home))
   }, [dispatch])
@@ -65,7 +59,7 @@ export const HeaderBar = ({
   }, [onClose])
 
   return (
-    <Container itemsDisplayed={itemsDisplayed}>
+    <Container>
       {(showBack || showLogo) && (
         <LogoContainer>
           {showBack && (
@@ -74,7 +68,7 @@ export const HeaderBar = ({
             </StyledBackButton>
           )}
 
-          {showLogo && (
+          {showLogo ? (
             <button onClick={onLogoClick}>
               <LogoContainer>
                 <Logo />
@@ -82,6 +76,8 @@ export const HeaderBar = ({
                 <Typography bold>DBL</Typography>
               </LogoContainer>
             </button>
+          ) : (
+            <div />
           )}
         </LogoContainer>
       )}
@@ -107,15 +103,14 @@ export const HeaderBar = ({
 
 export const HEADER_BAR_HEIGHT = 64
 
-const Container = styled.div<{ itemsDisplayed: number }>`
+const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   display: flex;
   flex-direction: row;
-  justify-content: ${({ itemsDisplayed }) =>
-    itemsDisplayed > 1 ? 'space-between' : 'flex-end'};
+  justify-content: space-between;
   align-items: center;
   padding: 0 ${RHYTHM}px;
   height: ${HEADER_BAR_HEIGHT}px;

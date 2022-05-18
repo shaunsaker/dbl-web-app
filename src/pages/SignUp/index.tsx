@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Image } from '../../components/Image'
+import { Explainer } from '../../components/Explainer'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
@@ -9,13 +9,10 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
-import { Typography } from '../../components/Typography'
 import { RoutePath } from '../../router/models'
 import { signUp } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
-import { colors } from '../../theme/colors'
-import { RHYTHM } from '../../theme/rhythm'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
 
@@ -69,19 +66,10 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
   return (
     <Page>
       <Container>
-        <StyledImage />
-
-        <Spacer />
-
-        <Typography large bold center>
-          Welcome to the Daily Bitcoin Lottery
-        </Typography>
-
-        <Spacer />
-
-        <Typography secondary center>
-          Creating one millionaire a day!
-        </Typography>
+        <Explainer
+          title="Welcome"
+          description="Creating one millionaire a day!"
+        />
 
         <Spacer />
 
@@ -134,7 +122,5 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
 const Container = styled.div`
   flex: 1;
   justify-content: center;
-  padding: ${RHYTHM}px;
+  text-align: center;
 `
-
-const StyledImage = styled(Image)``

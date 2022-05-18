@@ -1,12 +1,10 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { Explainer } from '../../components/Explainer'
 import { HeaderBar } from '../../components/HeaderBar'
-import { Image } from '../../components/Image'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
-import { Spacer } from '../../components/Spacer'
-import { Typography } from '../../components/Typography'
 import { RoutePath } from '../../router/models'
 import { selectHasUserSignedUp } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -33,20 +31,10 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
       <HeaderBar showClose onClose={onCloseClick} />
 
       <Container>
-        <StyledImage />
-
-        <Spacer />
-
-        <Typography large bold center>
-          Ready to change your life for the better...forever?
-        </Typography>
-
-        <Spacer />
-
-        <Typography secondary center>
-          This is a gravity-defying explanation that welcomes the user and gets
-          them excited and eager to buy their first tickets.
-        </Typography>
+        <Explainer
+          title="Ready to change your life for the better...forever?"
+          description="This is a gravity-defying explanation that welcomes the user and gets them excited and eager to buy their first tickets."
+        />
       </Container>
 
       <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
@@ -61,5 +49,3 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `
-
-const StyledImage = styled(Image)``

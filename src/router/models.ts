@@ -11,7 +11,7 @@ export const RoutePath = {
   onboarding: '/onboarding',
   signUp: '/sign-up',
   signIn: '/sign-in',
-  forgotPassword: `/forgot-password/email/${emailParam}`,
+  forgotPassword: `/forgot-password`,
   home: '/',
   reserveTickets: '/reserve-tickets',
   invoice: `/lot/${lotIdParam}/invoice/${invoiceIdParam}`,
@@ -25,7 +25,6 @@ export const RoutePath = {
 }
 
 export type RouteParams = {
-  forgotPassword: { email: string }
   invoice: {
     lotId: LotId
     invoiceId: InvoiceId

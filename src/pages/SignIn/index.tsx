@@ -10,13 +10,11 @@ import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
-import { emailParam, RoutePath } from '../../router/models'
+import { RoutePath } from '../../router/models'
 import { signIn } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { selectUsername } from '../../store/userProfile/selectors'
-import { colors } from '../../theme/colors'
-import { RHYTHM } from '../../theme/rhythm'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
 
@@ -47,8 +45,8 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   }, [])
 
   const onForgotPasswordClick = useCallback(() => {
-    dispatch(navigate(RoutePath.forgotPassword.replace(emailParam, email)))
-  }, [dispatch, email])
+    dispatch(navigate(RoutePath.forgotPassword))
+  }, [dispatch])
 
   const onSubmit = useCallback(() => {
     if (!isSignInDisabled) {
@@ -73,7 +71,7 @@ export const SignIn = ({}: SignInProps): ReactElement => {
           }`}
         </Typography>
 
-        <Spacer />
+        <Spacer size="small" />
 
         <Typography center>Creating one millionaire a day!</Typography>
 
@@ -121,7 +119,7 @@ export const SignIn = ({}: SignInProps): ReactElement => {
 const Container = styled.div`
   flex: 1;
   justify-content: center;
-  padding: ${RHYTHM}px;
+  text-align: center;
 `
 
 const StyledImage = styled(Image)``

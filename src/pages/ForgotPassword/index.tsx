@@ -1,37 +1,27 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { BackButton } from '../../components/BackButton'
+import { HeaderBar } from '../../components/HeaderBar'
+import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
+import { Spacer } from '../../components/Spacer'
 import { TextInput } from '../../components/TextInput'
 import { Typography } from '../../components/Typography'
-import { RouteParams } from '../../router/models'
 import { resetPassword } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
-import { navigateBack } from '../../store/navigation/actions'
-import { colors } from '../../theme/colors'
-import { RHYTHM } from '../../theme/rhythm'
 import { validateEmail } from '../../utils/validateEmail'
 
 export const ForgotPassword = (): ReactElement => {
   const dispatch = useDispatch()
 
-  const { email: initialEmail = '' } =
-    useParams<RouteParams['forgotPassword']>()
-
   const isAuthLoading = useSelector(selectAuthLoading)
 
-  const [email, setEmail] = useState(initialEmail)
+  const [email, setEmail] = useState('')
 
   const isEmailValid = validateEmail(email)
   const isForgotPasswordDisabled = !isEmailValid
-
-  const onBackClick = useCallback(() => {
-    dispatch(navigateBack())
-  }, [dispatch])
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text)
@@ -43,14 +33,24 @@ export const ForgotPassword = (): ReactElement => {
 
   return (
     <Page>
+      <HeaderBar showBack />
+
       <Container>
-        <StyledImage src="" />
+        <StyledImage />
+
+        <Spacer />
 
         <Typography large bold center>
           Title
         </Typography>
 
-        <Typography center>Creating one millionaire a day!</Typography>
+        <Spacer size="small" />
+
+        <Typography secondary center>
+          Creating one millionaire a day!
+        </Typography>
+
+        <Spacer />
 
         <TextInput
           label="Email*"
@@ -60,17 +60,15 @@ export const ForgotPassword = (): ReactElement => {
           onSubmit={onSubmitClick}
         />
 
-        <PrimaryButton
-          disabled={isForgotPasswordDisabled}
-          onClick={onSubmitClick}
-        >
-          SUBMIT
-        </PrimaryButton>
+        <Spacer />
       </Container>
 
-      <BackButtonContainer>
-        <BackButton onClick={onBackClick} />
-      </BackButtonContainer>
+      <PrimaryButton
+        disabled={isForgotPasswordDisabled}
+        onClick={onSubmitClick}
+      >
+        SUBMIT
+      </PrimaryButton>
 
       {isAuthLoading && <LoadingModal />}
     </Page>
@@ -80,18 +78,7 @@ export const ForgotPassword = (): ReactElement => {
 const Container = styled.div`
   flex: 1;
   justify-content: center;
-  padding: ${RHYTHM}px;
+  text-align: center;
 `
 
-const StyledImage = styled.img`
-  width: 120px;
-  height: 120px;
-  background-color: ${colors.border};
-  align-self: center;
-`
-
-const BackButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
+const StyledImage = styled(Image)``

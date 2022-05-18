@@ -29,23 +29,27 @@ export const PasswordTextInput = forwardRef(
 
     return (
       <Container>
-        <TextInput {...props} ref={ref} />
-
-        <VisibilityButton onClick={onVisibilityButtonClick}>
-          {passwordHidden ? (
-            <VisibilityOnIcon
-              width={VISIBILITY_ICON_SIZE}
-              height={VISIBILITY_ICON_SIZE}
-              fill={colors.primaryText}
-            />
-          ) : (
-            <VisibilityOffIcon
-              width={VISIBILITY_ICON_SIZE}
-              height={VISIBILITY_ICON_SIZE}
-              fill={colors.primaryText}
-            />
-          )}
-        </VisibilityButton>
+        <TextInput
+          {...props}
+          type={passwordHidden ? 'password' : 'text'}
+          ref={ref}
+        >
+          <VisibilityButton onClick={onVisibilityButtonClick}>
+            {passwordHidden ? (
+              <VisibilityOnIcon
+                width={VISIBILITY_ICON_SIZE}
+                height={VISIBILITY_ICON_SIZE}
+                fill={colors.primaryText}
+              />
+            ) : (
+              <VisibilityOffIcon
+                width={VISIBILITY_ICON_SIZE}
+                height={VISIBILITY_ICON_SIZE}
+                fill={colors.primaryText}
+              />
+            )}
+          </VisibilityButton>
+        </TextInput>
       </Container>
     )
   },
@@ -57,4 +61,7 @@ const VisibilityButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
 `
