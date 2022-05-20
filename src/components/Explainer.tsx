@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { Image } from './Image'
 import { Spacer } from './Spacer'
 import { Typography } from './Typography'
@@ -17,28 +17,17 @@ export const Explainer = ({
 }: ExplainerProps): ReactElement => {
   return (
     <Container>
-      <StyledImage {...imageProps} />
+      <Image {...imageProps} />
 
       <Spacer />
 
-      <Typography large bold center>
-        {title}
-      </Typography>
+      <Typography>{title}</Typography>
 
-      <Spacer size="small" />
+      <Spacer />
 
-      <Typography secondary center>
-        {description}
-      </Typography>
+      <Typography>{description}</Typography>
     </Container>
   )
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const StyledImage = styled(Image)``
+const Container = styled('div', {})

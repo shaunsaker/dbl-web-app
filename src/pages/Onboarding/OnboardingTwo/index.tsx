@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { Explainer } from '../../../components/Explainer'
 import { PrimaryButton } from '../../../components/PrimaryButton'
 
@@ -24,9 +24,4 @@ export const OnboardingTwo = ({
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
+const Container = styled('div', {})

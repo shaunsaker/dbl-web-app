@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { HeaderBar } from '../../components/HeaderBar'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
@@ -13,7 +13,6 @@ import {
   selectUserEmail,
   selectUsername,
 } from '../../store/userProfile/selectors'
-import { RHYTHM } from '../../theme/rhythm'
 
 interface ProfileProps {}
 
@@ -50,7 +49,7 @@ export const Profile = ({}: ProfileProps): ReactElement => {
       <Container>
         <Typography>Email</Typography>
 
-        <Typography bold>{userEmail}</Typography>
+        <Typography>{userEmail}</Typography>
 
         <TextInput
           label="What should we call you?"
@@ -72,12 +71,6 @@ export const Profile = ({}: ProfileProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  padding: ${RHYTHM}px;
-`
+const Container = styled('div', {})
 
-const ButtonsContainer = styled.div`
-  flex: 1;
-  justify-content: flex-end;
-`
+const ButtonsContainer = styled('div', {})

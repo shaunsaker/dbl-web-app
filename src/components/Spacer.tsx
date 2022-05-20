@@ -1,20 +1,10 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
-import { RHYTHM } from '../theme/rhythm'
+import { styled } from '../styles/stitches.config'
 
-interface SpacerProps extends ContainerProps {}
+interface SpacerProps {}
 
-export const Spacer = ({ size = 'regular' }: SpacerProps): ReactElement => {
-  return <Container size={size} />
+export const Spacer = ({}: SpacerProps): ReactElement => {
+  return <Container />
 }
 
-interface ContainerProps {
-  size?: 'small' | 'regular' | 'large'
-}
-
-const Container = styled.div<ContainerProps>`
-  width: ${({ size }) =>
-    size === 'small' ? RHYTHM / 2 : size === 'large' ? RHYTHM * 2 : RHYTHM}px;
-  height: ${({ size }) =>
-    size === 'small' ? RHYTHM / 2 : size === 'large' ? RHYTHM * 2 : RHYTHM}px;
-`
+const Container = styled('div', {})

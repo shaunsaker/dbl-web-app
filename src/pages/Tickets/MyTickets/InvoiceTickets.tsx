@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { invoiceIdParam, lotIdParam, RoutePath } from '../../../router/models'
 import { LotId } from '../../../store/lots/models'
 import { navigate } from '../../../store/navigation/actions'
@@ -34,23 +34,21 @@ export const InvoiceTickets = ({
 
   return (
     <Container onClick={onClick}>
-      <Typography large>{getFormattedTime(dateCreated)}</Typography>
+      <Typography>{getFormattedTime(dateCreated)}</Typography>
 
       <Typography>TOTAL</Typography>
 
-      <Typography bold>{amountBTC} BTC</Typography>
+      <Typography>{amountBTC} BTC</Typography>
 
       <Typography>STATUS</Typography>
 
-      <Typography bold>{status}</Typography>
+      <Typography>{status}</Typography>
 
       <Typography>NO OF TICKETS</Typography>
 
-      <Typography bold>{ticketIds.length}</Typography>
+      <Typography>{ticketIds.length}</Typography>
     </Container>
   )
 }
 
-const Container = styled.button`
-  border-width: 1px;
-`
+const Container = styled('button', {})

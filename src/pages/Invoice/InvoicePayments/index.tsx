@@ -1,6 +1,6 @@
 import React, { ReactElement, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { InvoiceId } from '../../../store/invoices/models'
 import { LotId } from '../../../store/lots/models'
 import { fetchPayments } from '../../../store/payments/actions'
@@ -36,7 +36,7 @@ export const InvoicePayments = ({
 
   return (
     <Container>
-      <Typography bold>Payments</Typography>
+      <Typography>Payments</Typography>
 
       {payments && payments.length ? (
         payments.map(payment => <Payment key={payment.id} {...payment} />)
@@ -47,4 +47,4 @@ export const InvoicePayments = ({
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})

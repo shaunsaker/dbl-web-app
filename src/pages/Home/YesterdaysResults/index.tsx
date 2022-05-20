@@ -1,6 +1,5 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
 import { pageParam, RoutePath } from '../../../router/models'
 import {
   selectLatestInactiveLotId,
@@ -9,6 +8,7 @@ import {
 import { navigate } from '../../../store/navigation/actions'
 import { LotResult } from '../../../components/LotResult'
 import { Typography } from '../../../components/Typography'
+import { styled } from '../../../styles/stitches.config'
 
 interface YesterdaysResultsProps {}
 
@@ -25,7 +25,7 @@ export const YesterdaysResults =
 
     return (
       <Container>
-        <Typography bold>Yesterday&apo;s Results</Typography>
+        <Typography>Yesterday&apo;s Results</Typography>
 
         {loading ? (
           <div>Loading</div>
@@ -34,7 +34,7 @@ export const YesterdaysResults =
             <LotResult lotId={yesterdaysLotId} />
 
             <button onClick={onViewMoreResultsClick}>
-              <Typography bold>View More Results</Typography>
+              <Typography>View More Results</Typography>
             </button>
           </>
         ) : (
@@ -44,4 +44,4 @@ export const YesterdaysResults =
     )
   }
 
-const Container = styled.div``
+const Container = styled('div', {})

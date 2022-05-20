@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { LotId } from '../../../store/lots/models'
 import { ApplicationState } from '../../../store/reducers'
 import { selectInvoicesDataLoading } from '../../../store/invoices/selectors'
@@ -22,7 +22,7 @@ export const MyTickets = ({ lotId }: MyTicketsProps): ReactElement => {
 
   return (
     <Container>
-      <Typography bold>My Tickets</Typography>
+      <Typography>My Tickets</Typography>
 
       {loading ? (
         <div>Loading</div>
@@ -37,4 +37,4 @@ export const MyTickets = ({ lotId }: MyTicketsProps): ReactElement => {
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})

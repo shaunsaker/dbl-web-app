@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { PrimaryButton } from './PrimaryButton'
 import { Typography } from './Typography'
 
@@ -23,11 +23,9 @@ export const BlankState = ({
     <Container>
       <Image src={imageSource} />
 
-      <Typography large bold>
-        {title}
-      </Typography>
+      <Typography>{title}</Typography>
 
-      <Typography center>{description}</Typography>
+      <Typography>{description}</Typography>
 
       {buttonText && onClick && (
         <>
@@ -38,10 +36,6 @@ export const BlankState = ({
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`
+const Container = styled('div', {})
 
-const Image = styled.img``
+const Image = styled('img', {})

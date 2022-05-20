@@ -3,9 +3,6 @@ import { useDispatch } from 'react-redux'
 import { showSnackbar } from '../store/snackbars/actions'
 import { SnackbarType } from '../store/snackbars/models'
 import { CopyIcon } from './icons/CopyIcon'
-import { colors } from '../theme/colors'
-
-const SIZE = 24
 
 interface CopyIconProps {
   value: string
@@ -27,7 +24,7 @@ export const CopyButton = ({ value }: CopyIconProps): ReactElement => {
 
   return (
     <button onClick={onCopyClick}>
-      <CopyIcon width={SIZE} height={SIZE} fill={colors.primaryText} />
+      <CopyIcon />
     </button>
   )
 }

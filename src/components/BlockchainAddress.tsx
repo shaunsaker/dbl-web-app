@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { CopyButton } from './CopyButton'
 import { Typography } from './Typography'
 
@@ -21,4 +21,4 @@ export const BlockchainAddress = ({
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})

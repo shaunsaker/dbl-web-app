@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { lotIdParam, RoutePath } from '../../router/models'
 import { fetchInvoices } from '../../store/invoices/actions'
 import { InvoiceStatus } from '../../store/invoices/models'
@@ -64,7 +64,7 @@ export const TicketsSummary = ({
 
   return (
     <Container onClick={onClick}>
-      <Typography large bold>
+      <Typography>
         You {isActiveLot ? 'have' : 'had'}{' '}
         {maybePluralise(tickets.length, 'ticket')}
       </Typography>
@@ -104,4 +104,4 @@ export const TicketsSummary = ({
   )
 }
 
-const Container = styled.button``
+const Container = styled('button', {})

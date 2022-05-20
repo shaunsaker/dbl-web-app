@@ -1,9 +1,6 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
-import { colors } from '../theme/colors'
+import { styled } from '../styles/stitches.config'
 import { ChevronLeftIcon } from './icons/ChevronLeftIcon'
-
-const ICON_SIZE = 24
 
 interface BackButtonPropsProps {
   onClick: () => void
@@ -12,13 +9,9 @@ interface BackButtonPropsProps {
 export const BackButton = ({ onClick }: BackButtonPropsProps): ReactElement => {
   return (
     <Container onClick={onClick}>
-      <ChevronLeftIcon
-        width={ICON_SIZE}
-        height={ICON_SIZE}
-        fill={colors.primaryText}
-      />
+      <ChevronLeftIcon />
     </Container>
   )
 }
 
-const Container = styled.button``
+const Container = styled('button', {})

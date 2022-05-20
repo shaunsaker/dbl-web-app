@@ -5,14 +5,11 @@ import React, {
   useCallback,
   useState,
 } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 
-import { colors } from '../theme/colors'
 import { VisibilityOffIcon } from './icons/VisibilityOffIcon'
 import { VisibilityOnIcon } from './icons/VisibilityOnIcon'
 import { TextInput, TextInputProps } from './TextInput'
-
-const VISIBILITY_ICON_SIZE = 24
 
 type PasswordTextInputProps = TextInputProps
 
@@ -35,19 +32,7 @@ export const PasswordTextInput = forwardRef(
           ref={ref}
         >
           <VisibilityButton onClick={onVisibilityButtonClick}>
-            {passwordHidden ? (
-              <VisibilityOnIcon
-                width={VISIBILITY_ICON_SIZE}
-                height={VISIBILITY_ICON_SIZE}
-                fill={colors.primaryText}
-              />
-            ) : (
-              <VisibilityOffIcon
-                width={VISIBILITY_ICON_SIZE}
-                height={VISIBILITY_ICON_SIZE}
-                fill={colors.primaryText}
-              />
-            )}
+            {passwordHidden ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
           </VisibilityButton>
         </TextInput>
       </Container>
@@ -55,13 +40,6 @@ export const PasswordTextInput = forwardRef(
   },
 )
 
-const Container = styled.div``
+const Container = styled('div', {})
 
-const VisibilityButton = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-`
+const VisibilityButton = styled('button', {})

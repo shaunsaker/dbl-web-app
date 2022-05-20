@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback } from 'react'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { Payment as PaymentType } from '../../../store/payments/models'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
 import { Typography } from '../../../components/Typography'
@@ -32,7 +32,4 @@ export const Payment = ({
   )
 }
 
-const Container = styled.button`
-  flex-direction: row;
-  justify-content: space-between;
-`
+const Container = styled('button', {})

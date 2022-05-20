@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
@@ -126,24 +126,18 @@ export const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
       <Container>
         <Typography>How many tickets would you like to buy?</Typography>
 
-        <PrimaryButton small secondary onClick={() => onAddTickets(-1)}>
-          -
-        </PrimaryButton>
+        <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
 
-        <Typography large bold>
-          {ticketCount}
-        </Typography>
+        <Typography>{ticketCount}</Typography>
 
-        <PrimaryButton small secondary onClick={() => onAddTickets(1)}>
-          +
-        </PrimaryButton>
+        <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
 
         <Typography>
           {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
           {ticketsValueUSD})
         </Typography>
 
-        <Typography small>
+        <Typography>
           *Exact BTC value will be confirmed once reserved
         </Typography>
 
@@ -163,10 +157,6 @@ export const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})
 
-const CloseButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
+const CloseButtonContainer = styled('div', {})

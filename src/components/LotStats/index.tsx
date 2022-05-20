@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { LotId } from '../../store/lots/models'
@@ -33,9 +33,7 @@ export const LotStats = ({
 
   return (
     <Container>
-      <Typography large bold>
-        {lot ? getFormattedTime(lot?.id) : ''}
-      </Typography>
+      <Typography>{lot ? getFormattedTime(lot?.id) : ''}</Typography>
 
       <Typography>
         Value: {lot?.totalBTC} BTC ($
@@ -52,9 +50,7 @@ export const LotStats = ({
         <>
           <Typography>Winner</Typography>
 
-          <Typography large bold>
-            {lot.winnerUsername}
-          </Typography>
+          <Typography>{lot.winnerUsername}</Typography>
         </>
       ) : null}
 
@@ -69,12 +65,6 @@ export const LotStats = ({
   )
 }
 
-const Container = styled.div`
-  border-width: 1px;
-`
+const Container = styled('div', {})
 
-const ActivityIndicatorContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
+const ActivityIndicatorContainer = styled('div', {})

@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React, { HTMLAttributes, ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { lotIdParam, RoutePath } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
@@ -67,17 +67,15 @@ export const LotResult = ({
     <Container {...props}>
       <Typography>{moment(lotDate).format('dddd, DD MMMM YYYY')}</Typography>
 
-      <Typography large bold>
-        {lot.winnerUsername}
-      </Typography>
+      <Typography>{lot.winnerUsername}</Typography>
 
-      <Typography bold>
+      <Typography>
         {lot.totalBTC} BTC ($
         {numberToDigits(lot?.totalBTC * rate, 0)})
       </Typography>
 
       <button disabled={!onViewMoreClick} onClick={onViewMoreClick}>
-        <Typography bold>View More</Typography>
+        <Typography>View More</Typography>
       </button>
 
       {didUserWinThisLot && (
@@ -85,13 +83,13 @@ export const LotResult = ({
           <Typography>You won this one 🎉</Typography>
 
           <button onClick={onViewWinningDetailsClick}>
-            <Typography bold>View Winning Details</Typography>
+            <Typography>View Winning Details</Typography>
           </button>
         </>
       )}
 
       {didLotHaveWinner && (
-        <PrimaryButton small onClick={onVerifyResultClick}>
+        <PrimaryButton onClick={onVerifyResultClick}>
           Verify Result
         </PrimaryButton>
       )}
@@ -99,6 +97,4 @@ export const LotResult = ({
   )
 }
 
-const Container = styled.div`
-  border-width: 1px;
-`
+const Container = styled('div', {})

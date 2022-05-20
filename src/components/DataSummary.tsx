@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { OpenIcon } from './icons/OpenIcon'
 import { Typography } from './Typography'
 
@@ -24,19 +24,11 @@ export const DataSummary = ({
     <Container>
       {icon}
 
-      <Typography small secondary>
-        {title}
-      </Typography>
+      <Typography>{title}</Typography>
 
-      <Typography large bold>
-        {value}
-      </Typography>
+      <Typography>{value}</Typography>
 
-      {subtitle && (
-        <Typography small bold>
-          {subtitle}
-        </Typography>
-      )}
+      {subtitle && <Typography>{subtitle}</Typography>}
 
       {children}
 
@@ -49,4 +41,4 @@ export const DataSummary = ({
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})

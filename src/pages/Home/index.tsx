@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { HeaderBar } from '../../components/HeaderBar'
 import { LotStats } from '../../components/LotStats'
 import { Page } from '../../components/Page'
@@ -45,6 +45,4 @@ export const Home = ({}: HomeProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-`
+const Container = styled('div', {})

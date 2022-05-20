@@ -1,10 +1,8 @@
 import React, { HTMLAttributes, ReactElement } from 'react'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { Typography } from './Typography'
 
-interface TextButtonProps
-  extends HTMLAttributes<HTMLButtonElement>,
-    ContainerProps {
+interface TextButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: string
   disabled?: boolean
   onClick?: () => void
@@ -17,15 +15,9 @@ export const TextButton = ({
 }: TextButtonProps): ReactElement => {
   return (
     <Container disabled={disabled} {...props}>
-      <Typography bold small primary={!disabled} secondary={disabled} underline>
-        {children}
-      </Typography>
+      <Typography>{children}</Typography>
     </Container>
   )
 }
 
-interface ContainerProps {}
-
-const Container = styled.button<ContainerProps>`
-  align-self: center;
-`
+const Container = styled('button', {})

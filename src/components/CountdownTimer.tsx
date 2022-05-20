@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React, { ReactElement } from 'react'
 import { useTimer } from 'react-timer-hook'
-import styled from 'styled-components'
+import { styled } from '../styles/stitches.config'
 import { Typography } from './Typography'
 
 interface TimerProps {
@@ -22,4 +22,4 @@ export const CountdownTimer = ({ timestamp }: TimerProps): ReactElement => {
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})

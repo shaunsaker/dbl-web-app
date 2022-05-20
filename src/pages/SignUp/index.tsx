@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
@@ -82,7 +82,7 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
           onSubmit={onSubmitEmail}
         />
 
-        <Spacer size="small" />
+        <Spacer />
 
         <TextInput
           label="What should we call you?*"
@@ -92,7 +92,7 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
           onSubmit={onSubmitUsername}
         />
 
-        <Spacer size="small" />
+        <Spacer />
 
         <PasswordTextInput
           ref={passwordInputRef}
@@ -119,8 +119,4 @@ export const SignUp = ({}: SignUpProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  justify-content: center;
-  text-align: center;
-`
+const Container = styled('div', {})

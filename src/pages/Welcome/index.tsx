@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
 import { HeaderBar } from '../../components/HeaderBar'
 import { Page } from '../../components/Page'
@@ -42,10 +42,4 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
+const Container = styled('div', {})

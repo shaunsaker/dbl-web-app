@@ -1,6 +1,5 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import styled from 'styled-components'
-import { RHYTHM } from '../../theme/rhythm'
+import { styled } from '../../styles/stitches.config'
 import { Typography } from '../Typography'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateBack } from '../../store/navigation/actions'
@@ -9,7 +8,6 @@ import { MenuIcon } from '../icons/MenuIcon'
 import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
 import { PrimaryDrawer } from './PrimaryDrawer'
 import { CloseIcon } from '../icons/CloseIcon'
-import { colors } from '../../theme/colors'
 
 interface HeaderBarProps {
   showBack?: boolean
@@ -64,7 +62,7 @@ export const HeaderBar = ({
         <LogoContainer>
           {showBack && (
             <StyledBackButton onClick={onBackClick}>
-              <StyledChevronLeftIcon />
+              <ChevronLeftIcon />
             </StyledBackButton>
           )}
 
@@ -73,7 +71,7 @@ export const HeaderBar = ({
               <LogoContainer>
                 <Logo />
 
-                <Typography bold>DBL</Typography>
+                <Typography>DBL</Typography>
               </LogoContainer>
             </button>
           ) : (
@@ -85,7 +83,7 @@ export const HeaderBar = ({
       {showMenu && (
         <>
           <button onClick={onMenuClick}>
-            <StyledMenuIcon />
+            <MenuIcon />
           </button>
 
           <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
@@ -94,7 +92,7 @@ export const HeaderBar = ({
 
       {showClose && (
         <button onClick={onCloseClick}>
-          <StyledCloseIcon />
+          <CloseIcon />
         </button>
       )}
     </Container>
@@ -103,42 +101,10 @@ export const HeaderBar = ({
 
 export const HEADER_BAR_HEIGHT = 64
 
-const Container = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 ${RHYTHM}px;
-  height: ${HEADER_BAR_HEIGHT}px;
-`
+const Container = styled('div', {})
 
-const StyledBackButton = styled.button``
+const StyledBackButton = styled('button', {})
 
-const StyledChevronLeftIcon = styled(ChevronLeftIcon)`
-  font-size: 24px;
-  color: ${colors.primaryText};
-`
+const LogoContainer = styled('div', {})
 
-const LogoContainer = styled.div`
-  flex-direction: row;
-`
-
-const Logo = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: black;
-`
-
-const StyledMenuIcon = styled(MenuIcon)`
-  font-size: 24px;
-  color: ${colors.primaryText};
-`
-
-const StyledCloseIcon = styled(CloseIcon)`
-  font-size: 24px;
-  color: ${colors.primaryText};
-`
+const Logo = styled('div', {})

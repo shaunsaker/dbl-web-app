@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { CloseButton } from '../../components/CloseButton'
 import { Page } from '../../components/Page'
 import { InvoicePayments } from './InvoicePayments'
@@ -40,10 +40,6 @@ export const Invoice = (): ReactElement | null => {
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})
 
-const CloseButtonContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
+const CloseButtonContainer = styled('div', {})

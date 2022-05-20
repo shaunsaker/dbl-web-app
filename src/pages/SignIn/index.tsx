@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
@@ -61,19 +61,19 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   return (
     <Page>
       <Container>
-        <StyledImage />
+        <Image />
 
         <Spacer />
 
-        <Typography large bold center>
+        <Typography>
           {`Welcome back to the Daily Bitcoin Lottery${
             existingUsername ? `, ${existingUsername}` : ''
           }`}
         </Typography>
 
-        <Spacer size="small" />
+        <Spacer />
 
-        <Typography center>Creating one millionaire a day!</Typography>
+        <Typography>Creating one millionaire a day!</Typography>
 
         <Spacer />
 
@@ -85,7 +85,7 @@ export const SignIn = ({}: SignInProps): ReactElement => {
           onSubmit={onSubmitEmail}
         />
 
-        <Spacer size="small" />
+        <Spacer />
 
         <PasswordTextInput
           ref={passwordInputRef}
@@ -116,10 +116,4 @@ export const SignIn = ({}: SignInProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  justify-content: center;
-  text-align: center;
-`
-
-const StyledImage = styled(Image)``
+const Container = styled('div', {})

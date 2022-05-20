@@ -1,6 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { HeaderBar } from '../../components/HeaderBar'
 import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
@@ -36,19 +36,15 @@ export const ForgotPassword = (): ReactElement => {
       <HeaderBar showBack />
 
       <Container>
-        <StyledImage />
+        <Image />
 
         <Spacer />
 
-        <Typography large bold center>
-          Title
-        </Typography>
+        <Typography>Title</Typography>
 
-        <Spacer size="small" />
+        <Spacer />
 
-        <Typography secondary center>
-          Creating one millionaire a day!
-        </Typography>
+        <Typography>Creating one millionaire a day!</Typography>
 
         <Spacer />
 
@@ -75,10 +71,4 @@ export const ForgotPassword = (): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-  justify-content: center;
-  text-align: center;
-`
-
-const StyledImage = styled(Image)``
+const Container = styled('div', {})

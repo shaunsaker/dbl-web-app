@@ -40,12 +40,12 @@ export const PrimaryDrawer = ({
           key={drawerRoute.label}
           onClick={() => onDrawerRouteClick(drawerRoute.path)}
         >
-          <Typography bold>{drawerRoute.label}</Typography>
+          <Typography>{drawerRoute.label}</Typography>
         </button>
       ))}
 
       <button onClick={onContactSupportClick}>
-        <Typography bold>Contact Support</Typography>
+        <Typography>Contact Support</Typography>
       </button>
     </CustomDrawer>
   )

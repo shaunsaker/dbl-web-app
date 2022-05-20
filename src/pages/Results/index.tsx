@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from '../../styles/stitches.config'
 import { CustomPagination } from '../../components/CustomPagination'
 import { HeaderBar } from '../../components/HeaderBar'
 import { LotResult } from '../../components/LotResult'
@@ -63,7 +63,7 @@ export const Results = ({}: ResultsProps): ReactElement => {
       <HeaderBar />
 
       <Container>
-        <Typography bold>Results</Typography>
+        <Typography>Results</Typography>
 
         {loading ? (
           <div>Loading</div>
@@ -85,6 +85,4 @@ export const Results = ({}: ResultsProps): ReactElement => {
   )
 }
 
-const Container = styled.div`
-  flex: 1;
-`
+const Container = styled('div', {})

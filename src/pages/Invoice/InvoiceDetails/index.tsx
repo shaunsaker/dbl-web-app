@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
+import { styled } from '../../../styles/stitches.config'
 import { BlockchainAddress } from '../../../components/BlockchainAddress'
 import { Typography } from '../../../components/Typography'
 import { InvoiceId } from '../../../store/invoices/models'
@@ -27,13 +27,11 @@ export const InvoiceDetails = ({
     <Container>
       <Typography>Invoice amount</Typography>
 
-      <Typography bold large>
-        {invoice.amountBTC} BTC
-      </Typography>
+      <Typography>{invoice.amountBTC} BTC</Typography>
 
       <Typography>Invoice date</Typography>
 
-      <Typography bold>{getFormattedTime(invoice.dateCreated)}</Typography>
+      <Typography>{getFormattedTime(invoice.dateCreated)}</Typography>
 
       <Typography>Invoice address</Typography>
 
@@ -42,4 +40,4 @@ export const InvoiceDetails = ({
   )
 }
 
-const Container = styled.div``
+const Container = styled('div', {})
