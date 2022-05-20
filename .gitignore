@@ -1,5 +1,6 @@
 # build
-.parcel-cache
+.next
+tsconfig.tsbuildinfo
 dist
 node_modules
 

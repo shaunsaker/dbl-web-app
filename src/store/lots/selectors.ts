@@ -1,4 +1,4 @@
-import { LOT_RESULTS_PER_PAGE } from '../../pages/Results'
+import { LOT_RESULTS_PER_PAGE } from '../../pages/results/page/[page]'
 import { objectToArray } from '../../utils/objectToArray'
 import { sortArrayOfObjectsByKey } from '../../utils/sortArrayOfObjectsByKey'
 import { ApplicationState } from '../reducers'

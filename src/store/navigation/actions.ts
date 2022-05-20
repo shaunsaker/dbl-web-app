@@ -3,6 +3,7 @@ import { Path, Pathname } from 'history'
 
 export const navigateBack = createStandardAction('NAVIGATION/navigateBack')()
 
-export const navigate = createStandardAction('NAVIGATION/navigate')<
-  Path | Pathname
->()
+export const navigate = createStandardAction('NAVIGATION/navigate')<{
+  route: Path | Pathname
+  replace?: boolean
+}>()

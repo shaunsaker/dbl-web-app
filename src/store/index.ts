@@ -16,8 +16,8 @@ const sagaMiddleware = createSagaMiddleware()
 
 middlewares.push(sagaMiddleware)
 
-const isTesting = process.env.JEST_WORKER_ID
-if (process.env.NODE_ENV === 'development' && !isTesting) {
+const isTesting = process.env.NEXT_PUBLIC_JEST_WORKER_ID
+if (process.env.NEXT_PUBLIC_NODE_ENV === 'development' && !isTesting) {
   const loggerMiddleware = createLogger({ collapsed: true })
 
   middlewares.push(loggerMiddleware)

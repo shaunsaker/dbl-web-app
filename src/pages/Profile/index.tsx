@@ -16,7 +16,7 @@ import {
 
 interface ProfileProps {}
 
-export const Profile = ({}: ProfileProps): ReactElement => {
+const Profile = ({}: ProfileProps): ReactElement => {
   const dispatch = useDispatch()
 
   const savedUsername = useSelector(selectUsername)
@@ -70,6 +70,8 @@ export const Profile = ({}: ProfileProps): ReactElement => {
     </Page>
   )
 }
+
+export default Profile
 
 const Container = styled('div', {})
 

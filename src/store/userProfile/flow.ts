@@ -134,7 +134,9 @@ export function* checkUserWinnerFlow(): SagaIterator {
       return
     }
 
-    yield put(navigate(RoutePath.winner.replace(lotIdParam, winningLotId)))
+    yield put(
+      navigate({ route: RoutePath.winner.replace(lotIdParam, winningLotId) }),
+    )
 
     // toggle hasSeenLink so that we don't show the Winner modal automatically again
     const newWinnings: UserWinnings = {

@@ -31,7 +31,7 @@ export const HeaderBar = ({
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const onLogoClick = useCallback(() => {
-    dispatch(navigate(RoutePath.home))
+    dispatch(navigate({ route: RoutePath.home }))
   }, [dispatch])
 
   const onBackClick = useCallback(() => {

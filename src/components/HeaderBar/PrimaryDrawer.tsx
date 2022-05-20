@@ -7,9 +7,9 @@ import { CustomDrawer, CustomDrawerProps } from '../CustomDrawer'
 import { Typography } from '../Typography'
 import { useLinking } from '../useLinking'
 
-const DRAWER_ROUTES: { label: string; path: string }[] = [
-  { label: 'Results', path: RoutePath.results.replace(pageParam, '1') },
-  { label: 'Profile', path: RoutePath.profile },
+const DRAWER_ROUTES: { label: string; route: string }[] = [
+  { label: 'Results', route: RoutePath.results.replace(pageParam, '1') },
+  { label: 'Profile', route: RoutePath.profile },
 ]
 
 interface PrimaryDrawerProps extends CustomDrawerProps {}
@@ -21,14 +21,14 @@ export const PrimaryDrawer = ({
   const { openLink } = useLinking()
 
   const onDrawerRouteClick = useCallback(
-    (path: string) => {
-      dispatch(navigate(path))
+    (route: string) => {
+      dispatch(navigate({ route }))
     },
     [dispatch],
   )
 
   const onContactSupportClick = useCallback(() => {
-    const link = `mailto:${process.env.SUPPORT_EMAIL}`
+    const link = `mailto:${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`
 
     openLink(link)
   }, [openLink])
@@ -38,7 +38,7 @@ export const PrimaryDrawer = ({
       {DRAWER_ROUTES.map(drawerRoute => (
         <button
           key={drawerRoute.label}
-          onClick={() => onDrawerRouteClick(drawerRoute.path)}
+          onClick={() => onDrawerRouteClick(drawerRoute.route)}
         >
           <Typography>{drawerRoute.label}</Typography>
         </button>

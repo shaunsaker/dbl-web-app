@@ -44,11 +44,11 @@ export const LotResult = ({
   const didLotHaveWinner = Boolean(lot?.winnerUsername)
 
   const onViewMoreClick = useCallback(() => {
-    dispatch(navigate(RoutePath.result.replace(lotIdParam, lotId)))
+    dispatch(navigate({ route: RoutePath.result.replace(lotIdParam, lotId) }))
   }, [dispatch, lotId])
 
   const onViewWinningDetailsClick = useCallback(() => {
-    dispatch(navigate(RoutePath.winner.replace(lotIdParam, lotId)))
+    dispatch(navigate({ route: RoutePath.winner.replace(lotIdParam, lotId) }))
   }, [dispatch, lotId])
 
   const onVerifyResultClick = useCallback(() => {
@@ -56,7 +56,9 @@ export const LotResult = ({
       return
     }
 
-    dispatch(navigate(RoutePath.verifyResult.replace(lotIdParam, lot.id)))
+    dispatch(
+      navigate({ route: RoutePath.verifyResult.replace(lotIdParam, lot.id) }),
+    )
   }, [lot, dispatch])
 
   if (!lot) {

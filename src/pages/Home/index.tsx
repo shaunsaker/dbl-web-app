@@ -11,11 +11,12 @@ import { selectHasTicketsForLotId } from '../../store/invoices/selectors'
 import { selectActiveLotId } from '../../store/lots/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
-import { YesterdaysResults } from './YesterdaysResults'
+import { YesterdaysResults } from '../../components/home/YesterdaysResults'
+import { ProtectedRoute } from '../../components/ProtectedRoute'
 
 interface HomeProps {}
 
-export const Home = ({}: HomeProps): ReactElement => {
+const Home = ({}: HomeProps): ReactElement => {
   const dispatch = useDispatch()
 
   const activeLotId = useSelector(selectActiveLotId) || ''
@@ -25,24 +26,28 @@ export const Home = ({}: HomeProps): ReactElement => {
   )
 
   const onBuyTicketsClick = useCallback(() => {
-    dispatch(navigate(RoutePath.reserveTickets))
+    dispatch(navigate({ route: RoutePath.reserveTickets }))
   }, [dispatch])
 
   return (
-    <Page>
-      <HeaderBar />
+    <ProtectedRoute>
+      <Page>
+        <HeaderBar />
 
-      <Container>
-        <YesterdaysResults />
+        <Container>
+          <YesterdaysResults />
 
-        <LotStats lotId={activeLotId} />
+          <LotStats lotId={activeLotId} />
 
-        <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
+          <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
 
-        {hasTickets ? <TicketsSummary lotId={activeLotId} /> : null}
-      </Container>
-    </Page>
+          {hasTickets ? <TicketsSummary lotId={activeLotId} /> : null}
+        </Container>
+      </Page>
+    </ProtectedRoute>
   )
 }
+
+export default Home
 
 const Container = styled('div', {})

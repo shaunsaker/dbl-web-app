@@ -12,18 +12,22 @@ import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 
 interface WelcomeProps {}
 
-export const Welcome = ({}: WelcomeProps): ReactElement => {
+const Welcome = ({}: WelcomeProps): ReactElement => {
   const dispatch = useDispatch()
   const hasUserSignedUp = useSelector(selectHasUserSignedUp)
 
   const onLearnMoreClick = useCallback(() => {
-    dispatch(navigate(RoutePath.onboarding))
+    dispatch(navigate({ route: RoutePath.onboarding }))
   }, [dispatch])
 
   const onCloseClick = useCallback(() => {
     dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
 
-    dispatch(navigate(hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp))
+    dispatch(
+      navigate({
+        route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
+      }),
+    )
   }, [dispatch, hasUserSignedUp])
 
   return (
@@ -41,5 +45,7 @@ export const Welcome = ({}: WelcomeProps): ReactElement => {
     </Page>
   )
 }
+
+export default Welcome
 
 const Container = styled('div', {})

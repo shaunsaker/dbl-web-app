@@ -1,16 +1,16 @@
 import { SagaIterator } from 'redux-saga'
 import { fork, takeLatest } from 'redux-saga/effects'
 import { ActionType } from 'typesafe-actions'
-import { Navigation } from './Navigation'
+import { Navigation } from '../../router/Navigation'
 import { navigate, navigateBack } from './actions'
 
 function* onNavigateBackFlow(): SagaIterator {
   yield takeLatest(navigateBack, function* (): SagaIterator {
-    if (!Navigation.navigate) {
+    if (!Navigation.router) {
       return
     }
 
-    Navigation.navigate(-1)
+    Navigation.router.back()
   })
 }
 
@@ -18,11 +18,13 @@ function* onNavigateFlow(): SagaIterator {
   yield takeLatest(
     navigate,
     function* (action: ActionType<typeof navigate>): SagaIterator {
-      if (!Navigation.navigate) {
+      if (!Navigation.router) {
         return
       }
 
-      Navigation.navigate(action.payload)
+      Navigation.router[action.payload.replace ? 'replace' : 'push'](
+        action.payload.route,
+      )
     },
   )
 }

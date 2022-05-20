@@ -59,7 +59,7 @@ export const TicketsSummary = ({
   )
 
   const onClick = useCallback(() => {
-    dispatch(navigate(RoutePath.tickets.replace(lotIdParam, lotId)))
+    dispatch(navigate({ route: RoutePath.tickets.replace(lotIdParam, lotId) }))
   }, [dispatch, lotId])
 
   return (

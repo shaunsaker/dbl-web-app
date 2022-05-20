@@ -1,9 +1,9 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { styled } from '../../styles/stitches.config'
 import { useDispatch, useSelector } from 'react-redux'
-import { OnboardingOne } from './OnboardingOne'
-import { OnboardingTwo } from './OnboardingTwo'
-import { OnboardingThree } from './OnboardingThree'
+import { OnboardingOne } from '../../components/onboarding/OnboardingOne'
+import { OnboardingTwo } from '../../components/onboarding/OnboardingTwo'
+import { OnboardingThree } from '../../components/onboarding/OnboardingThree'
 import { Page } from '../../components/Page'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 import { navigate, navigateBack } from '../../store/navigation/actions'
@@ -16,7 +16,7 @@ const SLIDES = [OnboardingOne, OnboardingTwo, OnboardingThree]
 
 interface OnboardingProps {}
 
-export const Onboarding = ({}: OnboardingProps): ReactElement => {
+const Onboarding = ({}: OnboardingProps): ReactElement => {
   const dispatch = useDispatch()
 
   const hasUserSignedUp = useSelector(selectHasUserSignedUp)
@@ -40,7 +40,11 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
   const markCompletedOnboarding = useCallback(() => {
     dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
 
-    dispatch(navigate(hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp))
+    dispatch(
+      navigate({
+        route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
+      }),
+    )
   }, [dispatch, hasUserSignedUp])
 
   const onSubmitClick = useCallback(
@@ -87,6 +91,8 @@ export const Onboarding = ({}: OnboardingProps): ReactElement => {
     </Page>
   )
 }
+
+export default Onboarding
 
 const Container = styled('div', {})
 
