@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react'
+import React, { HTMLAttributes, ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
 import { PrimaryButton } from './PrimaryButton'
 import { Typography } from './Typography'
 
 interface BlankStateProps {
-  imageSource: any // FIXME: type this
+  imageProps: HTMLAttributes<HTMLImageElement>
   title: string
   description: string
   buttonText?: string
@@ -13,7 +13,7 @@ interface BlankStateProps {
 }
 
 export const BlankState = ({
-  imageSource,
+  imageProps,
   title,
   description,
   buttonText,
@@ -21,7 +21,7 @@ export const BlankState = ({
 }: BlankStateProps): ReactElement => {
   return (
     <Container>
-      <Image src={imageSource} />
+      <Image alt="" {...imageProps} />
 
       <Typography>{title}</Typography>
 

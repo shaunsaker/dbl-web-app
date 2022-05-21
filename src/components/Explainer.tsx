@@ -17,7 +17,7 @@ export const Explainer = ({
 }: ExplainerProps): ReactElement => {
   return (
     <Container>
-      <Image {...imageProps} />
+      <Image alt="" {...imageProps} />
 
       <Spacer />
 

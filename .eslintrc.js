@@ -12,6 +12,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
+    'next',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
