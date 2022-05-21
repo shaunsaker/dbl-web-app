@@ -1,22 +1,11 @@
 import { ActionType, getType } from 'typesafe-actions'
-import { arrayToObject } from '../../utils/arrayToObject'
-import {
-  fetchActiveLot,
-  fetchInactiveLots,
-  fetchLatestInactiveLot,
-} from './actions'
+import { fetchActiveLot } from './actions'
 import { LotsState } from './models'
 
 const reducerActions = {
   fetchActiveLotRequest: fetchActiveLot.request,
   fetchActiveLotSuccess: fetchActiveLot.success,
   fetchActiveLotFailure: fetchActiveLot.failure,
-  fetchLatestInactiveLotRequest: fetchLatestInactiveLot.request,
-  fetchLatestInactiveLotSuccess: fetchLatestInactiveLot.success,
-  fetchLatestInactiveLotFailure: fetchLatestInactiveLot.failure,
-  fetchInactiveLotsRequest: fetchInactiveLots.request,
-  fetchInactiveLotsSuccess: fetchInactiveLots.success,
-  fetchInactiveLotsFailure: fetchInactiveLots.failure,
 }
 
 export const initialState: LotsState = {
@@ -30,8 +19,6 @@ export const lotsReducer = (
 ): LotsState => {
   switch (action.type) {
     case getType(fetchActiveLot.request):
-    case getType(fetchLatestInactiveLot.request):
-    case getType(fetchInactiveLots.request):
       return {
         ...state,
         loading: true,
@@ -65,36 +52,7 @@ export const lotsReducer = (
         loading: false,
       }
 
-    case getType(fetchLatestInactiveLot.success):
-      // if there is no inactive lot, just return the old state
-      if (!action.payload.data) {
-        return state
-      }
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          [action.payload.data.id]: action.payload.data,
-        },
-        loading: false,
-      }
-
-    case getType(fetchInactiveLots.success):
-      const lotsObject = arrayToObject(action.payload.data, 'id')
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          ...lotsObject,
-        },
-        loading: false,
-      }
-
     case getType(fetchActiveLot.failure):
-    case getType(fetchLatestInactiveLot.failure):
-    case getType(fetchInactiveLots.failure):
       return {
         ...state,
         loading: false,

@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
+import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
 import { CustomPagination } from '../../../components/CustomPagination'
@@ -7,14 +7,13 @@ import { LotResult } from '../../../components/LotResult'
 import { Page } from '../../../components/Page'
 import { Typography } from '../../../components/Typography'
 import { pageParam, RoutePath } from '../../../router/models'
-import { fetchInactiveLots } from '../../../store/lots/actions'
 import {
+  selectInactiveLotsCount,
   selectLotsDataLoading,
   selectSortedInactiveLotsByPage,
 } from '../../../store/lots/selectors'
 import { navigate } from '../../../store/navigation/actions'
 import { ApplicationState } from '../../../store/reducers'
-import { selectStatsData } from '../../../store/stats/selectors'
 import { useRouter } from 'next/router'
 
 export const LOT_RESULTS_PER_PAGE = 10
@@ -33,23 +32,8 @@ const Results = ({}: ResultsProps): ReactElement => {
   const lots = useSelector((state: ApplicationState) =>
     selectSortedInactiveLotsByPage(state, page),
   )
-  const stats = useSelector(selectStatsData)
-
-  useLayoutEffect(
-    () => {
-      // this will fetch the latest n + 1 lots (we already fetch the latest inactive lot by default)
-      const earliestDate = lots && lots.length ? lots[0].drawTime : ''
-
-      dispatch(
-        fetchInactiveLots.request({
-          startAfter: earliestDate,
-          limit: LOT_RESULTS_PER_PAGE,
-        }),
-      )
-    },
-    // eslint-disable-next-line
-    [page],
-  )
+  const totalLots = useSelector(selectInactiveLotsCount)
+  const totalPages = Math.floor(totalLots / LOT_RESULTS_PER_PAGE) || 1
 
   const onPaginationClick = useCallback(
     (_: any, newPage: number) => {
@@ -78,9 +62,7 @@ const Results = ({}: ResultsProps): ReactElement => {
         )}
 
         <CustomPagination
-          count={
-            stats?.resultsCount ? stats?.resultsCount / LOT_RESULTS_PER_PAGE : 1
-          }
+          count={totalPages}
           page={page}
           onChange={onPaginationClick}
         />

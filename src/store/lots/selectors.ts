@@ -54,14 +54,21 @@ export const selectLotById = (state: ApplicationState, lotId: LotId) => {
   return lot
 }
 
-export const selectInactiveLotsSortedByDate = (state: ApplicationState) => {
+export const selectInactiveLots = (state: ApplicationState) => {
   const lots = selectLots(state)
 
   if (!lots) {
-    return null
+    return []
   }
 
   const inactiveLots = objectToArray(lots).filter(lot => !lot.active)
+
+  return inactiveLots
+}
+
+export const selectInactiveLotsSortedByDate = (state: ApplicationState) => {
+  const inactiveLots = selectInactiveLots(state)
+
   const sortedInactiveLots = sortArrayOfObjectsByKey(
     inactiveLots,
     'drawTime',
@@ -104,4 +111,10 @@ export const selectSortedInactiveLotsByPage = (
   const lots = sortedInactiveLots.slice(startIndex, endIndex)
 
   return lots
+}
+
+export const selectInactiveLotsCount = (state: ApplicationState) => {
+  const inactiveLots = selectInactiveLots(state)
+
+  return inactiveLots.length
 }

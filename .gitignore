@@ -1,8 +1,10 @@
 # build
 .next
+.cache
 tsconfig.tsbuildinfo
 dist
 node_modules
+yarn-error.log
 
 # private
 env
