@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "dbl-development",
+    "development": "dbl-development",
+    "production": "dbl-production"
+  },
+  "targets": {}
+}
