@@ -1,6 +1,8 @@
 # build
 .next
 .cache
+.firebase
+yarn-error.log
 tsconfig.tsbuildinfo
 dist
 node_modules
