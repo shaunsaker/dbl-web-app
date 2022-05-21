@@ -25,7 +25,11 @@ export const getCachedData = async <T>({
 
     try {
       fs.mkdirSync(CACHE_DIR)
+    } catch (error) {
+      // ignore
+    }
 
+    try {
       fs.writeFileSync(filepath, JSON.stringify(data), 'utf8')
 
       console.log(`wrote to ${filename} cache`)
