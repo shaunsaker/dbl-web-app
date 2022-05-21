@@ -3,11 +3,8 @@ import { useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
-import { LotId } from '../../store/lots/models'
-import {
-  selectLotById,
-  selectLotsDataLoading,
-} from '../../store/lots/selectors'
+import { Lot } from '../../store/lots/models'
+import { selectLotsDataLoading } from '../../store/lots/selectors'
 import { ApplicationState } from '../../store/reducers'
 import { getFormattedTime } from '../../utils/getFormattedTime'
 import { maybePluralise } from '../../utils/maybePluralise'
@@ -15,18 +12,15 @@ import { CountdownTimer } from '../CountdownTimer'
 import { Typography } from '../Typography'
 
 interface LotStatsProps {
-  lotId: LotId
+  lot: Lot
   children?: React.ReactNode
 }
 
 export const LotStats = ({
-  lotId,
+  lot,
   children,
 }: LotStatsProps): ReactElement | null => {
   const loading = useSelector(selectLotsDataLoading)
-  const lot = useSelector((state: ApplicationState) =>
-    selectLotById(state, lotId),
-  )
   const rate = useSelector((state: ApplicationState) =>
     selectBtcRateByCurrency(state, Currency.usd),
   )

@@ -12,7 +12,7 @@ interface MyTicketsProps {
   lotId: LotId
 }
 
-export const MyTickets = ({ lotId }: MyTicketsProps): ReactElement => {
+export const MyInvoices = ({ lotId }: MyTicketsProps): ReactElement => {
   const loading = useSelector(selectInvoicesDataLoading)
 
   // we use invoices to group the tickets
