@@ -2,7 +2,7 @@ import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '../../../../styles/stitches.config'
 import { CloseButton } from '../../../../components/CloseButton'
-import { MyTickets } from '../../../../components/tickets/MyTickets'
+import { MyInvoices } from '../../../../components/tickets/MyInvoices'
 import { Page } from '../../../../components/Page'
 import { navigateBack } from '../../../../store/navigation/actions'
 import { useRouter } from 'next/router'
@@ -26,7 +26,7 @@ const Tickets = (): ReactElement | null => {
   return (
     <Page>
       <Container>
-        <MyTickets lotId={lotId} />
+        <MyInvoices lotId={lotId} />
       </Container>
 
       <CloseButtonContainer>

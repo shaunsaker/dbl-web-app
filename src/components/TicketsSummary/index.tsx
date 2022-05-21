@@ -8,8 +8,8 @@ import {
   selectTicketIdsByLotId,
   selectTicketIdsByLotIdGroupedByStatus,
 } from '../../store/invoices/selectors'
-import { LotId } from '../../store/lots/models'
-import { selectActiveLotId, selectLotById } from '../../store/lots/selectors'
+import { Lot } from '../../store/lots/models'
+import { selectActiveLotId } from '../../store/lots/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { getTicketOdds } from '../../utils/getTicketOdds'
@@ -18,23 +18,18 @@ import { maybePluralise } from '../../utils/maybePluralise'
 import { Typography } from '../Typography'
 
 interface TicketsSummaryProps {
-  lotId: LotId
+  lot: Lot
 }
 
-export const TicketsSummary = ({
-  lotId,
-}: TicketsSummaryProps): ReactElement => {
+export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
   const dispatch = useDispatch()
 
-  const lot = useSelector((state: ApplicationState) =>
-    selectLotById(state, lotId),
-  )
-  const isActiveLot = useSelector(selectActiveLotId) === lotId
+  const isActiveLot = useSelector(selectActiveLotId) === lot.id
   const ticketsGroupedByStatus = useSelector((state: ApplicationState) =>
-    selectTicketIdsByLotIdGroupedByStatus(state, lotId),
+    selectTicketIdsByLotIdGroupedByStatus(state, lot.id),
   )
   const tickets = useSelector((state: ApplicationState) =>
-    selectTicketIdsByLotId(state, lotId),
+    selectTicketIdsByLotId(state, lot.id),
   )
 
   const hasConfirmedTickets =
@@ -51,7 +46,7 @@ export const TicketsSummary = ({
     () => {
       // we only fetch invoices for lot results because we already sync on active lot invoices
       if (!isActiveLot) {
-        dispatch(fetchInvoices.request({ lotId }))
+        dispatch(fetchInvoices.request({ lotId: lot.id }))
       }
     },
     // eslint-disable-next-line
@@ -59,8 +54,8 @@ export const TicketsSummary = ({
   )
 
   const onClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.tickets.replace(lotIdParam, lotId) }))
-  }, [dispatch, lotId])
+    dispatch(navigate({ route: RoutePath.tickets.replace(lotIdParam, lot.id) }))
+  }, [dispatch, lot.id])
 
   return (
     <Container onClick={onClick}>

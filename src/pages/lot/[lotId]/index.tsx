@@ -1,50 +1,36 @@
-import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
+import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
 import { CloseButton } from '../../../components/CloseButton'
 import { LotStats } from '../../../components/LotStats'
 import { Page } from '../../../components/Page'
 import { TicketsSummary } from '../../../components/TicketsSummary'
-import { fetchInvoices } from '../../../store/invoices/actions'
 import { navigateBack } from '../../../store/navigation/actions'
-import { useRouter } from 'next/router'
-import { LotId } from '../../../store/lots/models'
+import { Lot, LotId } from '../../../store/lots/models'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { getInactiveLots } from '../../../server/getInactiveLots'
 
-const Result = (): ReactElement | null => {
-  const router = useRouter()
-  const query = router.query
-  const lotId = query.lotId as LotId
+interface ResultProps {
+  lot?: Lot
+}
 
+const Result = ({ lot }: ResultProps): ReactElement | null => {
   const dispatch = useDispatch()
-
-  useLayoutEffect(
-    () => {
-      if (!lotId) {
-        return
-      }
-
-      // on mount fetch the invoices for this lot
-      dispatch(fetchInvoices.request({ lotId }))
-    },
-    // only run this once on mount
-    // eslint-disable-next-line
-    [],
-  )
 
   const onCloseClick = useCallback(() => {
     dispatch(navigateBack())
   }, [dispatch])
 
-  if (!lotId) {
+  if (!lot) {
     return null
   }
 
   return (
     <Page>
       <Container>
-        <LotStats lotId={lotId} />
+        <LotStats lot={lot} />
 
-        <TicketsSummary lotId={lotId} />
+        <TicketsSummary lot={lot} />
       </Container>
 
       <CloseButtonContainer>
@@ -52,6 +38,34 @@ const Result = (): ReactElement | null => {
       </CloseButtonContainer>
     </Page>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const lots = await getInactiveLots()
+
+  const paths = lots.map(lot => ({
+    params: { lotId: lot.id },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<ResultProps> = async ({
+  params,
+}) => {
+  if (!params) {
+    return {
+      props: {
+        lot: undefined,
+      },
+    }
+  }
+
+  const lotId = params.lotId as LotId
+  const lots = await getInactiveLots()
+  const lot = lots.find(lot => lot.id === lotId)
+
+  return { props: { lot } }
 }
 
 export default Result

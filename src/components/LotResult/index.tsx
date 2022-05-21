@@ -5,8 +5,7 @@ import { styled } from '../../styles/stitches.config'
 import { lotIdParam, RoutePath } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
-import { LotId } from '../../store/lots/models'
-import { selectLotById } from '../../store/lots/selectors'
+import { Lot } from '../../store/lots/models'
 import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { selectUserWinningByLotId } from '../../store/userProfile/selectors'
@@ -16,18 +15,14 @@ import { PrimaryButton } from '../PrimaryButton'
 import { Typography } from '../Typography'
 
 interface LotResultProps extends HTMLAttributes<HTMLDivElement> {
-  lotId: LotId
+  lot: Lot
 }
 
 export const LotResult = ({
-  lotId,
+  lot,
   ...props
 }: LotResultProps): ReactElement | null => {
   const dispatch = useDispatch()
-
-  const lot = useSelector((state: ApplicationState) =>
-    selectLotById(state, lotId),
-  )
 
   const rate = useSelector((state: ApplicationState) =>
     selectBtcRateByCurrency(state, Currency.usd),
@@ -35,7 +30,7 @@ export const LotResult = ({
 
   const didUserWinThisLot = Boolean(
     useSelector((state: ApplicationState) =>
-      selectUserWinningByLotId(state, lotId),
+      selectUserWinningByLotId(state, lot.id),
     ),
   )
 
@@ -44,12 +39,12 @@ export const LotResult = ({
   const didLotHaveWinner = Boolean(lot?.winnerUsername)
 
   const onViewMoreClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.result.replace(lotIdParam, lotId) }))
-  }, [dispatch, lotId])
+    dispatch(navigate({ route: RoutePath.result.replace(lotIdParam, lot.id) }))
+  }, [dispatch, lot.id])
 
   const onViewWinningDetailsClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.winner.replace(lotIdParam, lotId) }))
-  }, [dispatch, lotId])
+    dispatch(navigate({ route: RoutePath.winner.replace(lotIdParam, lot.id) }))
+  }, [dispatch, lot.id])
 
   const onVerifyResultClick = useCallback(() => {
     if (!lot) {
@@ -77,7 +72,7 @@ export const LotResult = ({
       </Typography>
 
       <button disabled={!onViewMoreClick} onClick={onViewMoreClick}>
-        <Typography>View More</Typography>
+        <Typography>View Result</Typography>
       </button>
 
       {didUserWinThisLot && (

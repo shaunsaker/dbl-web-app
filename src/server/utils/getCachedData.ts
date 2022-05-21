@@ -11,7 +11,6 @@ export const getCachedData = async <T>({
   api: () => Promise<T>
 }): Promise<T> => {
   const filepath = path.join(CACHE_DIR, filename)
-  console.log('HERE', filepath)
 
   let cachedData
 

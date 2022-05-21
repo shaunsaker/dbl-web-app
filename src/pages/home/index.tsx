@@ -6,24 +6,38 @@ import { LotStats } from '../../components/LotStats'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TicketsSummary } from '../../components/TicketsSummary'
-import { RoutePath } from '../../router/models'
+import { pageParam, RoutePath } from '../../router/models'
 import { selectHasTicketsForLotId } from '../../store/invoices/selectors'
-import { selectActiveLotId } from '../../store/lots/selectors'
+import { selectActiveLot } from '../../store/lots/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
-import { YesterdaysResults } from '../../components/home/YesterdaysResults'
 import { ProtectedRoute } from '../../components/ProtectedRoute'
+import { GetStaticProps } from 'next'
+import { getInactiveLots } from '../../server/getInactiveLots'
+import { Lot } from '../../store/lots/models'
+import { sortArrayOfObjectsByKey } from '../../utils/sortArrayOfObjectsByKey'
+import { LotResult } from '../../components/LotResult'
+import { Typography } from '../../components/Typography'
 
-interface HomeProps {}
+interface HomeProps {
+  latestInactiveLot?: Lot
+}
 
-const Home = ({}: HomeProps): ReactElement => {
+const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
   const dispatch = useDispatch()
 
-  const activeLotId = useSelector(selectActiveLotId) || ''
+  const activeLot = useSelector(selectActiveLot)
 
-  const hasTickets = useSelector((state: ApplicationState) =>
-    selectHasTicketsForLotId(state, activeLotId),
+  const hasTickets = useSelector(
+    (state: ApplicationState) =>
+      activeLot && selectHasTicketsForLotId(state, activeLot.id),
   )
+
+  const onViewMoreResultsClick = useCallback(() => {
+    const route = RoutePath.results.replace(pageParam, '1')
+
+    dispatch(navigate({ route }))
+  }, [dispatch])
 
   const onBuyTicketsClick = useCallback(() => {
     dispatch(navigate({ route: RoutePath.reserveTickets }))
@@ -35,17 +49,29 @@ const Home = ({}: HomeProps): ReactElement => {
         <HeaderBar />
 
         <Container>
-          <YesterdaysResults />
+          {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
 
-          <LotStats lotId={activeLotId} />
+          <button onClick={onViewMoreResultsClick}>
+            <Typography>View More Results</Typography>
+          </button>
+
+          {activeLot && <LotStats lot={activeLot} />}
 
           <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
 
-          {hasTickets ? <TicketsSummary lotId={activeLotId} /> : null}
+          {activeLot && hasTickets ? <TicketsSummary lot={activeLot} /> : null}
         </Container>
       </Page>
     </ProtectedRoute>
   )
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const lots = await getInactiveLots()
+  const reverseSortedLots = sortArrayOfObjectsByKey(lots, 'drawTime', true)
+  const latestInactiveLot = reverseSortedLots[0]
+
+  return { props: { latestInactiveLot } }
 }
 
 export default Home

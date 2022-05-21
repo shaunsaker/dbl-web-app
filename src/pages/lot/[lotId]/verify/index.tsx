@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { styled } from '../../../../styles/stitches.config'
 import { Card } from '../../../../components/Card'
 import { CloseButton } from '../../../../components/CloseButton'
@@ -12,23 +12,18 @@ import { PrimaryButton } from '../../../../components/PrimaryButton'
 import { TextButton } from '../../../../components/TextButton'
 import { useLinking } from '../../../../components/useLinking'
 import { lotIdParam, RoutePath } from '../../../../router/models'
-import { selectLotById } from '../../../../store/lots/selectors'
 import { navigate, navigateBack } from '../../../../store/navigation/actions'
-import { ApplicationState } from '../../../../store/reducers'
-import { useRouter } from 'next/router'
-import { LotId } from '../../../../store/lots/models'
+import { Lot, LotId } from '../../../../store/lots/models'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { getInactiveLots } from '../../../../server/getInactiveLots'
 
-const VerifyResult = (): ReactElement | null => {
-  const router = useRouter()
-  const query = router.query
-  const lotId = query.lotId as LotId
+interface VerifyResultProps {
+  lot?: Lot
+}
 
+const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
   const dispatch = useDispatch()
   const { openLink } = useLinking()
-
-  const lot = useSelector(
-    (state: ApplicationState) => lotId && selectLotById(state, lotId),
-  )
 
   const onViewLatestBlockHashClick = useCallback(() => {
     if (!lot) {
@@ -66,7 +61,7 @@ const VerifyResult = (): ReactElement | null => {
     dispatch(navigateBack())
   }, [dispatch])
 
-  if (!lotId || !lot) {
+  if (!lot) {
     return null
   }
 
@@ -124,6 +119,34 @@ const VerifyResult = (): ReactElement | null => {
       </CloseButtonContainer>
     </Page>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const lots = await getInactiveLots()
+
+  const paths = lots.map(lot => ({
+    params: { lotId: lot.id },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<VerifyResultProps> = async ({
+  params,
+}) => {
+  if (!params) {
+    return {
+      props: {
+        lot: undefined,
+      },
+    }
+  }
+
+  const lotId = params.lotId as LotId
+  const lots = await getInactiveLots()
+  const lot = lots.find(lot => lot.id === lotId)
+
+  return { props: { lot } }
 }
 
 export default VerifyResult
