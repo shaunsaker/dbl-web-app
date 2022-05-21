@@ -1,5 +1,5 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { styled } from '../../../../../styles/stitches.config'
 import { Card } from '../../../../../components/Card'
 import { CloseButton } from '../../../../../components/CloseButton'
@@ -10,24 +10,21 @@ import { InfoBox } from '../../../../../components/InfoBox'
 import { Page } from '../../../../../components/Page'
 import { TextInput } from '../../../../../components/TextInput'
 import { Typography } from '../../../../../components/Typography'
-import { selectLotById } from '../../../../../store/lots/selectors'
 import { navigateBack } from '../../../../../store/navigation/actions'
-import { ApplicationState } from '../../../../../store/reducers'
 import { blockHashToRandomNumber } from '../../../../../utils/blockHashToRandomNumber'
 import { floatToIndex } from '../../../../../utils/floatToIndex'
-import { useRouter } from 'next/router'
-import { LotId } from '../../../../../store/lots/models'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { getInactiveLots } from '../../../../../server/getInactiveLots'
+import { Lot, LotId } from '../../../../../store/lots/models'
 
-const VerifyResultCalculator = (): ReactElement | null => {
-  const router = useRouter()
-  const query = router.query
-  const lotId = query.lotId as LotId
+interface VerifyResultCalculatorProps {
+  lot?: Lot
+}
 
+const VerifyResultCalculator = ({
+  lot,
+}: VerifyResultCalculatorProps): ReactElement | null => {
   const dispatch = useDispatch()
-
-  const lot = useSelector((state: ApplicationState) =>
-    lotId ? selectLotById(state, lotId) : null,
-  )
 
   const [blockHash, setBlockHash] = useState(
     lot?.latestBlockHashAtDrawTime || '',
@@ -48,7 +45,7 @@ const VerifyResultCalculator = (): ReactElement | null => {
     setTicketCount(text)
   }, [])
 
-  if (!lotId || !lot) {
+  if (!lot) {
     return null
   }
 
@@ -113,6 +110,34 @@ const VerifyResultCalculator = (): ReactElement | null => {
       </CloseButtonContainer>
     </Page>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const lots = await getInactiveLots()
+
+  const paths = lots.map(lot => ({
+    params: { lotId: lot.id },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<
+  VerifyResultCalculatorProps
+> = async ({ params }) => {
+  if (!params) {
+    return {
+      props: {
+        lot: undefined,
+      },
+    }
+  }
+
+  const lotId = params.lotId as LotId
+  const lots = await getInactiveLots()
+  const lot = lots.find(lot => lot.id === lotId)
+
+  return { props: { lot } }
 }
 
 export default VerifyResultCalculator

@@ -9,14 +9,15 @@ import { useLinking } from '../../../../components/useLinking'
 import { navigateBack } from '../../../../store/navigation/actions'
 import { ApplicationState } from '../../../../store/reducers'
 import { selectUserWinningByLotId } from '../../../../store/userProfile/selectors'
-import { useRouter } from 'next/router'
 import { LotId } from '../../../../store/lots/models'
+import { getInactiveLots } from '../../../../server/getInactiveLots'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
-const Winner = (): ReactElement => {
-  const router = useRouter()
-  const query = router.query
-  const lotId = query.lotId as LotId
+interface WinnerProps {
+  lotId?: LotId
+}
 
+const Winner = ({ lotId }: WinnerProps): ReactElement => {
   const dispatch = useDispatch()
 
   const { openLink } = useLinking()
@@ -55,6 +56,32 @@ const Winner = (): ReactElement => {
       </CloseButtonContainer>
     </Page>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const lots = await getInactiveLots()
+
+  const paths = lots.map(lot => ({
+    params: { lotId: lot.id },
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<WinnerProps> = async ({
+  params,
+}) => {
+  if (!params) {
+    return {
+      props: {
+        lotId: undefined,
+      },
+    }
+  }
+
+  const lotId = params.lotId as LotId
+
+  return { props: { lotId } }
 }
 
 export default Winner

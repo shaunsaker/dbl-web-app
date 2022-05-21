@@ -11,7 +11,6 @@ import { btcRateFlow } from './btcRate/flow'
 import { invoicesFlow } from './invoices/flow'
 import { paymentsFlow } from './payments/flow'
 import { navigationFlow } from './navigation/flow'
-import { statsFlow } from './stats/flow'
 
 function* omnipresentFlows() {
   yield fork(authFlow)
@@ -27,7 +26,6 @@ function* authenticatedFlows() {
     yield fork(btcRateFlow)
     yield fork(invoicesFlow)
     yield fork(paymentsFlow)
-    yield fork(statsFlow)
     yield fork(userProfileFlow)
   }
 }
