@@ -70,7 +70,7 @@ const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
       <Container>
         <InfoBox>
           Every lot result is 100% transparent and provable. Read more in{' '}
-          <a href="/">our blog post</a>.
+          <a href="https://blog.com">our blog post</a>.
         </InfoBox>
 
         <Card>

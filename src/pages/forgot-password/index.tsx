@@ -36,7 +36,7 @@ const ForgotPassword = (): ReactElement => {
       <HeaderBar showBack />
 
       <Container>
-        <Image />
+        <Image alt="" />
 
         <Spacer />
 

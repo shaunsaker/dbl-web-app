@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
@@ -9,7 +8,6 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
-import { Typography } from '../../components/Typography'
 import { RoutePath } from '../../router/models'
 import { signIn } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
@@ -17,6 +15,7 @@ import { navigate } from '../../store/navigation/actions'
 import { selectUsername } from '../../store/userProfile/selectors'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
+import { Explainer } from '../../components/Explainer'
 
 interface SignInProps {}
 
@@ -61,19 +60,12 @@ const SignIn = ({}: SignInProps): ReactElement => {
   return (
     <Page>
       <Container>
-        <Image />
-
-        <Spacer />
-
-        <Typography>
-          {`Welcome back to the Daily Bitcoin Lottery${
+        <Explainer
+          title={`Welcome back to the Daily Bitcoin Lottery${
             existingUsername ? `, ${existingUsername}` : ''
           }`}
-        </Typography>
-
-        <Spacer />
-
-        <Typography>Creating one millionaire a day!</Typography>
+          description="Creating one millionaire a day!"
+        />
 
         <Spacer />
 
