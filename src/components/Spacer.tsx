@@ -1,10 +1,23 @@
-import React, { ReactElement } from 'react'
-import { styled } from '../styles/stitches.config'
+import { styled, theme } from '../styles/stitches.config'
 
-interface SpacerProps {}
-
-export const Spacer = ({}: SpacerProps): ReactElement => {
-  return <Container />
-}
-
-const Container = styled('div', {})
+export const Spacer = styled('div', {
+  variants: {
+    size: {
+      small: {
+        width: theme.space.small,
+        height: theme.space.small,
+      },
+      default: {
+        width: theme.space.default,
+        height: theme.space.default,
+      },
+      large: {
+        width: theme.space.large,
+        height: theme.space.large,
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+  },
+})

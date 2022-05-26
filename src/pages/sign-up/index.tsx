@@ -15,6 +15,7 @@ import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
+import { HeaderBar } from '../../components/HeaderBar'
 
 interface SignUpProps {}
 
@@ -65,13 +66,19 @@ const SignUp = ({}: SignUpProps): ReactElement => {
 
   return (
     <Page>
+      <HeaderBar showBack showLogo />
+
       <Container>
         <Explainer
+          imageProps={{
+            src: '/images/cyberpunk-city-4.webp',
+            alt: '',
+          }}
           title="Welcome"
-          description="Creating one millionaire a day!"
+          description="Physics-defying Explanation."
         />
 
-        <Spacer />
+        <Spacer size="large" />
 
         <TextInput
           ref={emailInputRef}
@@ -85,8 +92,8 @@ const SignUp = ({}: SignUpProps): ReactElement => {
         <Spacer />
 
         <TextInput
-          label="What should we call you?*"
-          placeholder="E.g. Nighthawk, Sandra, Xolisi, Kobus"
+          label="Username*"
+          placeholder="E.g. lootkid47"
           value={username}
           onChangeText={onChangeUsername}
           onSubmit={onSubmitUsername}
@@ -102,9 +109,9 @@ const SignUp = ({}: SignUpProps): ReactElement => {
           onChangeText={onChangePassword}
           onSubmit={onSubmit}
         />
-
-        <Spacer />
       </Container>
+
+      <Spacer size="large" />
 
       <PrimaryButton disabled={isSignUpDisabled} onClick={onSubmit}>
         SIGN UP
@@ -121,4 +128,8 @@ const SignUp = ({}: SignUpProps): ReactElement => {
 
 export default SignUp
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+  flex: 1,
+  flexCenter: '',
+})

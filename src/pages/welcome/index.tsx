@@ -9,6 +9,7 @@ import { RoutePath } from '../../router/models'
 import { selectHasUserSignedUp } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
+import { Spacer } from '../../components/Spacer'
 
 interface WelcomeProps {}
 
@@ -32,14 +33,20 @@ const Welcome = ({}: WelcomeProps): ReactElement => {
 
   return (
     <Page>
-      <HeaderBar showClose onClose={onCloseClick} />
+      <HeaderBar showLogo showClose onClose={onCloseClick} />
 
       <Container>
         <Explainer
+          imageProps={{
+            src: '/images/cyberpunk-city-4.webp',
+            alt: '',
+          }}
           title="Ready to change your life for the better...forever?"
           description="This is a gravity-defying explanation that welcomes the user and gets them excited and eager to buy their first tickets."
         />
       </Container>
+
+      <Spacer size="large" />
 
       <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
     </Page>
@@ -48,4 +55,7 @@ const Welcome = ({}: WelcomeProps): ReactElement => {
 
 export default Welcome
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  flex: 1,
+  flexCenter: '',
+})

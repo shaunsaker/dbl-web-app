@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react'
-import { styled } from '../../../styles/stitches.config'
-import { Explainer } from '../../Explainer'
-import { PrimaryButton } from '../../PrimaryButton'
+import { OnboardingPage } from '../OnboardingPage'
 
 interface OnboardingTwoProps {
   onSubmit: () => void
@@ -11,17 +9,19 @@ export const OnboardingTwo = ({
   onSubmit,
 }: OnboardingTwoProps): ReactElement => {
   return (
-    <>
-      <Container>
-        <Explainer
-          title="Entrancing Subheading"
-          description="Physics-defying Explanation."
-        />
-      </Container>
-
-      <PrimaryButton onClick={onSubmit}>CONTINUE</PrimaryButton>
-    </>
+    <OnboardingPage
+      explainerProps={{
+        imageProps: {
+          src: '/images/cyberpunk-city-2.webp',
+          alt: '',
+        },
+        title: 'Entrancing Subheading',
+        description: 'Physics-defying Explanation.',
+      }}
+      buttonProps={{
+        onClick: onSubmit,
+        children: 'CONTINUE',
+      }}
+    />
   )
 }
-
-const Container = styled('div', {})

@@ -2,14 +2,16 @@ import * as React from 'react'
 export const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    height="1em"
     viewBox="0 0 24 24"
-    width="1em"
     fill="currentColor"
     overflow="visible"
+    width="1em"
+    height="1em"
     {...props}
   >
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+    <path
+      fill="currentColor"
+      d="M3 8h18a1 1 0 000-2H3a1 1 0 000 2zm18 8H3a1 1 0 000 2h18a1 1 0 000-2zm0-5H3a1 1 0 000 2h18a1 1 0 000-2z"
+    />
   </svg>
 )

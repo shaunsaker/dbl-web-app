@@ -2,16 +2,15 @@ import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { HeaderBar } from '../../components/HeaderBar'
-import { Image } from '../../components/Image'
 import { LoadingModal } from '../../components/LoadingModal'
 import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextInput } from '../../components/TextInput'
-import { Typography } from '../../components/Typography'
 import { resetPassword } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { validateEmail } from '../../utils/validateEmail'
+import { Explainer } from '../../components/Explainer'
 
 const ForgotPassword = (): ReactElement => {
   const dispatch = useDispatch()
@@ -36,17 +35,16 @@ const ForgotPassword = (): ReactElement => {
       <HeaderBar showBack />
 
       <Container>
-        <Image alt="" />
+        <Explainer
+          imageProps={{
+            src: '/images/cyberpunk-city-4.webp',
+            alt: '',
+          }}
+          title="Welcome"
+          description="Physics-defying Explanation."
+        />
 
-        <Spacer />
-
-        <Typography>Title</Typography>
-
-        <Spacer />
-
-        <Typography>Creating one millionaire a day!</Typography>
-
-        <Spacer />
+        <Spacer size="large" />
 
         <TextInput
           label="Email*"
@@ -55,9 +53,9 @@ const ForgotPassword = (): ReactElement => {
           onChangeText={onChangeEmail}
           onSubmit={onSubmitClick}
         />
-
-        <Spacer />
       </Container>
+
+      <Spacer size="large" />
 
       <PrimaryButton
         disabled={isForgotPasswordDisabled}
@@ -73,4 +71,8 @@ const ForgotPassword = (): ReactElement => {
 
 export default ForgotPassword
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+  flex: 1,
+  flexCenter: '',
+})

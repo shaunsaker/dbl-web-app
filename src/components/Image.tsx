@@ -1,13 +1,20 @@
 import React, { HTMLAttributes, ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
+import { ElementContainer } from './ElementContainer'
 
-interface ImageProps extends HTMLAttributes<HTMLImageElement> {
-  src?: string
-  alt?: string
+export interface ImageProps extends HTMLAttributes<HTMLImageElement> {
+  src: string
+  alt: string
 }
 
 export const Image = ({ ...props }: ImageProps): ReactElement => {
-  return <Container {...props} />
+  return (
+    <ElementContainer>
+      <StyledNextImage width={343} height={238} {...props} />
+    </ElementContainer>
+  )
 }
 
-const Container = styled('img', {})
+const StyledNextImage = styled('img', {
+  borderRadius: '$default',
+})

@@ -1,11 +1,11 @@
-import React, { HTMLAttributes, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
-import { Image } from './Image'
+import { Image, ImageProps } from './Image'
 import { Spacer } from './Spacer'
 import { Typography } from './Typography'
 
-interface ExplainerProps {
-  imageProps?: HTMLAttributes<HTMLImageElement>
+export interface ExplainerProps {
+  imageProps?: ImageProps
   title: string
   description: string
 }
@@ -17,17 +17,19 @@ export const Explainer = ({
 }: ExplainerProps): ReactElement => {
   return (
     <Container>
-      <Image alt="" {...imageProps} />
+      <Image src={imageProps?.src || ''} alt="" {...imageProps} />
 
-      <Spacer />
+      <Spacer size="large" />
 
-      <Typography>{title}</Typography>
+      <Typography kind="title">{title}</Typography>
 
-      <Spacer />
+      <Spacer size="small" />
 
       <Typography>{description}</Typography>
     </Container>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+})

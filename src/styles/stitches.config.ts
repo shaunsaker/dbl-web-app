@@ -12,63 +12,69 @@ export const {
 } = createStitches({
   theme: {
     transitions: {
-      default: 'all 0.2s ease-in-out',
+      default: 'all 0.167s ease-in-out',
     },
     colors: {
-      primary: '#C94C19',
-      accent: '#C9A218',
+      purple: '#711c91',
+      pink: '#ea00d9',
+      turquoise: '#0abdc6',
+      transTurquoise: 'rgba(10, 189, 198, 0.33)',
+      blue: '#133e7c',
+      black: '#091833',
+      transBlack: 'rgba(9, 24, 51, 0.8)',
       white: '#FFFFFF',
-      transWhite: 'rgba(255, 255, 255, 0.8)',
-      border: '#C2C9D6',
-      background: '#F3F5F9',
-      primaryText: '#2E3233',
-      secondaryText: '#5C6466',
+      transWhite: 'rgba(255, 255, 255, 0.1)',
     },
-    // fonts: {
-    //   primary: 'Source Sans Pro',
-    //   logo: 'Playfair Display',
-    // },
+    fonts: {
+      default: 'Courier Prime',
+      logo: 'Rock Salt',
+    },
     fontSizes: {
       title: '24px',
       heading: '20px',
       regular: '16px',
       small: '14px',
+      icon: '24px',
     },
     lineHeights: {
-      title: '32px',
-      heading: '28px',
-      regular: '24px',
+      title: '28px',
+      heading: '24px',
+      regular: '20px',
       small: '16px',
     },
     space: {
       verySmall: '4px',
       small: '8px',
-      large: '16px',
-      extraLarge: '32px',
+      default: '16px',
+      large: '32px',
     },
     borderRadius: {
-      small: '4px',
-      large: '8px',
+      default: '2px',
+      large: '4px',
     },
     breakpoints: {
       tablet: '768px',
       desktop: '1024px',
     },
-    boxShadows: {
-      small:
-        '0px 4px 6px 0px rgb(50 50 93 / 10%), 0px 1px 3px 0px rgb(0 0 0 / 8%)',
-      large:
-        '0px 4px 12px 0px rgb(50 50 93 / 20%), 0px 1px 3px 0px rgb(0 0 0 / 8%)',
-      veryLarge:
-        '0px 4px 16px 0px rgb(50 50 93 / 33%), 0px 1px 3px 0px rgb(0 0 0 / 8%)',
-    },
     borderWidths: {
-      small: '2px',
+      default: '2px',
+      large: '4px',
+    },
+    sizes: {
+      headerBarHeight: '64px',
     },
   },
   media: {
     tablet: '(min-width: 768px)',
     desktop: '(min-width: 1024px)',
+  },
+  utils: {
+    flexCenter: () => ({
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }),
   },
 })
 
@@ -76,37 +82,28 @@ export const globalStyles = globalCss({
   '*': {
     margin: 0,
     padding: 0,
-    fontFamily: "'Source Sans Pro', sans-serif",
+    fontFamily: "'Courier Prime', sans-serif",
     boxSizing: 'border-box',
   },
-  // '@font-face': [
-  //   {
-  //     fontFamily: 'Playfair Display',
-  //     src: "url('/fonts/PlayfairDisplay-Bold.ttf')",
-  //     fontStyle: 'normal',
-  //     fontWeight: '700',
-  //     fontDisplay: 'swap',
-  //   },
-  //   {
-  //     fontFamily: 'Source Sans Pro',
-  //     src: "url('/fonts/SourceSansPro-Regular.ttf')",
-  //     fontStyle: 'normal',
-  //     fontWeight: '400',
-  //     fontDisplay: 'swap',
-  //   },
-  //   {
-  //     fontFamily: 'Source Sans Pro',
-  //     src: "url('/fonts/SourceSansPro-SemiBold.ttf')",
-  //     fontStyle: 'normal',
-  //     fontWeight: '600',
-  //     fontDisplay: 'swap',
-  //   },
-  //   {
-  //     fontFamily: 'Source Sans Pro',
-  //     src: "url('/fonts/SourceSansPro-Bold.ttf')",
-  //     fontStyle: 'normal',
-  //     fontWeight: '700',
-  //     fontDisplay: 'swap',
-  //   },
-  // ],
+  html: {
+    height: '100%',
+  },
+  body: {
+    height: '100%',
+  },
+  '#__next': {
+    minHeight: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  button: {
+    background: 'none',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+  },
+  input: {
+    outline: 'none',
+    border: 'none',
+  },
 })

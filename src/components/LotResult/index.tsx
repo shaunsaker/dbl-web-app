@@ -71,17 +71,17 @@ export const LotResult = ({
         {numberToDigits(lot?.totalBTC * rate, 0)})
       </Typography>
 
-      <button disabled={!onViewMoreClick} onClick={onViewMoreClick}>
+      <PrimaryButton disabled={!onViewMoreClick} onClick={onViewMoreClick}>
         <Typography>View Result</Typography>
-      </button>
+      </PrimaryButton>
 
       {didUserWinThisLot && (
         <>
           <Typography>You won this one 🎉</Typography>
 
-          <button onClick={onViewWinningDetailsClick}>
+          <PrimaryButton onClick={onViewWinningDetailsClick}>
             <Typography>View Winning Details</Typography>
-          </button>
+          </PrimaryButton>
         </>
       )}
 

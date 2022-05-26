@@ -7,8 +7,8 @@ import React, {
 } from 'react'
 import { styled } from '../styles/stitches.config'
 
-import { VisibilityOffIcon } from './icons/VisibilityOffIcon'
-import { VisibilityOnIcon } from './icons/VisibilityOnIcon'
+import { EyeSlashIcon } from './icons/EyeSlashIcon'
+import { EyeIcon } from './icons/EyeIcon'
 import { TextInput, TextInputProps } from './TextInput'
 
 type PasswordTextInputProps = TextInputProps
@@ -25,21 +25,40 @@ export const PasswordTextInput = forwardRef(
     }, [])
 
     return (
-      <Container>
-        <TextInput
-          {...props}
-          type={passwordHidden ? 'password' : 'text'}
-          ref={ref}
-        >
-          <VisibilityButton onClick={onVisibilityButtonClick}>
-            {passwordHidden ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
-          </VisibilityButton>
-        </TextInput>
-      </Container>
+      <TextInput
+        {...props}
+        type={passwordHidden ? 'password' : 'text'}
+        ref={ref}
+      >
+        <VisibilityButton onClick={onVisibilityButtonClick}>
+          {passwordHidden ? <StyledEyeIcon /> : <StyledEyeSlashIcon />}
+        </VisibilityButton>
+      </TextInput>
     )
   },
 )
 
-const Container = styled('div', {})
+const VisibilityButton = styled('button', {
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  bottom: 0,
+  flexCenter: '',
+  paddingRight: '$default',
+  cursor: 'pointer',
+  transition: '$default',
 
-const VisibilityButton = styled('button', {})
+  '&:hover > svg': {
+    color: '$turquoise',
+  },
+})
+
+const StyledEyeIcon = styled(EyeIcon, {
+  fontSize: '$icon',
+  color: '$white',
+})
+
+const StyledEyeSlashIcon = styled(EyeSlashIcon, {
+  fontSize: '$icon',
+  color: '$white',
+})

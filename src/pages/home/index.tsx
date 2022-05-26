@@ -51,9 +51,9 @@ const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
         <Container>
           {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
 
-          <button onClick={onViewMoreResultsClick}>
+          <PrimaryButton onClick={onViewMoreResultsClick}>
             <Typography>View More Results</Typography>
-          </button>
+          </PrimaryButton>
 
           {activeLot && <LotStats lot={activeLot} />}
 

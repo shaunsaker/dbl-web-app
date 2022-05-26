@@ -11,6 +11,7 @@ import { selectHasUserSignedUp } from '../../store/auth/selectors'
 import { RoutePath } from '../../router/models'
 import { HeaderBar } from '../../components/HeaderBar'
 import { Spacer } from '../../components/Spacer'
+import { Stepper } from '../../components/Stepper'
 
 const SLIDES = [OnboardingOne, OnboardingTwo, OnboardingThree]
 
@@ -33,7 +34,7 @@ const Onboarding = ({}: OnboardingProps): ReactElement => {
     }
   }, [dispatch, pageIndex])
 
-  const onNavigateClick = useCallback((newPageIndex: number) => {
+  const onStepClick = useCallback((newPageIndex: number) => {
     setPageIndex(newPageIndex)
   }, [])
 
@@ -70,6 +71,7 @@ const Onboarding = ({}: OnboardingProps): ReactElement => {
     <Page>
       <HeaderBar
         showBack
+        showLogo
         showClose
         onBack={onBackClick}
         onClose={onCloseClick}
@@ -81,21 +83,19 @@ const Onboarding = ({}: OnboardingProps): ReactElement => {
 
       <Spacer />
 
-      <DotsContainer>
-        {SLIDES.map((_, index) => {
-          return (
-            <Dot key={`dot-${index}`} onClick={() => onNavigateClick(index)} />
-          )
-        })}
-      </DotsContainer>
+      <Stepper
+        activeStep={pageIndex}
+        steps={SLIDES.length}
+        onStepClick={onStepClick}
+      />
     </Page>
   )
 }
 
 export default Onboarding
 
-const Container = styled('div', {})
-
-const DotsContainer = styled('div', {})
-
-const Dot = styled('button', {})
+const Container = styled('div', {
+  width: '100%',
+  flex: 1,
+  flexCenter: '',
+})

@@ -6,8 +6,8 @@ import React, {
   ReactElement,
   useCallback,
 } from 'react'
-import { styled } from '../styles/stitches.config'
-import { Spacer } from './Spacer'
+import { styled, theme } from '../styles/stitches.config'
+import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
 export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
@@ -18,6 +18,7 @@ export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
 }
 
+// TODO: SS label component
 export const TextInput = forwardRef(
   (
     { type = 'text', label, onChangeText, children, ...props }: TextInputProps,
@@ -32,11 +33,11 @@ export const TextInput = forwardRef(
 
     return (
       <Container>
-        <Typography>{label}</Typography>
+        <LabelContainer>
+          <Typography kind="small">{label}</Typography>
+        </LabelContainer>
 
-        <Spacer />
-
-        <InputContainer>
+        <ElementContainer>
           <StyledTextInput
             type={type}
             onChange={onChange}
@@ -45,14 +46,36 @@ export const TextInput = forwardRef(
           />
 
           {children}
-        </InputContainer>
+        </ElementContainer>
       </Container>
     )
   },
 )
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+})
 
-const InputContainer = styled('div', {})
+const LabelContainer = styled('div', {
+  marginLeft: 2,
+  marginBottom: theme.space.verySmall,
+})
 
-const StyledTextInput = styled('input', {})
+const StyledTextInput = styled('input', {
+  width: '100%',
+  height: 48,
+  padding: '0 $default',
+  backgroundColor: '$black',
+  fontSize: '$small',
+  fontWeight: 700,
+  color: '$white',
+  caretColor: '$turquoise',
+  cursor: 'pointer',
+
+  '&:focus, &:hover': {
+    backgroundColor: '$transBlack',
+  },
+})

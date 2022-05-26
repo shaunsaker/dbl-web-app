@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { pageParam, RoutePath } from '../../router/models'
 import { navigate } from '../../store/navigation/actions'
 import { CustomDrawer, CustomDrawerProps } from '../CustomDrawer'
+import { PrimaryButton } from '../PrimaryButton'
 
 import { Typography } from '../Typography'
 import { useLinking } from '../useLinking'
@@ -36,17 +37,17 @@ export const PrimaryDrawer = ({
   return (
     <CustomDrawer anchor="left" {...props}>
       {DRAWER_ROUTES.map(drawerRoute => (
-        <button
+        <PrimaryButton
           key={drawerRoute.label}
           onClick={() => onDrawerRouteClick(drawerRoute.route)}
         >
           <Typography>{drawerRoute.label}</Typography>
-        </button>
+        </PrimaryButton>
       ))}
 
-      <button onClick={onContactSupportClick}>
+      <PrimaryButton onClick={onContactSupportClick}>
         <Typography>Contact Support</Typography>
-      </button>
+      </PrimaryButton>
     </CustomDrawer>
   )
 }

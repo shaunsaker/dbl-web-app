@@ -1,13 +1,15 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import { styled } from '../../styles/stitches.config'
+import { styled, theme } from '../../styles/stitches.config'
 import { Typography } from '../Typography'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateBack } from '../../store/navigation/actions'
 import { RoutePath } from '../../router/models'
 import { MenuIcon } from '../icons/MenuIcon'
-import { ChevronLeftIcon } from '../icons/ChevronLeftIcon'
 import { PrimaryDrawer } from './PrimaryDrawer'
-import { CloseIcon } from '../icons/CloseIcon'
+import { BackButton } from '../BackButton'
+import { CloseButton } from '../CloseButton'
+import { PAGE_PADDING } from '../Page'
+import { useRouter } from 'next/router'
 
 interface HeaderBarProps {
   showBack?: boolean
@@ -27,6 +29,8 @@ export const HeaderBar = ({
   onClose,
 }: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
+  const router = useRouter()
+  console.log(router, history)
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -58,53 +62,79 @@ export const HeaderBar = ({
 
   return (
     <Container>
-      {(showBack || showLogo) && (
-        <LogoContainer>
-          {showBack && (
-            <StyledBackButton onClick={onBackClick}>
-              <ChevronLeftIcon />
-            </StyledBackButton>
-          )}
-
-          {showLogo ? (
-            <button onClick={onLogoClick}>
-              <LogoContainer>
-                <Logo />
-
-                <Typography>DBL</Typography>
-              </LogoContainer>
-            </button>
-          ) : (
-            <div />
-          )}
-        </LogoContainer>
+      {showBack && (
+        <ItemContainer position="left">
+          <StyledBackButton onClick={onBackClick} />
+        </ItemContainer>
       )}
+
+      <ItemContainer position={showBack ? 'center' : 'left'}>
+        {showLogo && (
+          <button onClick={onLogoClick}>
+            <Typography kind="logo">DBL</Typography>
+          </button>
+        )}
+      </ItemContainer>
 
       {showMenu && (
         <>
-          <button onClick={onMenuClick}>
-            <MenuIcon />
-          </button>
+          <ItemContainer position="right">
+            <button onClick={onMenuClick}>
+              <StyledMenuIcon />
+            </button>
+          </ItemContainer>
 
           <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
         </>
       )}
 
-      {showClose && (
-        <button onClick={onCloseClick}>
-          <CloseIcon />
-        </button>
-      )}
+      <ItemContainer position="right">
+        {showClose && <StyledCloseButton onClick={onCloseClick} />}
+      </ItemContainer>
     </Container>
   )
 }
 
-export const HEADER_BAR_HEIGHT = 64
+const Container = styled('div', {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  height: theme.sizes.headerBarHeight,
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: `0 ${PAGE_PADDING}`,
+  backgroundColor: '$black',
+  zIndex: 1,
+})
 
-const Container = styled('div', {})
+const ItemContainer = styled('div', {
+  width: '33%',
 
-const StyledBackButton = styled('button', {})
+  variants: {
+    position: {
+      left: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+      },
+      center: {
+        display: 'flex',
+        justifyContent: 'center',
+      },
+      right: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+      },
+    },
+  },
+})
 
-const LogoContainer = styled('div', {})
+const StyledBackButton = styled(BackButton, {})
 
-const Logo = styled('div', {})
+const StyledCloseButton = styled(CloseButton, {})
+
+const StyledMenuIcon = styled(MenuIcon, {
+  fontSize: '$icon',
+  color: '$white',
+})

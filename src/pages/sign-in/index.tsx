@@ -16,6 +16,7 @@ import { selectUsername } from '../../store/userProfile/selectors'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
 import { Explainer } from '../../components/Explainer'
+import { HeaderBar } from '../../components/HeaderBar'
 
 interface SignInProps {}
 
@@ -59,15 +60,21 @@ const SignIn = ({}: SignInProps): ReactElement => {
 
   return (
     <Page>
+      <HeaderBar showBack showLogo />
+
       <Container>
         <Explainer
-          title={`Welcome back to the Daily Bitcoin Lottery${
+          imageProps={{
+            src: '/images/cyberpunk-city-4.webp',
+            alt: '',
+          }}
+          title={`Welcome back ${
             existingUsername ? `, ${existingUsername}` : ''
           }`}
-          description="Creating one millionaire a day!"
+          description="Physics-defying Explanation."
         />
 
-        <Spacer />
+        <Spacer size="large" />
 
         <TextInput
           label="Email*"
@@ -76,9 +83,7 @@ const SignIn = ({}: SignInProps): ReactElement => {
           onChangeText={onChangeEmail}
           onSubmit={onSubmitEmail}
         />
-
         <Spacer />
-
         <PasswordTextInput
           ref={passwordInputRef}
           label="Password*"
@@ -87,13 +92,13 @@ const SignIn = ({}: SignInProps): ReactElement => {
           onChangeText={onChangePassword}
           onSubmit={onSubmit}
         />
-
         <Spacer />
-
         <TextButton onClick={onForgotPasswordClick}>
           Forgot Password?
         </TextButton>
       </Container>
+
+      <Spacer size="large" />
 
       <PrimaryButton disabled={isSignInDisabled} onClick={onSubmit}>
         SIGN IN
@@ -110,4 +115,8 @@ const SignIn = ({}: SignInProps): ReactElement => {
 
 export default SignIn
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+  flex: 1,
+  flexCenter: '',
+})

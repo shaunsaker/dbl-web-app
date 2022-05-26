@@ -14,4 +14,13 @@ export const BackButton = ({ onClick }: BackButtonPropsProps): ReactElement => {
   )
 }
 
-const Container = styled('button', {})
+const Container = styled('button', {
+  flexCenter: '',
+  fontSize: '$icon',
+  color: '$white',
+  transition: '$default',
+
+  '&:hover': {
+    color: '$turquoise',
+  },
+})
