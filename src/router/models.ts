@@ -5,7 +5,7 @@ export const pageParam = ':page'
 
 export const RoutePath = {
   welcome: '/welcome',
-  onboarding: '/onboarding',
+  onboarding: `/onboarding/page/${pageParam}`,
   signUp: '/sign-up',
   signIn: '/sign-in',
   forgotPassword: `/forgot-password`,

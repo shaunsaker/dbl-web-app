@@ -1,49 +1,44 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { styled, theme } from '../../styles/stitches.config'
 import { Typography } from '../Typography'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { navigate, navigateBack } from '../../store/navigation/actions'
 import { RoutePath } from '../../router/models'
 import { MenuIcon } from '../icons/MenuIcon'
 import { PrimaryDrawer } from './PrimaryDrawer'
 import { BackButton } from '../BackButton'
 import { CloseButton } from '../CloseButton'
-import { PAGE_PADDING } from '../Page'
+import { selectHasUserSignedUp } from '../../store/auth/selectors'
+import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 import { useRouter } from 'next/router'
+import {
+  hasRouteHistory,
+  isCloseRoute,
+  isMenuRoute,
+  isOnboardingRoute,
+} from '../../router/utils'
 
-interface HeaderBarProps {
-  showBack?: boolean
-  showLogo?: boolean
-  showMenu?: boolean
-  showClose?: boolean
-  onBack?: () => void
-  onClose?: () => void
-}
+interface HeaderBarProps {}
 
-export const HeaderBar = ({
-  showBack,
-  showLogo,
-  showMenu,
-  showClose,
-  onBack,
-  onClose,
-}: HeaderBarProps): ReactElement => {
+export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const hasUserSignedUp = useSelector(selectHasUserSignedUp)
+
   const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const showBack = hasRouteHistory()
+  const showMenu = isMenuRoute(router.route)
+  const showClose = isCloseRoute(router.route)
 
   const onLogoClick = useCallback(() => {
     dispatch(navigate({ route: RoutePath.home }))
   }, [dispatch])
 
   const onBackClick = useCallback(() => {
-    if (onBack) {
-      onBack()
-    } else {
-      dispatch(navigateBack())
-    }
-  }, [onBack, dispatch])
+    dispatch(navigateBack())
+  }, [dispatch])
 
   const onMenuClick = useCallback(() => {
     setDrawerOpen(true)
@@ -54,10 +49,18 @@ export const HeaderBar = ({
   }, [])
 
   const onCloseClick = useCallback(() => {
-    if (onClose) {
-      onClose()
+    if (isOnboardingRoute(router.route)) {
+      dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
+
+      dispatch(
+        navigate({
+          route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
+        }),
+      )
+    } else {
+      navigateBack()
     }
-  }, [onClose])
+  }, [dispatch, hasUserSignedUp, router.route])
 
   return (
     <Container>
@@ -68,11 +71,9 @@ export const HeaderBar = ({
       )}
 
       <ItemContainer position={showBack ? 'center' : 'left'}>
-        {showLogo && (
-          <button onClick={onLogoClick}>
-            <Typography kind="logo">DBL</Typography>
-          </button>
-        )}
+        <button onClick={onLogoClick}>
+          <Typography kind="logo">DBL</Typography>
+        </button>
       </ItemContainer>
 
       {showMenu && (
@@ -103,7 +104,7 @@ const Container = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: `0 ${PAGE_PADDING}`,
+  padding: `0 ${theme.space.large}`,
   backgroundColor: '$black',
   zIndex: 1,
 })

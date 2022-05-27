@@ -1,9 +1,7 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { HeaderBar } from '../../components/HeaderBar'
 import { LoadingModal } from '../../components/LoadingModal'
-import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextInput } from '../../components/TextInput'
@@ -31,9 +29,7 @@ const ForgotPassword = (): ReactElement => {
   }, [dispatch, email])
 
   return (
-    <Page>
-      <HeaderBar showBack />
-
+    <>
       <Container>
         <Explainer
           imageProps={{
@@ -65,7 +61,7 @@ const ForgotPassword = (): ReactElement => {
       </PrimaryButton>
 
       {isAuthLoading && <LoadingModal />}
-    </Page>
+    </>
   )
 }
 

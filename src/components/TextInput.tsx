@@ -18,7 +18,6 @@ export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
 }
 
-// TODO: SS label component
 export const TextInput = forwardRef(
   (
     { type = 'text', label, onChangeText, children, ...props }: TextInputProps,
@@ -76,6 +75,6 @@ const StyledTextInput = styled('input', {
   cursor: 'pointer',
 
   '&:focus, &:hover': {
-    backgroundColor: '$transBlack',
+    backgroundColor: '$transWhite',
   },
 })

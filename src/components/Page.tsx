@@ -1,6 +1,7 @@
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import { styled, theme } from '../styles/stitches.config'
 import { ElementContainer } from './ElementContainer'
+import { HeaderBar } from './HeaderBar'
 
 interface PageProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
@@ -9,6 +10,8 @@ interface PageProps extends HTMLAttributes<HTMLDivElement> {
 export const Page = ({ children, ...props }: PageProps): ReactElement => {
   return (
     <StyledElementContainer kind="large">
+      <HeaderBar />
+
       <Container {...props}>
         <ContentContainer>{children}</ContentContainer>
       </Container>
@@ -20,22 +23,22 @@ const StyledElementContainer = styled(ElementContainer, {
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
+  position: 'relative',
 })
-
-export const PAGE_PADDING = theme.space.large
 
 const Container = styled('div', {
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: '$black',
-  padding: PAGE_PADDING,
+  padding: theme.space.large,
   paddingTop:
-    parseInt(theme.sizes.headerBarHeight.value) + parseInt(PAGE_PADDING.value),
-  position: 'relative',
+    parseInt(theme.sizes.headerBarHeight.value) +
+    parseInt(theme.space.large.value),
 })
 
 const ContentContainer = styled('div', {
   flex: 1,
   flexCenter: '',
+  position: 'relative',
 })

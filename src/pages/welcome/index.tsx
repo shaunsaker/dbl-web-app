@@ -1,40 +1,23 @@
 import React, { ReactElement, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
-import { HeaderBar } from '../../components/HeaderBar'
-import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
-import { RoutePath } from '../../router/models'
-import { selectHasUserSignedUp } from '../../store/auth/selectors'
+import { pageParam, RoutePath } from '../../router/models'
 import { navigate } from '../../store/navigation/actions'
-import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 import { Spacer } from '../../components/Spacer'
 
 interface WelcomeProps {}
 
 const Welcome = ({}: WelcomeProps): ReactElement => {
   const dispatch = useDispatch()
-  const hasUserSignedUp = useSelector(selectHasUserSignedUp)
 
   const onLearnMoreClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.onboarding }))
+    dispatch(navigate({ route: RoutePath.onboarding.replace(pageParam, '1') }))
   }, [dispatch])
 
-  const onCloseClick = useCallback(() => {
-    dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
-
-    dispatch(
-      navigate({
-        route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
-      }),
-    )
-  }, [dispatch, hasUserSignedUp])
-
   return (
-    <Page>
-      <HeaderBar showLogo showClose onClose={onCloseClick} />
-
+    <>
       <Container>
         <Explainer
           imageProps={{
@@ -49,7 +32,7 @@ const Welcome = ({}: WelcomeProps): ReactElement => {
       <Spacer size="large" />
 
       <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
-    </Page>
+    </>
   )
 }
 

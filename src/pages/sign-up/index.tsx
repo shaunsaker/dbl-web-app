@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
 import { LoadingModal } from '../../components/LoadingModal'
-import { Page } from '../../components/Page'
 import { PasswordTextInput } from '../../components/PasswordTextInput'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
@@ -15,7 +14,6 @@ import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
 import { validateEmail } from '../../utils/validateEmail'
 import { validatePassword } from '../../utils/validatePassword'
-import { HeaderBar } from '../../components/HeaderBar'
 
 interface SignUpProps {}
 
@@ -65,9 +63,7 @@ const SignUp = ({}: SignUpProps): ReactElement => {
   }, [dispatch])
 
   return (
-    <Page>
-      <HeaderBar showBack showLogo />
-
+    <>
       <Container>
         <Explainer
           imageProps={{
@@ -122,7 +118,7 @@ const SignUp = ({}: SignUpProps): ReactElement => {
       <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
 
       {isAuthLoading && <LoadingModal />}
-    </Page>
+    </>
   )
 }
 

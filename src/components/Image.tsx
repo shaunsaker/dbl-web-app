@@ -10,11 +10,12 @@ export interface ImageProps extends HTMLAttributes<HTMLImageElement> {
 export const Image = ({ ...props }: ImageProps): ReactElement => {
   return (
     <ElementContainer>
-      <StyledNextImage width={343} height={238} {...props} />
+      <StyledImage {...props} />
     </ElementContainer>
   )
 }
 
-const StyledNextImage = styled('img', {
+const StyledImage = styled('img', {
   borderRadius: '$default',
+  width: '100%',
 })
