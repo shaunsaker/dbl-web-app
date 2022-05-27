@@ -30,7 +30,6 @@ export const HeaderBar = ({
 }: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
   const router = useRouter()
-  console.log(router, history)
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
