@@ -117,7 +117,7 @@ const SignUp = ({}: SignUpProps): ReactElement => {
 
       <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
 
-      {isAuthLoading && <LoadingModal />}
+      {isAuthLoading && <LoadingModal>Authenticating...</LoadingModal>}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React, { HTMLAttributes, ReactElement } from 'react'
-import { styled, theme } from '../../styles/stitches.config'
+import { styled } from '../../styles/stitches.config'
 import { getRotateKeyFrames } from './utils'
 
 interface ElementContainerProps extends HTMLAttributes<HTMLDivElement> {
@@ -22,7 +22,6 @@ const Container = styled('div', {
   borderStyle: 'solid',
   borderImage: `conic-gradient(from var(--angle), ${colours}) 1`,
   animation: `10s ${getRotateKeyFrames(colours)} linear infinite`,
-  clipPath: `inset(0px round ${theme.borderWidths.default})`,
 
   '@property --angle': {
     syntax: '<angle>',

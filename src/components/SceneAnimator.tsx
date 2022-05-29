@@ -12,6 +12,18 @@ import { styled } from '../styles/stitches.config'
 const FADE_ANIMATION: Variants = {
   initial: {
     opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+}
+
+const FADE_SCALE_ANIMATION: Variants = {
+  initial: {
+    opacity: 0,
     scale: 0.95,
   },
   animate: {
@@ -30,11 +42,13 @@ const TRANSITION: Transition = {
 }
 
 interface SceneAnimatorProps {
+  kind?: 'default' | 'fade'
   sceneKey: string
   children: ReactNode
 }
 
 export const SceneAnimator = ({
+  kind = 'default',
   sceneKey,
   children,
 }: SceneAnimatorProps): ReactElement => {
@@ -46,7 +60,7 @@ export const SceneAnimator = ({
           initial="initial"
           animate="animate"
           exit="exit"
-          variants={FADE_ANIMATION}
+          variants={kind === 'default' ? FADE_SCALE_ANIMATION : FADE_ANIMATION}
           transition={TRANSITION}
         >
           {children}

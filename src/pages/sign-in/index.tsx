@@ -73,6 +73,7 @@ const SignIn = ({}: SignInProps): ReactElement => {
         <Spacer size="large" />
 
         <TextInput
+          type="email"
           label="Email*"
           placeholder="Enter your email"
           value={email}
@@ -104,7 +105,7 @@ const SignIn = ({}: SignInProps): ReactElement => {
 
       <TextButton onClick={onSignUpInsteadClick}>Sign up instead?</TextButton>
 
-      {isAuthLoading && <LoadingModal />}
+      {isAuthLoading && <LoadingModal>Authenticating...</LoadingModal>}
     </>
   )
 }

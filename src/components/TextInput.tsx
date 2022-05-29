@@ -11,7 +11,7 @@ import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
 export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
-  type?: 'text' | 'password'
+  type?: 'text' | 'email' | 'password'
   label: string
   value: string
   onChangeText: (text: string) => void
@@ -37,14 +37,16 @@ export const TextInput = forwardRef(
         </LabelContainer>
 
         <ElementContainer>
-          <StyledTextInput
-            type={type}
-            onChange={onChange}
-            {...props}
-            ref={ref}
-          />
+          <InputContainer>
+            <StyledTextInput
+              type={type}
+              onChange={onChange}
+              {...props}
+              ref={ref}
+            />
 
-          {children}
+            {children}
+          </InputContainer>
         </ElementContainer>
       </Container>
     )
@@ -61,6 +63,10 @@ const Container = styled('div', {
 const LabelContainer = styled('div', {
   marginLeft: 2,
   marginBottom: theme.space.verySmall,
+})
+
+const InputContainer = styled('div', {
+  position: 'relative',
 })
 
 const StyledTextInput = styled('input', {

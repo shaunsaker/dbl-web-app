@@ -60,7 +60,7 @@ const ForgotPassword = (): ReactElement => {
         SUBMIT
       </PrimaryButton>
 
-      {isAuthLoading && <LoadingModal />}
+      {isAuthLoading && <LoadingModal>Resetting your password...</LoadingModal>}
     </>
   )
 }

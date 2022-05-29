@@ -1,14 +1,26 @@
 import React, { ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
+import { AnimatedSvgPaths } from './AnimatedSvgPaths'
+import { Backdrop } from './Backdrop'
+import { Typography } from './Typography'
 
-interface LoadingModalProps {}
+interface LoadingModalProps {
+  children?: string
+}
 
-export const LoadingModal = ({}: LoadingModalProps): ReactElement => {
+export const LoadingModal = ({ children }: LoadingModalProps): ReactElement => {
   return (
-    <Container>
-      <div>Loading</div>
-    </Container>
+    <Backdrop>
+      <Container>
+        <AnimatedSvgPaths />
+
+        <Typography>{children}</Typography>
+      </Container>
+    </Backdrop>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  flex: 1,
+  flexCenter: '',
+})
