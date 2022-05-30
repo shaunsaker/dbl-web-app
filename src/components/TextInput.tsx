@@ -67,6 +67,7 @@ const LabelContainer = styled('div', {
 
 const InputContainer = styled('div', {
   position: 'relative',
+  width: '100%',
 })
 
 const StyledTextInput = styled('input', {

@@ -80,7 +80,9 @@ const SignIn = ({}: SignInProps): ReactElement => {
           onChangeText={onChangeEmail}
           onSubmit={onSubmitEmail}
         />
+
         <Spacer />
+
         <PasswordTextInput
           ref={passwordInputRef}
           label="Password*"
@@ -89,7 +91,9 @@ const SignIn = ({}: SignInProps): ReactElement => {
           onChangeText={onChangePassword}
           onSubmit={onSubmit}
         />
+
         <Spacer />
+
         <TextButton onClick={onForgotPasswordClick}>
           Forgot Password?
         </TextButton>

@@ -16,6 +16,7 @@ export const ElementContainer = ({
 export const colours = '$pink, $turquoise, $blue, $purple, $pink'
 
 const Container = styled('div', {
+  display: 'flex',
   width: '100%',
   '--angle': '0deg',
   borderWidth: '$default',
