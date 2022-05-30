@@ -7,6 +7,7 @@ import {
 import { selectHasCompletedOnboarding } from '../store/onboarding/selectors'
 import { RoutePath } from '../router/models'
 import { navigate } from '../store/navigation/actions'
+import { LoadingModal } from './LoadingModal'
 
 interface ProtectedRouteProps {
   children: ReactElement
@@ -34,7 +35,7 @@ export const ProtectedRoute = ({
   }, [dispatch, isAuthenticated, hasSignedUp, hasCompletedOnboarding])
 
   if (!isAuthenticated) {
-    return null
+    return <LoadingModal opaque />
   }
 
   return children

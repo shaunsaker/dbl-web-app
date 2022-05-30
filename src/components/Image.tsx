@@ -16,6 +16,5 @@ export const Image = ({ ...props }: ImageProps): ReactElement => {
 }
 
 const StyledImage = styled('img', {
-  borderRadius: '$default',
   width: '100%',
 })
