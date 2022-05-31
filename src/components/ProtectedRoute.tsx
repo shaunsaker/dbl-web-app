@@ -35,7 +35,7 @@ export const ProtectedRoute = ({
   }, [dispatch, isAuthenticated, hasSignedUp, hasCompletedOnboarding])
 
   if (!isAuthenticated) {
-    return <LoadingModal opaque />
+    return <LoadingModal opaque>Checking authentication...</LoadingModal>
   }
 
   return children

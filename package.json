@@ -52,7 +52,6 @@
     "@stitches/react": "^1.2.8",
     "axios": "^0.27.2",
     "firebase": "8.10.1",
-    "flubber": "^0.4.2",
     "framer-motion": "^6.3.4",
     "moment": "^2.29.3",
     "next": "^12.1.6",

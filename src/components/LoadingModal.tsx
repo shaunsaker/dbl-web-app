@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
-import { AnimatedSvgPaths } from './AnimatedSvgPaths'
 import { Backdrop, BackdropProps } from './Backdrop'
 import { Typography } from './Typography'
 
@@ -15,8 +14,6 @@ export const LoadingModal = ({
   return (
     <Backdrop {...props}>
       <Container>
-        <AnimatedSvgPaths />
-
         <Typography>{children}</Typography>
       </Container>
     </Backdrop>
