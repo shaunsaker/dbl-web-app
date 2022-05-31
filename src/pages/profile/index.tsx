@@ -1,8 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { HeaderBar } from '../../components/HeaderBar'
-import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
@@ -43,31 +41,27 @@ const Profile = ({}: ProfileProps): ReactElement => {
   }, [dispatch, username])
 
   return (
-    <Page>
-      <HeaderBar />
+    <Container>
+      <Typography>Email</Typography>
 
-      <Container>
-        <Typography>Email</Typography>
+      <Typography>{userEmail}</Typography>
 
-        <Typography>{userEmail}</Typography>
+      <TextInput
+        label="What should we call you?"
+        placeholder="E.g. Nighthawk"
+        value={username}
+        onChangeText={onChangeUsername}
+        onSubmit={!isSaveDisabled ? onSubmit : undefined}
+      />
 
-        <TextInput
-          label="What should we call you?"
-          placeholder="E.g. Nighthawk"
-          value={username}
-          onChangeText={onChangeUsername}
-          onSubmit={!isSaveDisabled ? onSubmit : undefined}
-        />
+      <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
 
-        <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
-
-        <ButtonsContainer>
-          <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
-            SAVE
-          </PrimaryButton>
-        </ButtonsContainer>
-      </Container>
-    </Page>
+      <ButtonsContainer>
+        <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
+          SAVE
+        </PrimaryButton>
+      </ButtonsContainer>
+    </Container>
   )
 }
 

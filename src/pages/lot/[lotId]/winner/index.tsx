@@ -1,12 +1,9 @@
 import React, { ReactElement, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { styled } from '../../../../styles/stitches.config'
-import { CloseButton } from '../../../../components/CloseButton'
-import { Page } from '../../../../components/Page'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 import { Typography } from '../../../../components/Typography'
 import { useLinking } from '../../../../components/useLinking'
-import { navigateBack } from '../../../../store/navigation/actions'
 import { ApplicationState } from '../../../../store/reducers'
 import { selectUserWinningByLotId } from '../../../../store/userProfile/selectors'
 import { LotId } from '../../../../store/lots/models'
@@ -18,8 +15,6 @@ interface WinnerProps {
 }
 
 const Winner = ({ lotId }: WinnerProps): ReactElement => {
-  const dispatch = useDispatch()
-
   const { openLink } = useLinking()
 
   const winning = useSelector(
@@ -35,26 +30,14 @@ const Winner = ({ lotId }: WinnerProps): ReactElement => {
     openLink(winning.link)
   }, [openLink, winning])
 
-  const onCloseClick = useCallback(() => {
-    dispatch(navigateBack())
-  }, [dispatch])
-
   return (
-    <Page>
-      <Container>
-        <Typography>Holy shit, you just won 🎉</Typography>
+    <Container>
+      <Typography>Holy shit, you just won 🎉</Typography>
 
-        <Typography>Follow the link below to withdraw your BTC...</Typography>
+      <Typography>Follow the link below to withdraw your BTC...</Typography>
 
-        <PrimaryButton onClick={onWithdrawClick}>
-          SET UP WITHDRAWAL
-        </PrimaryButton>
-      </Container>
-
-      <CloseButtonContainer>
-        <CloseButton onClick={onCloseClick} />
-      </CloseButtonContainer>
-    </Page>
+      <PrimaryButton onClick={onWithdrawClick}>SET UP WITHDRAWAL</PrimaryButton>
+    </Container>
   )
 }
 
@@ -87,5 +70,3 @@ export const getStaticProps: GetStaticProps<WinnerProps> = async ({
 export default Winner
 
 const Container = styled('div', {})
-
-const CloseButtonContainer = styled('div', {})

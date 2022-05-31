@@ -1,9 +1,7 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { HeaderBar } from '../../components/HeaderBar'
 import { LotStats } from '../../components/LotStats'
-import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TicketsSummary } from '../../components/TicketsSummary'
 import { pageParam, RoutePath } from '../../router/models'
@@ -45,23 +43,19 @@ const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
 
   return (
     <ProtectedRoute>
-      <Page>
-        <HeaderBar />
+      <Container>
+        {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
 
-        <Container>
-          {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
+        <PrimaryButton onClick={onViewMoreResultsClick}>
+          <Typography>View More Results</Typography>
+        </PrimaryButton>
 
-          <PrimaryButton onClick={onViewMoreResultsClick}>
-            <Typography>View More Results</Typography>
-          </PrimaryButton>
+        {activeLot && <LotStats lot={activeLot} />}
 
-          {activeLot && <LotStats lot={activeLot} />}
+        <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
 
-          <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
-
-          {activeLot && hasTickets ? <TicketsSummary lot={activeLot} /> : null}
-        </Container>
-      </Page>
+        {activeLot && hasTickets ? <TicketsSummary lot={activeLot} /> : null}
+      </Container>
     </ProtectedRoute>
   )
 }

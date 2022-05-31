@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { Page } from '../../components/Page'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
 import { firebaseReserveTickets } from '../../services/firebase/functions/firebaseReserveTickets'
@@ -11,12 +10,11 @@ import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { InvoiceId, InvoiceStatus } from '../../store/invoices/models'
 import { Lot, MAX_BTC_DIGITS } from '../../store/lots/models'
 import { selectActiveLot } from '../../store/lots/selectors'
-import { navigate, navigateBack } from '../../store/navigation/actions'
+import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { maybePluralise } from '../../utils/maybePluralise'
 import { numberToDigits } from '../../utils/numberToDigits'
 import { getTicketOdds } from '../../utils/getTicketOdds'
-import { CloseButton } from '../../components/CloseButton'
 import { showSnackbar } from '../../store/snackbars/actions'
 import { SnackbarType } from '../../store/snackbars/models'
 import { selectTicketIdsByLotIdGroupedByStatus } from '../../store/invoices/selectors'
@@ -115,48 +113,34 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
     setLoading(false)
   }, [activeLot, ticketCount, dispatch])
 
-  const onCloseClick = useCallback(() => {
-    dispatch(navigateBack())
-  }, [dispatch])
-
   return (
-    <Page>
-      <Container>
-        <Typography>How many tickets would you like to buy?</Typography>
+    <Container>
+      <Typography>How many tickets would you like to buy?</Typography>
 
-        <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
+      <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
 
-        <Typography>{ticketCount}</Typography>
+      <Typography>{ticketCount}</Typography>
 
-        <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
+      <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
 
-        <Typography>
-          {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
-          {ticketsValueUSD})
-        </Typography>
+      <Typography>
+        {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
+        {ticketsValueUSD})
+      </Typography>
 
-        <Typography>
-          *Exact BTC value will be confirmed once reserved
-        </Typography>
+      <Typography>*Exact BTC value will be confirmed once reserved</Typography>
 
-        <Typography>
-          Your odds of winning would be {ticketOdds || 'Infinity'}%
-        </Typography>
+      <Typography>
+        Your odds of winning would be {ticketOdds || 'Infinity'}%
+      </Typography>
 
-        <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
-          {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
-        </PrimaryButton>
-
-        <CloseButtonContainer>
-          <CloseButton onClick={onCloseClick} />
-        </CloseButtonContainer>
-      </Container>
-    </Page>
+      <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
+        {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
+      </PrimaryButton>
+    </Container>
   )
 }
 
 export default ReserveTickets
 
 const Container = styled('div', {})
-
-const CloseButtonContainer = styled('div', {})

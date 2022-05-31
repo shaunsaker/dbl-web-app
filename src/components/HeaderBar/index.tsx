@@ -86,20 +86,18 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
         </button>
       </ItemContainer>
 
-      {showMenu && (
-        <>
-          <ItemContainer position="right">
+      <ItemContainer position="right">
+        {showMenu ? (
+          <>
             <button onClick={onMenuClick}>
               <StyledMenuIcon />
             </button>
-          </ItemContainer>
 
-          <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
-        </>
-      )}
-
-      <ItemContainer position="right">
-        {showClose && <StyledCloseButton onClick={onCloseClick} />}
+            <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
+          </>
+        ) : (
+          showClose && <StyledCloseButton onClick={onCloseClick} />
+        )}
       </ItemContainer>
     </Container>
   )

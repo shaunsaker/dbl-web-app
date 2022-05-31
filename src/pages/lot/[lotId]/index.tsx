@@ -1,11 +1,7 @@
-import React, { ReactElement, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { ReactElement } from 'react'
 import { styled } from '../../../styles/stitches.config'
-import { CloseButton } from '../../../components/CloseButton'
 import { LotStats } from '../../../components/LotStats'
-import { Page } from '../../../components/Page'
 import { TicketsSummary } from '../../../components/TicketsSummary'
-import { navigateBack } from '../../../store/navigation/actions'
 import { Lot, LotId } from '../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../server/getInactiveLots'
@@ -15,28 +11,16 @@ interface ResultProps {
 }
 
 const Result = ({ lot }: ResultProps): ReactElement | null => {
-  const dispatch = useDispatch()
-
-  const onCloseClick = useCallback(() => {
-    dispatch(navigateBack())
-  }, [dispatch])
-
   if (!lot) {
     return null
   }
 
   return (
-    <Page>
-      <Container>
-        <LotStats lot={lot} />
+    <Container>
+      <LotStats lot={lot} />
 
-        <TicketsSummary lot={lot} />
-      </Container>
-
-      <CloseButtonContainer>
-        <CloseButton onClick={onCloseClick} />
-      </CloseButtonContainer>
-    </Page>
+      <TicketsSummary lot={lot} />
+    </Container>
   )
 }
 
@@ -71,5 +55,3 @@ export const getStaticProps: GetStaticProps<ResultProps> = async ({
 export default Result
 
 const Container = styled('div', {})
-
-const CloseButtonContainer = styled('div', {})

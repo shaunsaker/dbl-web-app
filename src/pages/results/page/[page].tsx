@@ -2,9 +2,7 @@ import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
 import { CustomPagination } from '../../../components/CustomPagination'
-import { HeaderBar } from '../../../components/HeaderBar'
 import { LotResult } from '../../../components/LotResult'
-import { Page } from '../../../components/Page'
 import { Typography } from '../../../components/Typography'
 import { pageParam, RoutePath } from '../../../router/models'
 import { navigate } from '../../../store/navigation/actions'
@@ -37,25 +35,21 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   )
 
   return (
-    <Page>
-      <HeaderBar />
+    <Container>
+      <Typography>Results</Typography>
 
-      <Container>
-        <Typography>Results</Typography>
+      {lots && lots.length ? (
+        lots.map(lot => <LotResult key={lot.id} lot={lot} />)
+      ) : (
+        <Typography>No Results Yet</Typography>
+      )}
 
-        {lots && lots.length ? (
-          lots.map(lot => <LotResult key={lot.id} lot={lot} />)
-        ) : (
-          <Typography>No Results Yet</Typography>
-        )}
-
-        <CustomPagination
-          count={totalPages}
-          page={page}
-          onChange={onPaginationClick}
-        />
-      </Container>
-    </Page>
+      <CustomPagination
+        count={totalPages}
+        page={page}
+        onChange={onPaginationClick}
+      />
+    </Container>
   )
 }
 
