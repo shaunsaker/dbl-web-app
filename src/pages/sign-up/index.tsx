@@ -1,4 +1,10 @@
-import React, { ReactElement, useCallback, useRef, useState } from 'react'
+import React, {
+  KeyboardEvent,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
@@ -30,23 +36,34 @@ const SignUp = ({}: SignUpProps): ReactElement => {
   const isSignUpDisabled = !isUsernameValid || !isEmailValid || !isPasswordValid
 
   const emailInputRef = useRef<HTMLInputElement>(null)
+  const usernameInputRef = useRef<HTMLInputElement>(null)
   const passwordInputRef = useRef<HTMLInputElement>(null)
-
-  const onChangeUsername = useCallback((text: string) => {
-    setUsername(text)
-  }, [])
-
-  const onSubmitUsername = useCallback(() => {
-    emailInputRef.current?.focus()
-  }, [emailInputRef])
 
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text)
   }, [])
 
-  const onSubmitEmail = useCallback(() => {
-    passwordInputRef.current?.focus()
-  }, [passwordInputRef])
+  const onEmailKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        usernameInputRef.current?.focus()
+      }
+    },
+    [usernameInputRef],
+  )
+
+  const onChangeUsername = useCallback((text: string) => {
+    setUsername(text)
+  }, [])
+
+  const onUsernameKeydown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        passwordInputRef.current?.focus()
+      }
+    },
+    [passwordInputRef],
+  )
 
   const onChangePassword = useCallback((text: string) => {
     setPassword(text)
@@ -57,6 +74,15 @@ const SignUp = ({}: SignUpProps): ReactElement => {
       dispatch(signUp.request({ username, email, password }))
     }
   }, [dispatch, username, email, password, isSignUpDisabled])
+
+  const onPasswordKeydown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        onSubmit()
+      }
+    },
+    [onSubmit],
+  )
 
   const onSignInInsteadClick = useCallback(() => {
     dispatch(navigate({ route: RoutePath.signIn }))
@@ -77,33 +103,34 @@ const SignUp = ({}: SignUpProps): ReactElement => {
         <Spacer size="large" />
 
         <TextInput
-          ref={emailInputRef}
+          inputRef={emailInputRef}
           label="Email*"
           placeholder="Enter your email"
           value={email}
           onChangeText={onChangeEmail}
-          onSubmit={onSubmitEmail}
+          onKeyDown={onEmailKeyDown}
         />
 
         <Spacer />
 
         <TextInput
+          inputRef={usernameInputRef}
           label="Username*"
           placeholder="E.g. lootkid47"
           value={username}
           onChangeText={onChangeUsername}
-          onSubmit={onSubmitUsername}
+          onKeyDown={onUsernameKeydown}
         />
 
         <Spacer />
 
         <PasswordTextInput
-          ref={passwordInputRef}
+          inputRef={passwordInputRef}
           label="Password*"
           placeholder="Enter your password"
           value={password}
           onChangeText={onChangePassword}
-          onSubmit={onSubmit}
+          onKeyDown={onPasswordKeydown}
         />
       </Container>
 

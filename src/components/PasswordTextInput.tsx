@@ -1,10 +1,4 @@
-import React, {
-  ForwardedRef,
-  forwardRef,
-  ReactElement,
-  useCallback,
-  useState,
-} from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import { styled } from '../styles/stitches.config'
 
 import { EyeSlashIcon } from './icons/EyeSlashIcon'
@@ -13,30 +7,23 @@ import { TextInput, TextInputProps } from './TextInput'
 
 type PasswordTextInputProps = TextInputProps
 
-export const PasswordTextInput = forwardRef(
-  (
-    props: PasswordTextInputProps,
-    ref: ForwardedRef<HTMLInputElement>,
-  ): ReactElement => {
-    const [passwordHidden, setPasswordHidden] = useState(true)
+export const PasswordTextInput = (
+  props: PasswordTextInputProps,
+): ReactElement => {
+  const [passwordHidden, setPasswordHidden] = useState(true)
 
-    const onVisibilityButtonClick = useCallback(() => {
-      setPasswordHidden(hidden => !hidden)
-    }, [])
+  const onVisibilityButtonClick = useCallback(() => {
+    setPasswordHidden(hidden => !hidden)
+  }, [])
 
-    return (
-      <TextInput
-        {...props}
-        type={passwordHidden ? 'password' : 'text'}
-        ref={ref}
-      >
-        <VisibilityButton onClick={onVisibilityButtonClick}>
-          {passwordHidden ? <StyledEyeIcon /> : <StyledEyeSlashIcon />}
-        </VisibilityButton>
-      </TextInput>
-    )
-  },
-)
+  return (
+    <TextInput {...props} type={passwordHidden ? 'password' : 'text'}>
+      <VisibilityButton onClick={onVisibilityButtonClick}>
+        {passwordHidden ? <StyledEyeIcon /> : <StyledEyeSlashIcon />}
+      </VisibilityButton>
+    </TextInput>
+  )
+}
 
 const VisibilityButton = styled('button', {
   position: 'absolute',

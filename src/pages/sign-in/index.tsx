@@ -1,4 +1,10 @@
-import React, { ReactElement, useCallback, useRef, useState } from 'react'
+import React, {
+  KeyboardEvent,
+  ReactElement,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { LoadingModal } from '../../components/LoadingModal'
@@ -34,9 +40,14 @@ const SignIn = ({}: SignInProps): ReactElement => {
     setEmail(text)
   }, [])
 
-  const onSubmitEmail = useCallback(() => {
-    passwordInputRef.current?.focus()
-  }, [passwordInputRef])
+  const onEmailKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        passwordInputRef.current?.focus()
+      }
+    },
+    [passwordInputRef],
+  )
 
   const onChangePassword = useCallback((text: string) => {
     setPassword(text)
@@ -51,6 +62,15 @@ const SignIn = ({}: SignInProps): ReactElement => {
       dispatch(signIn.request({ email, password }))
     }
   }, [dispatch, email, password, isSignInDisabled])
+
+  const onPasswordKeydown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        onSubmit()
+      }
+    },
+    [onSubmit],
+  )
 
   const onSignUpInsteadClick = useCallback(() => {
     dispatch(navigate({ route: RoutePath.signUp }))
@@ -78,18 +98,18 @@ const SignIn = ({}: SignInProps): ReactElement => {
           placeholder="Enter your email"
           value={email}
           onChangeText={onChangeEmail}
-          onSubmit={onSubmitEmail}
+          onKeyDown={onEmailKeyDown}
         />
 
         <Spacer />
 
         <PasswordTextInput
-          ref={passwordInputRef}
+          inputRef={passwordInputRef}
           label="Password*"
           placeholder="Enter your password"
           value={password}
           onChangeText={onChangePassword}
-          onSubmit={onSubmit}
+          onKeyDown={onPasswordKeydown}
         />
 
         <Spacer />

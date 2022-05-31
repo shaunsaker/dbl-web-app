@@ -1,7 +1,6 @@
 import React, {
   ChangeEvent,
   ForwardedRef,
-  forwardRef,
   HTMLAttributes,
   ReactElement,
   useCallback,
@@ -11,6 +10,7 @@ import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
 export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
+  inputRef?: ForwardedRef<HTMLInputElement>
   type?: 'text' | 'email' | 'password'
   label: string
   value: string
@@ -18,40 +18,42 @@ export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
 }
 
-export const TextInput = forwardRef(
-  (
-    { type = 'text', label, onChangeText, children, ...props }: TextInputProps,
-    ref: ForwardedRef<HTMLInputElement>,
-  ): ReactElement => {
-    const onChange = useCallback(
-      (event: ChangeEvent<HTMLInputElement>) => {
-        onChangeText(event.target.value)
-      },
-      [onChangeText],
-    )
+export const TextInput = ({
+  inputRef,
+  type = 'text',
+  label,
+  onChangeText,
+  children,
+  ...props
+}: TextInputProps): ReactElement => {
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      onChangeText(event.target.value)
+    },
+    [onChangeText],
+  )
 
-    return (
-      <Container>
-        <LabelContainer>
-          <Typography kind="small">{label}</Typography>
-        </LabelContainer>
+  return (
+    <Container>
+      <LabelContainer>
+        <Typography kind="small">{label}</Typography>
+      </LabelContainer>
 
-        <ElementContainer>
-          <InputContainer>
-            <StyledTextInput
-              type={type}
-              onChange={onChange}
-              {...props}
-              ref={ref}
-            />
+      <ElementContainer>
+        <InputContainer>
+          <StyledTextInput
+            type={type}
+            onChange={onChange}
+            {...props}
+            ref={inputRef}
+          />
 
-            {children}
-          </InputContainer>
-        </ElementContainer>
-      </Container>
-    )
-  },
-)
+          {children}
+        </InputContainer>
+      </ElementContainer>
+    </Container>
+  )
+}
 
 const Container = styled('div', {
   width: '100%',
