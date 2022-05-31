@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
 import { Backdrop, BackdropProps } from './Backdrop'
+import { Spacer } from './Spacer'
+import { Spinner } from './Spinner'
 import { Typography } from './Typography'
 
 interface LoadingModalProps extends BackdropProps {
@@ -14,6 +16,10 @@ export const LoadingModal = ({
   return (
     <Backdrop {...props}>
       <Container>
+        <Spinner />
+
+        <Spacer size="large" />
+
         <Typography>{children}</Typography>
       </Container>
     </Backdrop>
