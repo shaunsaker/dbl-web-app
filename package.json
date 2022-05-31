@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "env:dev": "cp ./env/development/.env.dev .env && cp ./env/development/service-account.json ./src/server/services/firebase/service-account.json",
-    "env:prod": "cp ./env/development/.env.prod .env && cp ./env/production/service-account.json ./src/server/services/firebase/service-account.json",
+    "env:dev": "cp ./env/development/.env .env && cp ./env/development/service-account.json ./src/server/services/firebase/service-account.json",
+    "env:prod": "cp ./env/development/.env .env && cp ./env/production/service-account.json ./src/server/services/firebase/service-account.json",
     "dev": "next dev",
     "prebuild": "rm -r .cache || true",
     "build": "next build && next export -o dist",
