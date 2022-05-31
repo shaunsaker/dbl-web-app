@@ -17,4 +17,5 @@ export const Image = ({ ...props }: ImageProps): ReactElement => {
 
 const StyledImage = styled('img', {
   width: '100%',
+  minHeight: 237, // TEMP
 })
