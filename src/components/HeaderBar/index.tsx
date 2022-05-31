@@ -8,7 +8,10 @@ import { MenuIcon } from '../icons/MenuIcon'
 import { PrimaryDrawer } from './PrimaryDrawer'
 import { BackButton } from '../BackButton'
 import { CloseButton } from '../CloseButton'
-import { selectHasUserSignedUp } from '../../store/auth/selectors'
+import {
+  selectHasUserSignedUp,
+  selectIsAuthenticated,
+} from '../../store/auth/selectors'
 import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
 import { useRouter } from 'next/router'
 import {
@@ -24,6 +27,7 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
   const dispatch = useDispatch()
   const router = useRouter()
 
+  const isAuthenticated = useSelector(selectIsAuthenticated)
   const hasUserSignedUp = useSelector(selectHasUserSignedUp)
 
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -32,9 +36,25 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
   const showMenu = isMenuRoute(router.route)
   const showClose = isCloseRoute(router.route)
 
+  const navigateToRoot = useCallback(() => {
+    if (isOnboardingRoute(router.route)) {
+      dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
+    }
+
+    dispatch(
+      navigate({
+        route: isAuthenticated
+          ? RoutePath.home
+          : hasUserSignedUp
+          ? RoutePath.signIn
+          : RoutePath.signUp,
+      }),
+    )
+  }, [dispatch, router.route, isAuthenticated, hasUserSignedUp])
+
   const onLogoClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.home }))
-  }, [dispatch])
+    navigateToRoot()
+  }, [navigateToRoot])
 
   const onBackClick = useCallback(() => {
     dispatch(navigateBack())
@@ -49,18 +69,8 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
   }, [])
 
   const onCloseClick = useCallback(() => {
-    if (isOnboardingRoute(router.route)) {
-      dispatch(setHasCompletedOnboarding({ hasCompletedOnboarding: true }))
-
-      dispatch(
-        navigate({
-          route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
-        }),
-      )
-    } else {
-      navigateBack()
-    }
-  }, [dispatch, hasUserSignedUp, router.route])
+    navigateToRoot()
+  }, [navigateToRoot])
 
   return (
     <Container>
