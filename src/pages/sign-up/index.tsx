@@ -93,7 +93,7 @@ const SignUp = ({}: SignUpProps): ReactElement => {
       <Container>
         <Explainer
           imageProps={{
-            src: '/images/cyberpunk-city-4.webp',
+            src: '/images/cyberpunk-city-4.png',
             alt: '',
           }}
           title="Welcome"

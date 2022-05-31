@@ -13,7 +13,7 @@ export const Spinner = ({}: SpinnerProps): ReactElement => {
 
   useInterval(() => {
     setActiveIndex(index => (index === BARS - 1 ? 0 : index + 1))
-  }, 300)
+  }, 400)
 
   return (
     <Container>

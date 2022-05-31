@@ -12,7 +12,7 @@ export const OnboardingOne = ({
     <OnboardingPage
       explainerProps={{
         imageProps: {
-          src: '/images/cyberpunk-city-1.webp',
+          src: '/images/cyberpunk-city-1.png',
           alt: '',
         },
         title: 'Entrancing Subheading',
