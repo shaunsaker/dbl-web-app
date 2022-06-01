@@ -3,6 +3,7 @@ import { styled } from '../../../../styles/stitches.config'
 import { MyInvoices } from '../../../../components/tickets/MyInvoices'
 import { useRouter } from 'next/router'
 import { LotId } from '../../../../store/lots/models'
+import { ProtectedRoute } from '../../../../components/ProtectedRoute'
 
 const Tickets = (): ReactElement | null => {
   const router = useRouter()
@@ -14,9 +15,11 @@ const Tickets = (): ReactElement | null => {
   }
 
   return (
-    <Container>
-      <MyInvoices lotId={lotId} />
-    </Container>
+    <ProtectedRoute>
+      <Container>
+        <MyInvoices lotId={lotId} />
+      </Container>
+    </ProtectedRoute>
   )
 }
 

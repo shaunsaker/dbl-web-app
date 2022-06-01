@@ -14,6 +14,7 @@ import { navigate } from '../../../../store/navigation/actions'
 import { Lot, LotId } from '../../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../../server/getInactiveLots'
+import { ProtectedRoute } from '../../../../components/ProtectedRoute'
 
 interface VerifyResultProps {
   lot?: Lot
@@ -60,52 +61,54 @@ const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
   }
 
   return (
-    <Container>
-      <InfoBox>
-        Every lot result is 100% transparent and provable. Read more in{' '}
-        <a href="https://blog.com">our blog post</a>.
-      </InfoBox>
+    <ProtectedRoute>
+      <Container>
+        <InfoBox>
+          Every lot result is 100% transparent and provable. Read more in{' '}
+          <a href="https://blog.com">our blog post</a>.
+        </InfoBox>
 
-      <Card>
-        <DataSummary
-          icon={<CopyIcon />}
-          title="LATEST BLOCK HASH AT TIME OF DRAW"
-          value={lot.latestBlockHashAtDrawTime}
-        >
-          <TextButton onClick={onViewLatestBlockHashClick}>
-            View on Blockchain
-          </TextButton>
-        </DataSummary>
+        <Card>
+          <DataSummary
+            icon={<CopyIcon />}
+            title="LATEST BLOCK HASH AT TIME OF DRAW"
+            value={lot.latestBlockHashAtDrawTime}
+          >
+            <TextButton onClick={onViewLatestBlockHashClick}>
+              View on Blockchain
+            </TextButton>
+          </DataSummary>
 
-        <Divider />
+          <Divider />
 
-        <DataSummary
-          icon={<CopyIcon />}
-          title="WINNING TICKET INDEX"
-          value={lot.winningTicketIndex}
-        >
-          <TextButton onClick={onViewCalculationClick}>
-            See how we calculated this
-          </TextButton>
-        </DataSummary>
+          <DataSummary
+            icon={<CopyIcon />}
+            title="WINNING TICKET INDEX"
+            value={lot.winningTicketIndex}
+          >
+            <TextButton onClick={onViewCalculationClick}>
+              See how we calculated this
+            </TextButton>
+          </DataSummary>
 
-        <Divider />
+          <Divider />
 
-        <DataSummary
-          icon={<CopyIcon />}
-          title="WINNING BLOCK HASH (TICKET ID)"
-          value={lot.winningTicketId}
-        >
-          <TextButton onClick={onViewWinningBlockHashClick}>
-            View on Blockchain
-          </TextButton>
-        </DataSummary>
-      </Card>
+          <DataSummary
+            icon={<CopyIcon />}
+            title="WINNING BLOCK HASH (TICKET ID)"
+            value={lot.winningTicketId}
+          >
+            <TextButton onClick={onViewWinningBlockHashClick}>
+              View on Blockchain
+            </TextButton>
+          </DataSummary>
+        </Card>
 
-      <PrimaryButton onClick={onViewAllTicketsClick}>
-        View All Tickets
-      </PrimaryButton>
-    </Container>
+        <PrimaryButton onClick={onViewAllTicketsClick}>
+          View All Tickets
+        </PrimaryButton>
+      </Container>
+    </ProtectedRoute>
   )
 }
 

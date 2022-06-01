@@ -22,7 +22,7 @@ export function* signUpSaga(): SagaIterator {
 
         yield put(signUp.success({ user, username: action.payload.username }))
 
-        yield put(navigate({ route: RoutePath.home }))
+        yield put(navigate({ route: RoutePath.home, replace: true }))
 
         yield put(
           showSnackbar({
@@ -46,7 +46,7 @@ export function* signInSaga(): SagaIterator {
 
         yield put(signIn.success(user))
 
-        yield put(navigate({ route: RoutePath.home }))
+        yield put(navigate({ route: RoutePath.home, replace: true }))
 
         yield put(
           showSnackbar({
@@ -90,7 +90,7 @@ export function* signOutSaga(): SagaIterator {
 
       yield put(signOut.success())
 
-      yield put(navigate({ route: RoutePath.signIn }))
+      yield put(navigate({ route: RoutePath.signIn, replace: true }))
 
       yield put(
         showSnackbar({

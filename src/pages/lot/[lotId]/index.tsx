@@ -5,6 +5,7 @@ import { TicketsSummary } from '../../../components/TicketsSummary'
 import { Lot, LotId } from '../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../server/getInactiveLots'
+import { ProtectedRoute } from '../../../components/ProtectedRoute'
 
 interface ResultProps {
   lot?: Lot
@@ -16,11 +17,13 @@ const Result = ({ lot }: ResultProps): ReactElement | null => {
   }
 
   return (
-    <Container>
-      <LotStats lot={lot} />
+    <ProtectedRoute>
+      <Container>
+        <LotStats lot={lot} />
 
-      <TicketsSummary lot={lot} />
-    </Container>
+        <TicketsSummary lot={lot} />
+      </Container>
+    </ProtectedRoute>
   )
 }
 

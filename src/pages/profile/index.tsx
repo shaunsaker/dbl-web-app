@@ -11,6 +11,7 @@ import {
   selectUserEmail,
   selectUsername,
 } from '../../store/userProfile/selectors'
+import { ProtectedRoute } from '../../components/ProtectedRoute'
 
 interface ProfileProps {}
 
@@ -41,27 +42,29 @@ const Profile = ({}: ProfileProps): ReactElement => {
   }, [dispatch, username])
 
   return (
-    <Container>
-      <Typography>Email</Typography>
+    <ProtectedRoute>
+      <Container>
+        <Typography>Email</Typography>
 
-      <Typography>{userEmail}</Typography>
+        <Typography>{userEmail}</Typography>
 
-      <TextInput
-        label="What should we call you?"
-        placeholder="E.g. Nighthawk"
-        value={username}
-        onChangeText={onChangeUsername}
-        onSubmit={!isSaveDisabled ? onSubmit : undefined}
-      />
+        <TextInput
+          label="What should we call you?"
+          placeholder="E.g. Nighthawk"
+          value={username}
+          onChangeText={onChangeUsername}
+          onSubmit={!isSaveDisabled ? onSubmit : undefined}
+        />
 
-      <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
+        <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
 
-      <ButtonsContainer>
-        <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
-          SAVE
-        </PrimaryButton>
-      </ButtonsContainer>
-    </Container>
+        <ButtonsContainer>
+          <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
+            SAVE
+          </PrimaryButton>
+        </ButtonsContainer>
+      </Container>
+    </ProtectedRoute>
   )
 }
 

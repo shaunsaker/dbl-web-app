@@ -11,6 +11,7 @@ import { getInactiveLots } from '../../../server/getInactiveLots'
 import { sortArrayOfObjectsByKey } from '../../../utils/sortArrayOfObjectsByKey'
 import { Lot } from '../../../store/lots/models'
 import { arrayFromNumber } from '../../../utils/arrayFromNumber'
+import { ProtectedRoute } from '../../../components/ProtectedRoute'
 
 export const LOT_RESULTS_PER_PAGE = 10
 
@@ -35,21 +36,23 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   )
 
   return (
-    <Container>
-      <Typography>Results</Typography>
+    <ProtectedRoute>
+      <Container>
+        <Typography>Results</Typography>
 
-      {lots && lots.length ? (
-        lots.map(lot => <LotResult key={lot.id} lot={lot} />)
-      ) : (
-        <Typography>No Results Yet</Typography>
-      )}
+        {lots && lots.length ? (
+          lots.map(lot => <LotResult key={lot.id} lot={lot} />)
+        ) : (
+          <Typography>No Results Yet</Typography>
+        )}
 
-      <CustomPagination
-        count={totalPages}
-        page={page}
-        onChange={onPaginationClick}
-      />
-    </Container>
+        <CustomPagination
+          count={totalPages}
+          page={page}
+          onChange={onPaginationClick}
+        />
+      </Container>
+    </ProtectedRoute>
   )
 }
 

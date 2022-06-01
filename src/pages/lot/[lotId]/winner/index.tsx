@@ -9,6 +9,7 @@ import { selectUserWinningByLotId } from '../../../../store/userProfile/selector
 import { LotId } from '../../../../store/lots/models'
 import { getInactiveLots } from '../../../../server/getInactiveLots'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { ProtectedRoute } from '../../../../components/ProtectedRoute'
 
 interface WinnerProps {
   lotId?: LotId
@@ -31,13 +32,17 @@ const Winner = ({ lotId }: WinnerProps): ReactElement => {
   }, [openLink, winning])
 
   return (
-    <Container>
-      <Typography>Holy shit, you just won 🎉</Typography>
+    <ProtectedRoute>
+      <Container>
+        <Typography>Holy shit, you just won 🎉</Typography>
 
-      <Typography>Follow the link below to withdraw your BTC...</Typography>
+        <Typography>Follow the link below to withdraw your BTC...</Typography>
 
-      <PrimaryButton onClick={onWithdrawClick}>SET UP WITHDRAWAL</PrimaryButton>
-    </Container>
+        <PrimaryButton onClick={onWithdrawClick}>
+          SET UP WITHDRAWAL
+        </PrimaryButton>
+      </Container>
+    </ProtectedRoute>
   )
 }
 

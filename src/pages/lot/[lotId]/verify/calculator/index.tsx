@@ -12,6 +12,7 @@ import { floatToIndex } from '../../../../../utils/floatToIndex'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../../../server/getInactiveLots'
 import { Lot, LotId } from '../../../../../store/lots/models'
+import { ProtectedRoute } from '../../../../../components/ProtectedRoute'
 
 interface VerifyResultCalculatorProps {
   lot?: Lot
@@ -46,53 +47,55 @@ const VerifyResultCalculator = ({
       : ''
 
   return (
-    <Container>
-      <Card>
-        <DataSummary
-          icon={<CopyIcon />}
-          title="Random Number"
-          value={randomNumber}
-        >
-          <Typography>=</Typography>
+    <ProtectedRoute>
+      <Container>
+        <Card>
+          <DataSummary
+            icon={<CopyIcon />}
+            title="Random Number"
+            value={randomNumber}
+          >
+            <Typography>=</Typography>
 
-          <InfoBox>
-            <Typography>parseInt(</Typography>
+            <InfoBox>
+              <Typography>parseInt(</Typography>
 
-            <TextInput
-              label="Block Hash"
-              placeholder="Enter block hash"
-              value={blockHash}
-              onChangeText={onChangeBlockHash}
-            />
+              <TextInput
+                label="Block Hash"
+                placeholder="Enter block hash"
+                value={blockHash}
+                onChangeText={onChangeBlockHash}
+              />
 
-            <Typography>, 16) / Math.pow(2, 256)</Typography>
-          </InfoBox>
-        </DataSummary>
+              <Typography>, 16) / Math.pow(2, 256)</Typography>
+            </InfoBox>
+          </DataSummary>
 
-        <Divider />
+          <Divider />
 
-        <DataSummary
-          icon={<CopyIcon />}
-          title="Ticket Index"
-          value={ticketIndex}
-        >
-          <Typography>=</Typography>
+          <DataSummary
+            icon={<CopyIcon />}
+            title="Ticket Index"
+            value={ticketIndex}
+          >
+            <Typography>=</Typography>
 
-          <InfoBox>
-            <Typography>Math.floor({randomNumber} * </Typography>
+            <InfoBox>
+              <Typography>Math.floor({randomNumber} * </Typography>
 
-            <TextInput
-              label="Ticket Count"
-              placeholder="Enter ticket count"
-              value={ticketCount}
-              onChangeText={onChangeTicketCount}
-            />
+              <TextInput
+                label="Ticket Count"
+                placeholder="Enter ticket count"
+                value={ticketCount}
+                onChangeText={onChangeTicketCount}
+              />
 
-            <Typography>)</Typography>
-          </InfoBox>
-        </DataSummary>
-      </Card>
-    </Container>
+              <Typography>)</Typography>
+            </InfoBox>
+          </DataSummary>
+        </Card>
+      </Container>
+    </ProtectedRoute>
   )
 }
 

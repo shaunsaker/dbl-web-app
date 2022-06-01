@@ -18,6 +18,7 @@ import { getTicketOdds } from '../../utils/getTicketOdds'
 import { showSnackbar } from '../../store/snackbars/actions'
 import { SnackbarType } from '../../store/snackbars/models'
 import { selectTicketIdsByLotIdGroupedByStatus } from '../../store/invoices/selectors'
+import { ProtectedRoute } from '../../components/ProtectedRoute'
 
 interface ReserveTicketsProps {}
 
@@ -114,30 +115,34 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
   }, [activeLot, ticketCount, dispatch])
 
   return (
-    <Container>
-      <Typography>How many tickets would you like to buy?</Typography>
+    <ProtectedRoute>
+      <Container>
+        <Typography>How many tickets would you like to buy?</Typography>
 
-      <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
+        <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
 
-      <Typography>{ticketCount}</Typography>
+        <Typography>{ticketCount}</Typography>
 
-      <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
+        <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
 
-      <Typography>
-        {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
-        {ticketsValueUSD})
-      </Typography>
+        <Typography>
+          {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
+          {ticketsValueUSD})
+        </Typography>
 
-      <Typography>*Exact BTC value will be confirmed once reserved</Typography>
+        <Typography>
+          *Exact BTC value will be confirmed once reserved
+        </Typography>
 
-      <Typography>
-        Your odds of winning would be {ticketOdds || 'Infinity'}%
-      </Typography>
+        <Typography>
+          Your odds of winning would be {ticketOdds || 'Infinity'}%
+        </Typography>
 
-      <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
-        {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
-      </PrimaryButton>
-    </Container>
+        <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
+          {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
+        </PrimaryButton>
+      </Container>
+    </ProtectedRoute>
   )
 }
 

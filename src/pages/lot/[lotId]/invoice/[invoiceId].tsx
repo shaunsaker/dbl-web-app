@@ -6,6 +6,7 @@ import { InvoiceStatus } from '../../../../components/invoice/InvoiceStatus'
 import { useRouter } from 'next/router'
 import { LotId } from '../../../../store/lots/models'
 import { InvoiceId } from '../../../../store/invoices/models'
+import { ProtectedRoute } from '../../../../components/ProtectedRoute'
 
 const Invoice = (): ReactElement | null => {
   const router = useRouter()
@@ -18,13 +19,15 @@ const Invoice = (): ReactElement | null => {
   }
 
   return (
-    <Container>
-      <InvoiceStatus invoiceId={invoiceId} />
+    <ProtectedRoute>
+      <Container>
+        <InvoiceStatus invoiceId={invoiceId} />
 
-      <InvoiceDetails invoiceId={invoiceId} />
+        <InvoiceDetails invoiceId={invoiceId} />
 
-      <InvoicePayments lotId={lotId} invoiceId={invoiceId} />
-    </Container>
+        <InvoicePayments lotId={lotId} invoiceId={invoiceId} />
+      </Container>
+    </ProtectedRoute>
   )
 }
 
