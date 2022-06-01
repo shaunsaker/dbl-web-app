@@ -4,10 +4,10 @@ import {
   domAnimation,
   LazyMotion,
   m,
-  Transition,
   Variants,
 } from 'framer-motion'
 import { styled } from '../styles/stitches.config'
+import { DEFAULT_TRANSITION } from '../styles/animation'
 
 const FADE_ANIMATION: Variants = {
   initial: {
@@ -36,11 +36,6 @@ const FADE_SCALE_ANIMATION: Variants = {
   },
 }
 
-const TRANSITION: Transition = {
-  type: 'spring',
-  duration: 0.4,
-}
-
 interface SceneAnimatorProps {
   kind?: 'default' | 'fade'
   sceneKey: string
@@ -61,7 +56,7 @@ export const SceneAnimator = ({
           animate="animate"
           exit="exit"
           variants={kind === 'default' ? FADE_SCALE_ANIMATION : FADE_ANIMATION}
-          transition={TRANSITION}
+          transition={DEFAULT_TRANSITION}
         >
           {children}
         </StyledMotionContainer>

@@ -6,7 +6,7 @@ const ACTIVE_STEP_WIDTH = STEP_SIZE * 2
 export const ShiftySquare = styled('button', {
   margin: '0 -6px',
   height: STEP_SIZE / 2,
-  transition: '$default',
+  transition: 'all $default',
 
   variants: {
     active: {

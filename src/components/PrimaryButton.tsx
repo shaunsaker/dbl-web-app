@@ -34,7 +34,7 @@ const Container = styled('button', {
   height: 50,
   padding: '0 $default',
   backgroundColor: '$transWhite',
-  transition: '$default',
+  transition: 'color $default',
 
   '&:hover': {
     backgroundColor: '$transTurquoise',

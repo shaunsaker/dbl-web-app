@@ -1,9 +1,14 @@
-import React, { ReactElement, ReactNode, useEffect } from 'react'
+import React, {
+  HTMLAttributes,
+  ReactElement,
+  ReactNode,
+  useEffect,
+} from 'react'
 import { styled } from '../styles/stitches.config'
 import { SceneAnimator } from './SceneAnimator'
 import usePortal from 'react-useportal'
 
-export interface BackdropProps {
+export interface BackdropProps extends HTMLAttributes<HTMLDivElement> {
   opaque?: boolean
   children?: ReactNode
 }
@@ -11,6 +16,7 @@ export interface BackdropProps {
 export const Backdrop = ({
   opaque = false,
   children,
+  ...props
 }: BackdropProps): ReactElement => {
   const { Portal } = usePortal()
 
@@ -25,16 +31,16 @@ export const Backdrop = ({
 
   return (
     <Portal>
-      <Container opaque={opaque}>
+      <BackdropBase opaque={opaque} {...props}>
         <SceneAnimator kind="fade" sceneKey="backdrop">
           {children}
         </SceneAnimator>
-      </Container>
+      </BackdropBase>
     </Portal>
   )
 }
 
-const Container = styled('div', {
+export const BackdropBase = styled('div', {
   position: 'fixed',
   top: 0,
   right: 0,
@@ -53,5 +59,9 @@ const Container = styled('div', {
         backgroundColor: '$transBlack',
       },
     },
+  },
+
+  defaultVariants: {
+    opaque: false,
   },
 })

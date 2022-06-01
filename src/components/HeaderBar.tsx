@@ -1,25 +1,34 @@
 import React, { ReactElement, useCallback, useState } from 'react'
-import { styled, theme } from '../../styles/stitches.config'
-import { Typography } from '../Typography'
+import { styled, theme } from '../styles/stitches.config'
+import { Typography } from './Typography'
 import { useDispatch, useSelector } from 'react-redux'
-import { navigate, navigateBack } from '../../store/navigation/actions'
-import { RoutePath } from '../../router/models'
-import { MenuIcon } from '../icons/MenuIcon'
-import { PrimaryDrawer } from './PrimaryDrawer'
-import { BackButton } from '../BackButton'
-import { CloseButton } from '../CloseButton'
+import { navigate, navigateBack } from '../store/navigation/actions'
+import { pageParam, RoutePath } from '../router/models'
+import { MenuIcon } from './icons/MenuIcon'
+import { BackButton } from './BackButton'
+import { CloseButton } from './CloseButton'
 import {
   selectHasUserSignedUp,
   selectIsAuthenticated,
-} from '../../store/auth/selectors'
-import { setHasCompletedOnboarding } from '../../store/onboarding/actions'
+} from '../store/auth/selectors'
+import { setHasCompletedOnboarding } from '../store/onboarding/actions'
 import { useRouter } from 'next/router'
 import {
   hasRouteHistory,
   isCloseRoute,
   isMenuRoute,
   isOnboardingRoute,
-} from '../../router/utils'
+} from '../router/utils'
+import { Drawer, DrawerItem } from './Drawer'
+
+const DRAWER_ITEMS: DrawerItem[] = [
+  { label: 'Results', link: RoutePath.results.replace(pageParam, '1') },
+  { label: 'Profile', link: RoutePath.profile },
+  {
+    label: 'Contact Us',
+    link: `mailto: ${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`,
+  },
+]
 
 interface HeaderBarProps {}
 
@@ -61,7 +70,7 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
   }, [dispatch])
 
   const onMenuClick = useCallback(() => {
-    setDrawerOpen(true)
+    setDrawerOpen(drawerOpen => !drawerOpen)
   }, [])
 
   const onCloseDrawer = useCallback(() => {
@@ -93,7 +102,11 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
               <StyledMenuIcon />
             </button>
 
-            <PrimaryDrawer open={drawerOpen} onClose={onCloseDrawer} />
+            <Drawer
+              open={drawerOpen}
+              items={DRAWER_ITEMS}
+              onClose={onCloseDrawer}
+            />
           </>
         ) : (
           showClose && <StyledCloseButton onClick={onCloseClick} />

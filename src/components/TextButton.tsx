@@ -28,7 +28,7 @@ const Container = styled('button', {
 
 const StyledTypography = styled(Typography, {
   textDecorationLine: 'underline',
-  transition: '$default',
+  transition: 'color $default',
 
   '&:hover': {
     color: '$turquoise',

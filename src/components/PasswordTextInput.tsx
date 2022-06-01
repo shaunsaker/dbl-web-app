@@ -33,7 +33,7 @@ const VisibilityButton = styled('button', {
   flexCenter: '',
   paddingRight: '$default',
   cursor: 'pointer',
-  transition: '$default',
+  transition: 'color $default',
 
   '&:hover > svg': {
     color: '$turquoise',

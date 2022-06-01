@@ -12,7 +12,7 @@ export const {
 } = createStitches({
   theme: {
     transitions: {
-      default: 'all 0.167s ease-in-out',
+      default: '0.167s ease-in-out',
     },
     colors: {
       purple: '#711c91',
@@ -21,7 +21,7 @@ export const {
       transTurquoise: 'rgba(10, 189, 198, 0.33)',
       blue: '#133e7c',
       black: '#091833',
-      transBlack: 'rgba(9, 24, 51, 0.9)',
+      transBlack: 'rgba(9, 24, 51, 0.85)',
       white: '#FFFFFF',
       transWhite: 'rgba(255, 255, 255, 0.1)',
     },

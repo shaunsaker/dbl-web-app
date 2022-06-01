@@ -18,7 +18,7 @@ const Container = styled('button', {
   flexCenter: '',
   fontSize: '$icon',
   color: '$white',
-  transition: '$default',
+  transition: 'color $default',
 
   '&:hover': {
     color: '$turquoise',

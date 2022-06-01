@@ -1,6 +1,6 @@
 import { styled } from '../styles/stitches.config'
 
-export const Typography = styled('div', {
+export const Typography = styled('span', {
   variants: {
     kind: {
       small: {
