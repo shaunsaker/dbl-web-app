@@ -40,6 +40,7 @@ const Profile = ({}: ProfileProps): ReactElement => {
       updateUserProfile.request({ data: { username }, showSnackbar: true }),
     )
   }, [dispatch, username])
+  console.log('HERE', isSaveDisabled)
 
   return (
     <ProtectedRoute>
@@ -59,7 +60,7 @@ const Profile = ({}: ProfileProps): ReactElement => {
         <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
 
         <ButtonsContainer>
-          <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
+          <PrimaryButton disabled={!isSaveDisabled} onClick={onSubmit}>
             SAVE
           </PrimaryButton>
         </ButtonsContainer>

@@ -1,20 +1,15 @@
 import { fork, takeLatest } from '@redux-saga/core/effects'
+import toast from 'react-hot-toast'
 import { SagaIterator } from 'redux-saga'
 import { ActionType } from 'typesafe-actions'
+import { call } from '../../utils/call'
 import { showSnackbar } from './actions'
-import { Snackbar } from './Snackbar'
 
 function* onShowSnackbarFlow(): SagaIterator {
   yield takeLatest(
     showSnackbar,
     function* (action: ActionType<typeof showSnackbar>): SagaIterator {
-      if (Snackbar.enqueueSnackbar) {
-        Snackbar.enqueueSnackbar(action.payload.title, {
-          variant: action.payload.type,
-        })
-      } else {
-        console.error('No Snackbar provider.')
-      }
+      yield* call(toast, action.payload.title)
     },
   )
 }
