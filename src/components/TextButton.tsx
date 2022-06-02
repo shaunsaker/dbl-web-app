@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
+import { ButtonBase } from './ButtonBase'
 import { Typography } from './Typography'
 
 interface TextButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -22,15 +23,8 @@ export const TextButton = ({
   )
 }
 
-const Container = styled('button', {
-  textDecorationLine: 'underline',
-})
+const Container = styled(ButtonBase, {})
 
 const StyledTypography = styled(Typography, {
   textDecorationLine: 'underline',
-  transition: 'color $default',
-
-  '&:hover': {
-    color: '$turquoise',
-  },
 })

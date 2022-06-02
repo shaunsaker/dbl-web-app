@@ -1,5 +1,6 @@
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import { styled } from '../styles/stitches.config'
+import { ButtonBase } from './ButtonBase'
 import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
@@ -29,14 +30,9 @@ export const PrimaryButton = ({
   )
 }
 
-const Container = styled('button', {
+const Container = styled(ButtonBase, {
   width: '100%',
   height: 50,
   padding: '0 $default',
   backgroundColor: '$transWhite',
-  transition: 'color $default',
-
-  '&:hover': {
-    backgroundColor: '$transTurquoise',
-  },
 })

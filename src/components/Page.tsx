@@ -38,7 +38,8 @@ const Container = styled('div', {
 })
 
 const ContentContainer = styled('div', {
-  flex: 1,
-  flexCenter: '',
   position: 'relative',
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
 })

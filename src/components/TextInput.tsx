@@ -77,7 +77,7 @@ const StyledTextInput = styled('input', {
   height: 48,
   padding: '0 $default',
   backgroundColor: '$black',
-  fontSize: '$small',
+  fontSize: '$regular',
   fontWeight: 700,
   color: '$white',
   caretColor: '$turquoise',

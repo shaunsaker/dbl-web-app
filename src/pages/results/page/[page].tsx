@@ -1,7 +1,6 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
-import { CustomPagination } from '../../../components/CustomPagination'
 import { LotResult } from '../../../components/LotResult'
 import { Typography } from '../../../components/Typography'
 import { pageParam, RoutePath } from '../../../router/models'
@@ -12,6 +11,8 @@ import { sortArrayOfObjectsByKey } from '../../../utils/sortArrayOfObjectsByKey'
 import { Lot } from '../../../store/lots/models'
 import { arrayFromNumber } from '../../../utils/arrayFromNumber'
 import { ProtectedRoute } from '../../../components/ProtectedRoute'
+import { Pagination } from '../../../components/Pagination'
+import { Spacer } from '../../../components/Spacer'
 
 export const LOT_RESULTS_PER_PAGE = 10
 
@@ -25,7 +26,11 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onPaginationClick = useCallback(
-    (_: any, newPage: number) => {
+    (newPage: number | string | null) => {
+      if (!newPage) {
+        return
+      }
+
       dispatch(
         navigate({
           route: RoutePath.results.replace(pageParam, newPage.toString()),
@@ -38,23 +43,61 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   return (
     <ProtectedRoute>
       <Container>
-        <Typography>Results</Typography>
+        <Typography kind="title">Results</Typography>
 
-        {lots && lots.length ? (
-          lots.map(lot => <LotResult key={lot.id} lot={lot} />)
-        ) : (
-          <Typography>No Results Yet</Typography>
-        )}
+        <Spacer size="large" />
 
-        <CustomPagination
-          count={totalPages}
-          page={page}
-          onChange={onPaginationClick}
-        />
+        <ContentContainer>
+          {lots && lots.length ? (
+            lots.map(lot => (
+              <>
+                <LotResult key={lot.id} lot={lot} />
+
+                <Spacer size="large" />
+              </>
+            ))
+          ) : (
+            <Typography>No results yet.</Typography>
+          )}
+        </ContentContainer>
+
+        <Spacer size="large" />
+
+        <PaginationContainer>
+          <Pagination
+            page={page}
+            count={totalPages}
+            onChange={onPaginationClick}
+          />
+        </PaginationContainer>
       </Container>
     </ProtectedRoute>
   )
 }
+
+const Container = styled('div', {
+  // necessary for ContentContainer scrolling
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  right: -32, // TODO: use theme
+  left: -32, // TODO: use theme
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+const ContentContainer = styled('div', {
+  width: '100%',
+  height: '100%',
+  overflow: 'auto',
+  padding: '0 $large',
+})
+
+const PaginationContainer = styled('div', {
+  padding: '0 $large',
+})
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const lots = await getInactiveLots()
@@ -86,5 +129,3 @@ export const getStaticProps: GetStaticProps<ResultsProps> = async ({
 }
 
 export default Results
-
-const Container = styled('div', {})

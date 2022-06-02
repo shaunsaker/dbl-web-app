@@ -41,8 +41,8 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const showBack = hasRouteHistory()
   const showMenu = isMenuRoute(router.route)
+  const showBack = !showMenu && hasRouteHistory()
   const showClose = isCloseRoute(router.route)
 
   const navigateToRoot = useCallback(() => {

@@ -40,7 +40,7 @@ export const Drawer = ({ open, items, onClose }: DrawerProps): ReactElement => {
                 },
               }}
             >
-              <ElementContainer kind="large">
+              <StyledElementContainer kind="large">
                 <Container
                   initial="closed"
                   animate="open"
@@ -78,7 +78,7 @@ export const Drawer = ({ open, items, onClose }: DrawerProps): ReactElement => {
                     </MenuItem>
                   ))}
                 </Container>
-              </ElementContainer>
+              </StyledElementContainer>
             </Wrapper>
           </BackdropBase>
         )}
@@ -93,6 +93,13 @@ const Wrapper = styled(m.div, {
   bottom: 0,
   left: 0,
   backgroundColor: '$black',
+})
+
+const StyledElementContainer = styled(ElementContainer, {
+  // we only want the RHS border
+  borderTop: 'none',
+  borderBottom: 'none',
+  borderLeft: 'none',
 })
 
 const Container = styled(m.div, {

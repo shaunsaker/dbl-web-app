@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { styled } from '../styles/stitches.config'
+import { ButtonBase } from './ButtonBase'
 import { ChevronLeftIcon } from './icons/ChevronLeftIcon'
 
 interface BackButtonPropsProps {
@@ -14,13 +15,7 @@ export const BackButton = ({ onClick }: BackButtonPropsProps): ReactElement => {
   )
 }
 
-const Container = styled('button', {
+const Container = styled(ButtonBase, {
   flexCenter: '',
   fontSize: '$icon',
-  color: '$white',
-  transition: 'color $default',
-
-  '&:hover': {
-    color: '$turquoise',
-  },
 })
