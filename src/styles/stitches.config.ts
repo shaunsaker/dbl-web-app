@@ -23,7 +23,7 @@ export const {
       black: '#091833',
       transBlack: 'rgba(9, 24, 51, 0.85)',
       white: '#FFFFFF',
-      transWhite: 'rgba(255, 255, 255, 0.1)',
+      transWhite: 'rgba(255, 255, 255, 0.167)',
     },
     fonts: {
       default: 'Courier Prime',
@@ -105,5 +105,17 @@ export const globalStyles = globalCss({
   input: {
     outline: 'none',
     border: 'none',
+  },
+  '::-webkit-scrollbar': {
+    width: theme.space.small,
+  },
+  '::-webkit-scrollbar-track': {
+    backgroundColor: '$transWhite',
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: '$transWhite',
+  },
+  '::-webkit-scrollbar-thumb:hover': {
+    backgroundColor: '$transTurquoise',
   },
 })
