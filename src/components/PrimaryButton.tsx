@@ -1,6 +1,5 @@
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import { styled } from '../styles/stitches.config'
-import { ButtonBase } from './ButtonBase'
 import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
@@ -18,21 +17,36 @@ export const PrimaryButton = ({
   ...props
 }: PrimaryButtonProps): ReactElement => {
   return (
-    <ElementContainer>
-      <Container disabled={disabled} {...props}>
+    <Container disabled={disabled} {...props}>
+      <ContentContainer>
         {loading ? (
           <div>Loading</div>
         ) : (
           <Typography style={{ fontWeight: 700 }}>{children}</Typography>
         )}
-      </Container>
-    </ElementContainer>
+      </ContentContainer>
+    </Container>
   )
 }
 
-const Container = styled(ButtonBase, {
+const Container = styled('button', {
   width: '100%',
   height: 50,
-  padding: '0 $default',
   backgroundColor: '$transWhite',
+  transition: 'backgroundColor,opacity $default',
+
+  '&:hover:not([disabled]), &[active]': {
+    backgroundColor: '$transTurquoise',
+  },
+
+  '&[disabled]': {
+    opacity: 0.5,
+    cursor: 'default',
+  },
+})
+
+const ContentContainer = styled(ElementContainer, {
+  height: '100%',
+  padding: '0 $default',
+  flexCenter: '',
 })
