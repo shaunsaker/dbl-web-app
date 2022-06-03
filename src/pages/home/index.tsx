@@ -4,7 +4,7 @@ import { styled } from '../../styles/stitches.config'
 import { LotStats } from '../../components/LotStats'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TicketsSummary } from '../../components/TicketsSummary'
-import { pageParam, RoutePath } from '../../router/models'
+import { pageParam, Routes } from '../../router/models'
 import { selectHasTicketsForLotId } from '../../store/invoices/selectors'
 import { selectActiveLot } from '../../store/lots/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -32,13 +32,13 @@ const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
   )
 
   const onViewMoreResultsClick = useCallback(() => {
-    const route = RoutePath.results.replace(pageParam, '1')
+    const route = Routes.results.path.replace(pageParam, '1')
 
     dispatch(navigate({ route }))
   }, [dispatch])
 
   const onBuyTicketsClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.reserveTickets }))
+    dispatch(navigate({ route: Routes.reserveTickets.path }))
   }, [dispatch])
 
   return (

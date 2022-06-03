@@ -31,7 +31,7 @@ export const {
     },
     fontSizes: {
       title: '24px',
-      heading: '20px',
+      heading: '18px',
       regular: '16px',
       small: '14px',
       icon: '24px',

@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useLayoutEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { lotIdParam, RoutePath } from '../../router/models'
+import { lotIdParam, Routes } from '../../router/models'
 import { fetchInvoices } from '../../store/invoices/actions'
 import { InvoiceStatus } from '../../store/invoices/models'
 import {
@@ -54,7 +54,9 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
   )
 
   const onClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.tickets.replace(lotIdParam, lot.id) }))
+    dispatch(
+      navigate({ route: Routes.tickets.path.replace(lotIdParam, lot.id) }),
+    )
   }, [dispatch, lot.id])
 
   return (

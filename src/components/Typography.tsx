@@ -18,7 +18,7 @@ export const Typography = styled('span', {
       heading: {
         fontSize: '$heading',
         lineHeight: '$heading',
-        fontWeight: 500,
+        fontWeight: 700,
         color: '$white',
       },
       title: {

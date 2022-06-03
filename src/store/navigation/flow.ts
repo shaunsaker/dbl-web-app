@@ -14,6 +14,7 @@ function* onNavigateBackFlow(): SagaIterator {
   })
 }
 
+// TODO: SS replace is not working
 function* onNavigateFlow(): SagaIterator {
   yield takeLatest(
     navigate,
@@ -22,9 +23,11 @@ function* onNavigateFlow(): SagaIterator {
         return
       }
 
-      Navigation.router[action.payload.replace ? 'replace' : 'push'](
-        action.payload.route,
-      )
+      if (action.payload.replace) {
+        Navigation.router.replace(action.payload.route)
+      } else {
+        Navigation.router.push(action.payload.route)
+      }
     },
   )
 }

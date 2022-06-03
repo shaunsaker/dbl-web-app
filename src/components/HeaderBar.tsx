@@ -3,7 +3,7 @@ import { styled, theme } from '../styles/stitches.config'
 import { Typography } from './Typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigate, navigateBack } from '../store/navigation/actions'
-import { pageParam, RoutePath } from '../router/models'
+import { Routes } from '../router/models'
 import { MenuIcon } from './icons/MenuIcon'
 import { BackButton } from './BackButton'
 import { CloseButton } from './CloseButton'
@@ -14,16 +14,20 @@ import {
 import { setHasCompletedOnboarding } from '../store/onboarding/actions'
 import { useRouter } from 'next/router'
 import {
+  findRouteByPath,
   hasRouteHistory,
-  isCloseRoute,
-  isMenuRoute,
   isOnboardingRoute,
 } from '../router/utils'
 import { Drawer, DrawerItem } from './Drawer'
+import { objectToArray } from '../utils/objectToArray'
 
 const DRAWER_ITEMS: DrawerItem[] = [
-  { label: 'Results', link: RoutePath.results.replace(pageParam, '1') },
-  { label: 'Profile', link: RoutePath.profile },
+  ...objectToArray(Routes)
+    .filter(route => route.isDrawerRoute)
+    .map(route => ({
+      label: route.title,
+      link: (route.getDefaultPath && route.getDefaultPath()) || route.path,
+    })),
   {
     label: 'Contact Us',
     link: `mailto: ${process.env.NEXT_PUBLIC_SUPPORT_EMAIL}`,
@@ -32,7 +36,7 @@ const DRAWER_ITEMS: DrawerItem[] = [
 
 interface HeaderBarProps {}
 
-export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
+export const HeaderBar = ({}: HeaderBarProps): ReactElement | null => {
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -41,9 +45,10 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const showMenu = isMenuRoute(router.route)
+  const route = findRouteByPath(router.route)
+  const showMenu = route?.isDrawerRoute
   const showBack = !showMenu && hasRouteHistory()
-  const showClose = isCloseRoute(router.route)
+  const showClose = isOnboardingRoute(router.route)
 
   const navigateToRoot = useCallback(() => {
     if (isOnboardingRoute(router.route)) {
@@ -53,10 +58,10 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
     dispatch(
       navigate({
         route: isAuthenticated
-          ? RoutePath.home
+          ? Routes.home.path
           : hasUserSignedUp
-          ? RoutePath.signIn
-          : RoutePath.signUp,
+          ? Routes.signIn.path
+          : Routes.signUp.path,
       }),
     )
   }, [dispatch, router.route, isAuthenticated, hasUserSignedUp])
@@ -81,18 +86,26 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement => {
     navigateToRoot()
   }, [navigateToRoot])
 
+  if (!route) {
+    return null
+  }
+
   return (
     <Container>
-      {showBack && (
-        <ItemContainer position="left">
+      <ItemContainer position="left">
+        {showBack ? (
           <StyledBackButton onClick={onBackClick} />
-        </ItemContainer>
-      )}
+        ) : (
+          <button onClick={onLogoClick}>
+            <Typography kind="logo">DBL</Typography>
+          </button>
+        )}
+      </ItemContainer>
 
-      <ItemContainer position={showBack ? 'center' : 'left'}>
-        <button onClick={onLogoClick}>
-          <Typography kind="logo">DBL</Typography>
-        </button>
+      <ItemContainer position="center">
+        {route.title ? (
+          <Typography kind="heading">{route.title}</Typography>
+        ) : null}
       </ItemContainer>
 
       <ItemContainer position="right">
@@ -131,21 +144,22 @@ const Container = styled('div', {
 })
 
 const ItemContainer = styled('div', {
-  width: '33%',
-
   variants: {
     position: {
       left: {
         display: 'flex',
         justifyContent: 'flex-start',
+        flex: 1,
       },
       center: {
         display: 'flex',
         justifyContent: 'center',
+        flex: 2,
       },
       right: {
         display: 'flex',
         justifyContent: 'flex-end',
+        flex: 1,
       },
     },
   },

@@ -9,7 +9,7 @@ import { InfoBox } from '../../../../components/InfoBox'
 import { PrimaryButton } from '../../../../components/PrimaryButton'
 import { TextButton } from '../../../../components/TextButton'
 import { useLinking } from '../../../../components/useLinking'
-import { lotIdParam, RoutePath } from '../../../../router/models'
+import { lotIdParam, Routes } from '../../../../router/models'
 import { navigate } from '../../../../store/navigation/actions'
 import { Lot, LotId } from '../../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
@@ -40,7 +40,7 @@ const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
 
     dispatch(
       navigate({
-        route: RoutePath.verifyResultCalculator.replace(lotIdParam, lot.id),
+        route: Routes.verifyResultCalculator.path.replace(lotIdParam, lot.id),
       }),
     )
   }, [dispatch, lot])

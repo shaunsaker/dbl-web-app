@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
-import { invoiceIdParam, lotIdParam, RoutePath } from '../../../router/models'
+import { invoiceIdParam, lotIdParam, Routes } from '../../../router/models'
 import { LotId } from '../../../store/lots/models'
 import { navigate } from '../../../store/navigation/actions'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
@@ -25,7 +25,7 @@ export const InvoiceTickets = ({
   const onClick = useCallback(() => {
     dispatch(
       navigate({
-        route: RoutePath.invoice
+        route: Routes.invoice.path
           .replace(lotIdParam, lotId)
           .replace(invoiceIdParam, id),
       }),

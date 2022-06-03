@@ -1,13 +1,10 @@
-import { RoutePath } from './models'
+import { objectToArray } from '../utils/objectToArray'
+import { Routes } from './models'
 
 export const hasRouteHistory = () => history.state.idx > 0
 
-export const isMenuRoute = (route: string) =>
-  route === RoutePath.home ||
-  route.startsWith('/results') ||
-  route === RoutePath.profile
+export const isOnboardingRoute = (path: string) =>
+  path === Routes.welcome.path || path.includes('onboarding')
 
-export const isOnboardingRoute = (route: string) =>
-  route === RoutePath.welcome || route.startsWith('/onboarding')
-
-export const isCloseRoute = (route: string) => isOnboardingRoute(route)
+export const findRouteByPath = (path: string) =>
+  objectToArray(Routes).find(route => route.isRoute(path))

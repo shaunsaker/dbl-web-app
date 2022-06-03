@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { HTMLAttributes, ReactElement, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
-import { lotIdParam, RoutePath } from '../../router/models'
+import { lotIdParam, Routes } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { Lot } from '../../store/lots/models'
@@ -39,11 +39,15 @@ export const LotResult = ({
   const didLotHaveWinner = Boolean(lot?.winnerUsername)
 
   const onViewMoreClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.result.replace(lotIdParam, lot.id) }))
+    dispatch(
+      navigate({ route: Routes.result.path.replace(lotIdParam, lot.id) }),
+    )
   }, [dispatch, lot.id])
 
   const onViewWinningDetailsClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.winner.replace(lotIdParam, lot.id) }))
+    dispatch(
+      navigate({ route: Routes.winner.path.replace(lotIdParam, lot.id) }),
+    )
   }, [dispatch, lot.id])
 
   const onVerifyResultClick = useCallback(() => {
@@ -52,7 +56,7 @@ export const LotResult = ({
     }
 
     dispatch(
-      navigate({ route: RoutePath.verifyResult.replace(lotIdParam, lot.id) }),
+      navigate({ route: Routes.verifyResult.path.replace(lotIdParam, lot.id) }),
     )
   }, [lot, dispatch])
 

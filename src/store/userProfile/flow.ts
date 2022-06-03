@@ -7,7 +7,7 @@ import {
 } from '@redux-saga/core/effects'
 import { SagaIterator } from '@redux-saga/types'
 import { ActionType, getType } from 'typesafe-actions'
-import { lotIdParam, RoutePath } from '../../router/models'
+import { lotIdParam, Routes } from '../../router/models'
 import { firebaseSyncUserProfile } from '../../services/firebase/firestore/firebaseSyncUserProfile'
 import { firebaseUpdateUserProfile } from '../../services/firebase/firestore/firebaseUpdateUserProfile'
 import { call } from '../../utils/call'
@@ -135,7 +135,7 @@ export function* checkUserWinnerFlow(): SagaIterator {
     }
 
     yield put(
-      navigate({ route: RoutePath.winner.replace(lotIdParam, winningLotId) }),
+      navigate({ route: Routes.winner.path.replace(lotIdParam, winningLotId) }),
     )
 
     // toggle hasSeenLink so that we don't show the Winner modal automatically again

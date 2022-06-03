@@ -1,7 +1,7 @@
 import { SagaIterator } from 'redux-saga'
 import { fork, put, takeLatest } from 'redux-saga/effects'
 import { ActionType, getType } from 'typesafe-actions'
-import { RoutePath } from '../../router/models'
+import { Routes } from '../../router/models'
 import { firebaseResetPassword } from '../../services/firebase/auth/firebaseResetPassword'
 import { firebaseSignIn } from '../../services/firebase/auth/firebaseSignIn'
 import { firebaseSignOut } from '../../services/firebase/auth/firebaseSignOut'
@@ -22,7 +22,7 @@ export function* signUpSaga(): SagaIterator {
 
         yield put(signUp.success({ user, username: action.payload.username }))
 
-        yield put(navigate({ route: RoutePath.home, replace: true }))
+        yield put(navigate({ route: Routes.home.path, replace: true }))
 
         yield put(
           showSnackbar({
@@ -46,7 +46,7 @@ export function* signInSaga(): SagaIterator {
 
         yield put(signIn.success(user))
 
-        yield put(navigate({ route: RoutePath.home, replace: true }))
+        yield put(navigate({ route: Routes.home.path, replace: true }))
 
         yield put(
           showSnackbar({
@@ -90,7 +90,7 @@ export function* signOutSaga(): SagaIterator {
 
       yield put(signOut.success())
 
-      yield put(navigate({ route: RoutePath.signIn, replace: true }))
+      yield put(navigate({ route: Routes.signIn.path, replace: true }))
 
       yield put(
         showSnackbar({

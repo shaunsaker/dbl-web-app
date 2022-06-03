@@ -4,7 +4,7 @@ import { styled } from '../../styles/stitches.config'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { Typography } from '../../components/Typography'
 import { firebaseReserveTickets } from '../../services/firebase/functions/firebaseReserveTickets'
-import { invoiceIdParam, lotIdParam, RoutePath } from '../../router/models'
+import { invoiceIdParam, lotIdParam, Routes } from '../../router/models'
 import { Currency } from '../../store/btcRate/models'
 import { selectBtcRateByCurrency } from '../../store/btcRate/selectors'
 import { InvoiceId, InvoiceStatus } from '../../store/invoices/models'
@@ -94,7 +94,7 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
 
       dispatch(
         navigate({
-          route: RoutePath.invoice
+          route: Routes.invoice.path
             .replace(lotIdParam, activeLot.id)
             .replace(invoiceIdParam, reserveTicketsResponse.data as InvoiceId),
           replace: true,

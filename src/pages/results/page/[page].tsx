@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
 import { LotResult } from '../../../components/LotResult'
 import { Typography } from '../../../components/Typography'
-import { pageParam, RoutePath } from '../../../router/models'
+import { pageParam, Routes } from '../../../router/models'
 import { navigate } from '../../../store/navigation/actions'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../server/getInactiveLots'
@@ -33,7 +33,7 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
 
       dispatch(
         navigate({
-          route: RoutePath.results.replace(pageParam, newPage.toString()),
+          route: Routes.results.path.replace(pageParam, newPage.toString()),
         }),
       )
     },
@@ -43,10 +43,6 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   return (
     <ProtectedRoute>
       <Container>
-        <Typography kind="title">Results</Typography>
-
-        <Spacer size="large" />
-
         <ContentContainer>
           {lots && lots.length ? (
             lots.map(lot => (

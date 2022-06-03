@@ -5,7 +5,7 @@ import {
   selectIsAuthenticated,
 } from '../store/auth/selectors'
 import { selectHasCompletedOnboarding } from '../store/onboarding/selectors'
-import { RoutePath } from '../router/models'
+import { Routes } from '../router/models'
 import { navigate } from '../store/navigation/actions'
 import { LoadingModal } from './LoadingModal'
 
@@ -25,10 +25,10 @@ export const ProtectedRoute = ({
   useEffect(() => {
     if (!isAuthenticated) {
       const route = !hasCompletedOnboarding
-        ? RoutePath.welcome
+        ? Routes.welcome.path
         : hasSignedUp
-        ? RoutePath.signIn
-        : RoutePath.signUp
+        ? Routes.signIn.path
+        : Routes.signUp.path
 
       dispatch(navigate({ route, replace: true }))
     }

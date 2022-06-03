@@ -13,7 +13,7 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
-import { RoutePath } from '../../router/models'
+import { Routes } from '../../router/models'
 import { signIn } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -54,7 +54,7 @@ const SignIn = ({}: SignInProps): ReactElement => {
   }, [])
 
   const onForgotPasswordClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.forgotPassword }))
+    dispatch(navigate({ route: Routes.forgotPassword.path }))
   }, [dispatch])
 
   const onSubmit = useCallback(() => {
@@ -73,7 +73,7 @@ const SignIn = ({}: SignInProps): ReactElement => {
   )
 
   const onSignUpInsteadClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.signUp }))
+    dispatch(navigate({ route: Routes.signUp.path }))
   }, [dispatch])
 
   return (

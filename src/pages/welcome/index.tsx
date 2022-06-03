@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { Explainer } from '../../components/Explainer'
 import { PrimaryButton } from '../../components/PrimaryButton'
-import { pageParam, RoutePath } from '../../router/models'
+import { pageParam, Routes } from '../../router/models'
 import { navigate } from '../../store/navigation/actions'
 import { Spacer } from '../../components/Spacer'
 
@@ -13,7 +13,9 @@ const Welcome = ({}: WelcomeProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onLearnMoreClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.onboarding.replace(pageParam, '1') }))
+    dispatch(
+      navigate({ route: Routes.onboarding.path.replace(pageParam, '1') }),
+    )
   }, [dispatch])
 
   return (

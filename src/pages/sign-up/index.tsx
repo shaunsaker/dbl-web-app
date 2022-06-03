@@ -14,7 +14,7 @@ import { PrimaryButton } from '../../components/PrimaryButton'
 import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
-import { RoutePath } from '../../router/models'
+import { Routes } from '../../router/models'
 import { signUp } from '../../store/auth/actions'
 import { selectAuthLoading } from '../../store/auth/selectors'
 import { navigate } from '../../store/navigation/actions'
@@ -85,7 +85,7 @@ const SignUp = ({}: SignUpProps): ReactElement => {
   )
 
   const onSignInInsteadClick = useCallback(() => {
-    dispatch(navigate({ route: RoutePath.signIn }))
+    dispatch(navigate({ route: Routes.signIn.path }))
   }, [dispatch])
 
   return (

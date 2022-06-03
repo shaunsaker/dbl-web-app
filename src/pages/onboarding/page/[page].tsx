@@ -8,7 +8,7 @@ import { OnboardingThree } from '../../../components/onboarding/OnboardingThree'
 import { setHasCompletedOnboarding } from '../../../store/onboarding/actions'
 import { navigate } from '../../../store/navigation/actions'
 import { selectHasUserSignedUp } from '../../../store/auth/selectors'
-import { pageParam, RoutePath } from '../../../router/models'
+import { pageParam, Routes } from '../../../router/models'
 import { Spacer } from '../../../components/Spacer'
 import { Stepper } from '../../../components/Stepper'
 import { SceneAnimator } from '../../../components/SceneAnimator'
@@ -31,7 +31,7 @@ const Onboarding = ({}: OnboardingProps): ReactElement | null => {
     (newPageIndex: number) => {
       dispatch(
         navigate({
-          route: RoutePath.onboarding.replace(
+          route: Routes.onboarding.path.replace(
             pageParam,
             (newPageIndex + 1).toString(),
           ),
@@ -46,7 +46,7 @@ const Onboarding = ({}: OnboardingProps): ReactElement | null => {
 
     dispatch(
       navigate({
-        route: hasUserSignedUp ? RoutePath.signIn : RoutePath.signUp,
+        route: hasUserSignedUp ? Routes.signIn.path : Routes.signUp.path,
       }),
     )
   }, [dispatch, hasUserSignedUp])
@@ -62,7 +62,7 @@ const Onboarding = ({}: OnboardingProps): ReactElement | null => {
 
         dispatch(
           navigate({
-            route: RoutePath.onboarding.replace(
+            route: Routes.onboarding.path.replace(
               pageParam,
               (newPageIndex + 1).toString(),
             ),
