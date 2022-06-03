@@ -99,7 +99,7 @@ export const globalStyles = globalCss({
   button: {
     background: 'none',
     border: 'none',
-    outline: 'none',
+    outline: '$white',
     cursor: 'pointer',
   },
   input: {

@@ -31,4 +31,5 @@ export const Stepper = ({
 
 const Container = styled('div', {
   display: 'flex',
+  justifyContent: 'center',
 })

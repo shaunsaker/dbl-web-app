@@ -130,17 +130,12 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement | null => {
 }
 
 const Container = styled('div', {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
   height: theme.sizes.headerBarHeight,
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: `0 ${theme.space.large}`,
   backgroundColor: '$black',
-  zIndex: 1,
 })
 
 const ItemContainer = styled('div', {

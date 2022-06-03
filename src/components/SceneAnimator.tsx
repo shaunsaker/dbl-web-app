@@ -37,12 +37,14 @@ const FADE_SCALE_ANIMATION: Variants = {
 }
 
 interface SceneAnimatorProps {
+  className?: string
   kind?: 'default' | 'fade'
   sceneKey: string
   children: ReactNode
 }
 
 export const SceneAnimator = ({
+  className,
   kind = 'default',
   sceneKey,
   children,
@@ -57,6 +59,7 @@ export const SceneAnimator = ({
           exit="exit"
           variants={kind === 'default' ? FADE_SCALE_ANIMATION : FADE_ANIMATION}
           transition={DEFAULT_TRANSITION}
+          className={className}
         >
           {children}
         </StyledMotionContainer>
@@ -65,8 +68,4 @@ export const SceneAnimator = ({
   )
 }
 
-const StyledMotionContainer = styled(m.div, {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-})
+const StyledMotionContainer = styled(m.div, {})

@@ -28,4 +28,5 @@ export const Spinner = ({}: SpinnerProps): ReactElement => {
 
 const Container = styled('div', {
   display: 'flex',
+  justifyContent: 'center',
 })

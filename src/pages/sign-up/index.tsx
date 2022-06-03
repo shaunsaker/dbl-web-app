@@ -89,50 +89,48 @@ const SignUp = ({}: SignUpProps): ReactElement => {
   }, [dispatch])
 
   return (
-    <>
-      <Container>
-        <Explainer
-          imageProps={{
-            src: '/images/cyberpunk-city-4.png',
-            alt: '',
-          }}
-          title="Welcome"
-          description="Physics-defying Explanation."
-        />
+    <Container>
+      <Explainer
+        imageProps={{
+          src: '/images/cyberpunk-city-4.png',
+          alt: '',
+        }}
+        title="Welcome"
+        description="Physics-defying Explanation."
+      />
 
-        <Spacer size="large" />
+      <Spacer size="large" />
 
-        <TextInput
-          inputRef={emailInputRef}
-          label="Email*"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={onChangeEmail}
-          onKeyDown={onEmailKeyDown}
-        />
+      <TextInput
+        inputRef={emailInputRef}
+        label="Email*"
+        placeholder="Enter your email"
+        value={email}
+        onChangeText={onChangeEmail}
+        onKeyDown={onEmailKeyDown}
+      />
 
-        <Spacer />
+      <Spacer />
 
-        <TextInput
-          inputRef={usernameInputRef}
-          label="Username*"
-          placeholder="E.g. lootkid47"
-          value={username}
-          onChangeText={onChangeUsername}
-          onKeyDown={onUsernameKeydown}
-        />
+      <TextInput
+        inputRef={usernameInputRef}
+        label="Username*"
+        placeholder="E.g. lootkid47"
+        value={username}
+        onChangeText={onChangeUsername}
+        onKeyDown={onUsernameKeydown}
+      />
 
-        <Spacer />
+      <Spacer />
 
-        <PasswordTextInput
-          inputRef={passwordInputRef}
-          label="Password*"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={onChangePassword}
-          onKeyDown={onPasswordKeydown}
-        />
-      </Container>
+      <PasswordTextInput
+        inputRef={passwordInputRef}
+        label="Password*"
+        placeholder="Enter your password"
+        value={password}
+        onChangeText={onChangePassword}
+        onKeyDown={onPasswordKeydown}
+      />
 
       <Spacer size="large" />
 
@@ -145,14 +143,12 @@ const SignUp = ({}: SignUpProps): ReactElement => {
       <TextButton onClick={onSignInInsteadClick}>Sign in instead?</TextButton>
 
       {isAuthLoading && <LoadingModal>Authenticating...</LoadingModal>}
-    </>
+    </Container>
   )
 }
 
-export default SignUp
-
 const Container = styled('div', {
-  width: '100%',
-  flex: 1,
-  flexCenter: '',
+  paddingBottom: '$large',
 })
+
+export default SignUp

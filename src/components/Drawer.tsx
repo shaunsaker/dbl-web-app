@@ -96,6 +96,7 @@ const Wrapper = styled(m.div, {
 })
 
 const StyledElementContainer = styled(ElementContainer, {
+  height: '100%',
   // we only want the RHS border
   borderTop: 'none',
   borderBottom: 'none',

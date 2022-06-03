@@ -14,19 +14,14 @@ export const LoadingModal = ({
   ...props
 }: LoadingModalProps): ReactElement => {
   return (
-    <Backdrop {...props}>
-      <Container>
-        <Spinner />
+    <Container {...props}>
+      <Spinner />
 
-        <Spacer size="large" />
+      <Spacer size="large" />
 
-        <Typography>{children}</Typography>
-      </Container>
-    </Backdrop>
+      <Typography>{children}</Typography>
+    </Container>
   )
 }
 
-const Container = styled('div', {
-  flex: 1,
-  flexCenter: '',
-})
+const Container = styled(Backdrop, {})

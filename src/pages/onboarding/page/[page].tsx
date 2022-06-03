@@ -81,11 +81,11 @@ const Onboarding = ({}: OnboardingProps): ReactElement | null => {
 
   return (
     <Container>
-      <SceneAnimator sceneKey={`onboarding-${pageIndex}`}>
+      <ContentContainer sceneKey={`onboarding-${pageIndex}`}>
         <CurrentSlide onSubmit={() => onSubmitClick(pageIndex)} />
-      </SceneAnimator>
+      </ContentContainer>
 
-      <Spacer />
+      <Spacer size="large" />
 
       <Stepper
         activeStep={pageIndex}
@@ -96,11 +96,13 @@ const Onboarding = ({}: OnboardingProps): ReactElement | null => {
   )
 }
 
-export default Onboarding
-
 const Container = styled('div', {
-  width: '100%',
-  flex: 1,
-  flexCenter: '',
-  position: 'relative',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 })
+
+const ContentContainer = styled(SceneAnimator, {})
+
+export default Onboarding

@@ -47,8 +47,7 @@ export const BackdropBase = styled('div', {
   bottom: 0,
   left: 0,
   zIndex: 1,
-  display: 'flex',
-  flexDirection: 'column',
+  flexCenter: '',
 
   variants: {
     opaque: {

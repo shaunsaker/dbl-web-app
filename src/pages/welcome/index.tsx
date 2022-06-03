@@ -19,28 +19,28 @@ const Welcome = ({}: WelcomeProps): ReactElement => {
   }, [dispatch])
 
   return (
-    <>
-      <Container>
-        <Explainer
-          imageProps={{
-            src: '/images/cyberpunk-city-4.png',
-            alt: '',
-          }}
-          title="Ready to change your life for the better...forever?"
-          description="This is a gravity-defying explanation that welcomes the user and gets them excited and eager to buy their first tickets."
-        />
-      </Container>
+    <Container>
+      <Explainer
+        imageProps={{
+          src: '/images/cyberpunk-city-4.png',
+          alt: '',
+        }}
+        title="Ready to change your life for the better...forever?"
+        description="This is a gravity-defying explanation that welcomes the user and gets them excited and eager to buy their first tickets."
+      />
 
       <Spacer size="large" />
 
       <PrimaryButton onClick={onLearnMoreClick}>LEARN MORE</PrimaryButton>
-    </>
+    </Container>
   )
 }
 
-export default Welcome
-
 const Container = styled('div', {
-  flex: 1,
-  flexCenter: '',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 })
+
+export default Welcome

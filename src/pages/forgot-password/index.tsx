@@ -29,27 +29,25 @@ const ForgotPassword = (): ReactElement => {
   }, [dispatch, email])
 
   return (
-    <>
-      <Container>
-        <Explainer
-          imageProps={{
-            src: '/images/cyberpunk-city-4.png',
-            alt: '',
-          }}
-          title="Welcome"
-          description="Physics-defying Explanation."
-        />
+    <Container>
+      <Explainer
+        imageProps={{
+          src: '/images/cyberpunk-city-4.png',
+          alt: '',
+        }}
+        title="Welcome"
+        description="Physics-defying Explanation."
+      />
 
-        <Spacer size="large" />
+      <Spacer size="large" />
 
-        <TextInput
-          label="Email*"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={onChangeEmail}
-          onSubmit={onSubmitClick}
-        />
-      </Container>
+      <TextInput
+        label="Email*"
+        placeholder="Enter your email"
+        value={email}
+        onChangeText={onChangeEmail}
+        onSubmit={onSubmitClick}
+      />
 
       <Spacer size="large" />
 
@@ -61,14 +59,15 @@ const ForgotPassword = (): ReactElement => {
       </PrimaryButton>
 
       {isAuthLoading && <LoadingModal>Resetting your password...</LoadingModal>}
-    </>
+    </Container>
   )
 }
 
-export default ForgotPassword
-
 const Container = styled('div', {
-  width: '100%',
-  flex: 1,
-  flexCenter: '',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 })
+
+export default ForgotPassword

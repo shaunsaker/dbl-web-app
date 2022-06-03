@@ -1,45 +1,69 @@
+import { useRouter } from 'next/router'
 import React, { HTMLAttributes, ReactElement, ReactNode } from 'react'
 import { styled, theme } from '../styles/stitches.config'
 import { ElementContainer } from './ElementContainer'
 import { HeaderBar } from './HeaderBar'
+import { SceneAnimator } from './SceneAnimator'
 
 interface PageProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
 }
 
 export const Page = ({ children, ...props }: PageProps): ReactElement => {
-  return (
-    <StyledElementContainer kind="large">
-      <HeaderBar />
+  const router = useRouter()
 
-      <Container {...props}>
+  return (
+    <Container {...props}>
+      <StyledElementContainer kind="large" />
+
+      <HeaderBarContainer>
+        <HeaderBar />
+      </HeaderBarContainer>
+
+      <ContentWrapper sceneKey={router.route}>
         <ContentContainer>{children}</ContentContainer>
-      </Container>
-    </StyledElementContainer>
+      </ContentWrapper>
+    </Container>
   )
 }
 
-const StyledElementContainer = styled(ElementContainer, {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
+const Container = styled('div', {
+  height: '100vh',
   position: 'relative',
+  backgroundColor: '$black',
+  overflow: 'hidden',
 })
 
-const Container = styled('div', {
-  flex: 1,
+const StyledElementContainer = styled(ElementContainer, {
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  right: 0,
+  left: 0,
+})
+
+const HeaderBarContainer = styled('div', {
+  position: 'relative',
+  zIndex: 1,
+  margin: 4,
+})
+
+const ContentWrapper = styled(SceneAnimator, {
+  position: 'absolute',
+  top: theme.sizes.headerBarHeight,
+  bottom: 0,
+  right: 0,
+  left: 0,
+  overflow: 'auto',
+  margin: theme.borderWidths.large, // ElementContainer width
+  padding: theme.space.large,
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '$black',
-  padding: theme.space.large,
-  paddingTop:
-    parseInt(theme.sizes.headerBarHeight.value) +
-    parseInt(theme.space.large.value),
 })
 
 const ContentContainer = styled('div', {
-  position: 'relative',
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
+  margin: '0 auto',
+  maxWidth: 560,
+  width: '100%',
+  height: '100%',
 })

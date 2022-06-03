@@ -55,12 +55,7 @@ export const TextInput = ({
   )
 }
 
-const Container = styled('div', {
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-})
+const Container = styled('div', {})
 
 const LabelContainer = styled('div', {
   marginLeft: 2,

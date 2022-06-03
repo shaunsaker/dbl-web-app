@@ -17,8 +17,6 @@ export const colours = '$pink, $turquoise, $blue, $purple, $pink'
 
 const Container = styled('div', {
   display: 'flex',
-  width: '100%',
-  height: '100%',
   '--angle': '0deg',
   borderWidth: '$default',
   borderStyle: 'solid',

@@ -77,47 +77,43 @@ const SignIn = ({}: SignInProps): ReactElement => {
   }, [dispatch])
 
   return (
-    <>
-      <Container>
-        <Explainer
-          imageProps={{
-            src: '/images/cyberpunk-city-4.png',
-            alt: '',
-          }}
-          title={`Welcome back ${
-            existingUsername ? `, ${existingUsername}` : ''
-          }`}
-          description="Physics-defying Explanation."
-        />
+    <Container>
+      <Explainer
+        imageProps={{
+          src: '/images/cyberpunk-city-4.png',
+          alt: '',
+        }}
+        title={`Welcome back ${
+          existingUsername ? `, ${existingUsername}` : ''
+        }`}
+        description="Physics-defying Explanation."
+      />
 
-        <Spacer size="large" />
+      <Spacer size="large" />
 
-        <TextInput
-          type="email"
-          label="Email*"
-          placeholder="Enter your email"
-          value={email}
-          onChangeText={onChangeEmail}
-          onKeyDown={onEmailKeyDown}
-        />
+      <TextInput
+        type="email"
+        label="Email*"
+        placeholder="Enter your email"
+        value={email}
+        onChangeText={onChangeEmail}
+        onKeyDown={onEmailKeyDown}
+      />
 
-        <Spacer />
+      <Spacer />
 
-        <PasswordTextInput
-          inputRef={passwordInputRef}
-          label="Password*"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={onChangePassword}
-          onKeyDown={onPasswordKeydown}
-        />
+      <PasswordTextInput
+        inputRef={passwordInputRef}
+        label="Password*"
+        placeholder="Enter your password"
+        value={password}
+        onChangeText={onChangePassword}
+        onKeyDown={onPasswordKeydown}
+      />
 
-        <Spacer />
+      <Spacer />
 
-        <TextButton onClick={onForgotPasswordClick}>
-          Forgot Password?
-        </TextButton>
-      </Container>
+      <TextButton onClick={onForgotPasswordClick}>Forgot Password?</TextButton>
 
       <Spacer size="large" />
 
@@ -130,14 +126,12 @@ const SignIn = ({}: SignInProps): ReactElement => {
       <TextButton onClick={onSignUpInsteadClick}>Sign up instead?</TextButton>
 
       {isAuthLoading && <LoadingModal>Authenticating...</LoadingModal>}
-    </>
+    </Container>
   )
 }
 
-export default SignIn
-
 const Container = styled('div', {
-  width: '100%',
-  flex: 1,
-  flexCenter: '',
+  paddingBottom: '$large',
 })
+
+export default SignIn
