@@ -12,7 +12,7 @@ export const Snackbar = ({}: SnackbarProps): ReactElement => {
   const { startPause, endPause } = handlers
 
   return (
-    <div onMouseEnter={startPause} onMouseLeave={endPause}>
+    <Container onMouseEnter={startPause} onMouseLeave={endPause}>
       <AnimatePresence initial={false}>
         {toasts
           .filter(toast => toast.visible)
@@ -31,20 +31,28 @@ export const Snackbar = ({}: SnackbarProps): ReactElement => {
                 transition: { duration: 0.2 },
               }}
             >
-              <Container>
+              <SnackbarContainer>
                 <Typography kind="small">
                   {resolveValue(toast.message, toast)}
                 </Typography>
-              </Container>
+              </SnackbarContainer>
             </motion.div>
           ))}
       </AnimatePresence>
-    </div>
+    </Container>
   )
 }
 
 const Container = styled('div', {
+  position: 'fixed',
+  bottom: '$large',
+  right: 0,
+  left: 0,
+  zIndex: 1,
   flexCenter: '',
+})
+
+const SnackbarContainer = styled('div', {
   backgroundColor: '$transWhite',
   padding: '$small $default',
   borderRadius: '$default',

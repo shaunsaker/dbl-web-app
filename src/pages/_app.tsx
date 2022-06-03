@@ -16,9 +16,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <PersistGate loading={null} persistor={persistor}>
           <Page>
             <Component {...pageProps} />
-
-            <Snackbar />
           </Page>
+
+          <Snackbar />
         </PersistGate>
       </Provider>
     </>
