@@ -15,6 +15,9 @@ import { Lot, LotId } from '../../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../../server/getInactiveLots'
 import { ProtectedRoute } from '../../../../components/ProtectedRoute'
+import { Spacer } from '../../../../components/Spacer'
+import { Typography } from '../../../../components/Typography'
+import { CopyValue } from '../../../../components/CopyValue'
 
 interface VerifyResultProps {
   lot?: Lot
@@ -54,11 +57,17 @@ const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
     openLink(url)
   }, [openLink, lot])
 
-  const onViewAllTicketsClick = useCallback(() => {}, [])
+  const onViewAllTicketsClick = useCallback(() => {
+    // TODO:
+  }, [])
 
-  if (!lot) {
+  if (!lot || !lot.latestBlockHashAtDrawTime || !lot.winningTicketId) {
     return null
   }
+
+  // TODO: blog post
+
+  // TODO:
 
   return (
     <ProtectedRoute>
@@ -68,41 +77,65 @@ const VerifyResult = ({ lot }: VerifyResultProps): ReactElement | null => {
           <a href="https://blog.com">our blog post</a>.
         </InfoBox>
 
-        <Card>
+        <Spacer />
+
+        <Card disabled>
           <DataSummary
             icon={<CopyIcon />}
             title="LATEST BLOCK HASH AT TIME OF DRAW"
-            value={lot.latestBlockHashAtDrawTime}
           >
+            <CopyValue value={lot.latestBlockHashAtDrawTime}>
+              {lot.latestBlockHashAtDrawTime}
+            </CopyValue>
+
+            <Spacer size="small" />
+
             <TextButton onClick={onViewLatestBlockHashClick}>
               View on Blockchain
             </TextButton>
           </DataSummary>
 
+          <Spacer />
+
           <Divider />
+
+          <Spacer />
 
           <DataSummary
             icon={<CopyIcon />}
             title="WINNING TICKET INDEX"
             value={lot.winningTicketIndex}
           >
+            <Spacer size="small" />
+
             <TextButton onClick={onViewCalculationClick}>
               See how we calculated this
             </TextButton>
           </DataSummary>
 
+          <Spacer />
+
           <Divider />
+
+          <Spacer />
 
           <DataSummary
             icon={<CopyIcon />}
             title="WINNING BLOCK HASH (TICKET ID)"
-            value={lot.winningTicketId}
           >
+            <CopyValue value={lot.winningTicketId}>
+              {lot.winningTicketId}
+            </CopyValue>
+
+            <Spacer size="small" />
+
             <TextButton onClick={onViewWinningBlockHashClick}>
               View on Blockchain
             </TextButton>
           </DataSummary>
         </Card>
+
+        <Spacer />
 
         <PrimaryButton onClick={onViewAllTicketsClick}>
           View All Tickets

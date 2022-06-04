@@ -23,6 +23,6 @@ const Tickets = (): ReactElement | null => {
   )
 }
 
-export default Tickets
-
 const Container = styled('div', {})
+
+export default Tickets

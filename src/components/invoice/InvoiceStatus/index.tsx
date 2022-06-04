@@ -22,6 +22,8 @@ export const InvoiceStatus = ({
     selectInvoiceById(state, invoiceId),
   )
 
+  const areTicketsReserved = invoice?.status === InvoiceStatusType.reserved
+
   const renderStatusText = useCallback(() => {
     const ticketCount = invoice?.ticketIds.length || 0
     const ticketText = maybePluralise(ticketCount, 'ticket')
@@ -52,7 +54,7 @@ export const InvoiceStatus = ({
     <InfoBox>
       <Typography>{renderStatusText()}</Typography>
 
-      <CountdownTimer timestamp={invoice.expiry} />
+      {areTicketsReserved && <CountdownTimer timestamp={invoice.expiry} />}
     </InfoBox>
   )
 }

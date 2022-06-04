@@ -28,7 +28,11 @@ export const selectInvoicesByLotId = (
   const invoices = state.invoices.data
   const invoicesArray = objectToArray(invoices)
   const lotInvoices = invoicesArray.filter(invoice => invoice.lotId === lotId)
-  const sortedLotInvoices = sortArrayOfObjectsByKey(lotInvoices, 'dateCreated')
+  const sortedLotInvoices = sortArrayOfObjectsByKey(
+    lotInvoices,
+    'dateCreated',
+    true,
+  )
 
   return sortedLotInvoices
 }

@@ -40,6 +40,18 @@ export const Typography = styled('span', {
         textAlign: 'center',
       },
     },
+    bold: {
+      true: {
+        fontWeight: 700,
+      },
+    },
+    ellipsis: {
+      true: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      },
+    },
   },
 
   defaultVariants: {

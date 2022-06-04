@@ -7,6 +7,8 @@ import { navigate } from '../../../store/navigation/actions'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
 import { Typography } from '../../Typography'
 import { Invoice } from '../../../store/invoices/models'
+import { Card } from '../../Card'
+import { Spacer } from '../../Spacer'
 
 interface InvoiceTicketsProps extends Invoice {
   lotId: LotId
@@ -34,21 +36,37 @@ export const InvoiceTickets = ({
 
   return (
     <Container onClick={onClick}>
-      <Typography>{getFormattedTime(dateCreated)}</Typography>
+      <Typography kind="small">Date</Typography>
 
-      <Typography>TOTAL</Typography>
+      <Typography kind="paragraph" bold>
+        {getFormattedTime(dateCreated, true)}
+      </Typography>
 
-      <Typography>{amountBTC} BTC</Typography>
+      <Spacer />
 
-      <Typography>STATUS</Typography>
+      <Typography kind="small">Total</Typography>
 
-      <Typography>{status}</Typography>
+      <Typography kind="paragraph" bold>
+        {amountBTC} BTC
+      </Typography>
 
-      <Typography>NO OF TICKETS</Typography>
+      <Spacer />
 
-      <Typography>{ticketIds.length}</Typography>
+      <Typography kind="small">Status</Typography>
+
+      <Typography kind="paragraph" bold>
+        {status}
+      </Typography>
+
+      <Spacer />
+
+      <Typography kind="small">No of Tickets</Typography>
+
+      <Typography kind="paragraph" bold>
+        {ticketIds.length}
+      </Typography>
     </Container>
   )
 }
 
-const Container = styled('button', {})
+const Container = styled(Card, {})

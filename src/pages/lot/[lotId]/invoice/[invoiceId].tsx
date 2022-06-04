@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { LotId } from '../../../../store/lots/models'
 import { InvoiceId } from '../../../../store/invoices/models'
 import { ProtectedRoute } from '../../../../components/ProtectedRoute'
+import { Spacer } from '../../../../components/Spacer'
 
 const Invoice = (): ReactElement | null => {
   const router = useRouter()
@@ -23,7 +24,11 @@ const Invoice = (): ReactElement | null => {
       <Container>
         <InvoiceStatus invoiceId={invoiceId} />
 
+        <Spacer size="large" />
+
         <InvoiceDetails invoiceId={invoiceId} />
+
+        <Spacer size="large" />
 
         <InvoicePayments lotId={lotId} invoiceId={invoiceId} />
       </Container>
@@ -31,6 +36,6 @@ const Invoice = (): ReactElement | null => {
   )
 }
 
-export default Invoice
-
 const Container = styled('div', {})
+
+export default Invoice

@@ -42,7 +42,7 @@ export const LotResult = ({
     ),
   )
 
-  const lotDate = lot?.id
+  const lotDate = lot?.lastCallTime
 
   const didLotHaveWinner = Boolean(lot?.winnerUsername)
 

@@ -4,7 +4,6 @@ import { styled } from '../../styles/stitches.config'
 import { PrimaryButton } from '../../components/PrimaryButton'
 import { TextButton } from '../../components/TextButton'
 import { TextInput } from '../../components/TextInput'
-import { Typography } from '../../components/Typography'
 import { signOut } from '../../store/auth/actions'
 import { updateUserProfile } from '../../store/userProfile/actions'
 import {
@@ -12,6 +11,7 @@ import {
   selectUsername,
 } from '../../store/userProfile/selectors'
 import { ProtectedRoute } from '../../components/ProtectedRoute'
+import { Spacer } from '../../components/Spacer'
 
 interface ProfileProps {}
 
@@ -40,14 +40,18 @@ const Profile = ({}: ProfileProps): ReactElement => {
       updateUserProfile.request({ data: { username }, showSnackbar: true }),
     )
   }, [dispatch, username])
-  console.log('HERE', isSaveDisabled)
 
   return (
     <ProtectedRoute>
       <Container>
-        <Typography>Email</Typography>
+        <TextInput
+          label="Email"
+          placeholder="E.g. nighthawk@protonmail.com"
+          value={userEmail || ''}
+          disabled
+        />
 
-        <Typography>{userEmail}</Typography>
+        <Spacer />
 
         <TextInput
           label="What should we call you?"
@@ -57,20 +61,20 @@ const Profile = ({}: ProfileProps): ReactElement => {
           onSubmit={!isSaveDisabled ? onSubmit : undefined}
         />
 
-        <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
+        <Spacer />
 
-        <ButtonsContainer>
-          <PrimaryButton disabled={!isSaveDisabled} onClick={onSubmit}>
-            SAVE
-          </PrimaryButton>
-        </ButtonsContainer>
+        <PrimaryButton disabled={isSaveDisabled} onClick={onSubmit}>
+          SAVE
+        </PrimaryButton>
+
+        <Spacer />
+
+        <TextButton onClick={onSignOutClick}>Sign Out</TextButton>
       </Container>
     </ProtectedRoute>
   )
 }
 
-export default Profile
-
 const Container = styled('div', {})
 
-const ButtonsContainer = styled('div', {})
+export default Profile

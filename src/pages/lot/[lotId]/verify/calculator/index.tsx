@@ -13,6 +13,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../../../server/getInactiveLots'
 import { Lot, LotId } from '../../../../../store/lots/models'
 import { ProtectedRoute } from '../../../../../components/ProtectedRoute'
+import { Spacer } from '../../../../../components/Spacer'
 
 interface VerifyResultCalculatorProps {
   lot?: Lot
@@ -48,56 +49,64 @@ const VerifyResultCalculator = ({
 
   return (
     <ProtectedRoute>
-      <Container>
-        <Card>
-          <DataSummary
-            icon={<CopyIcon />}
-            title="Random Number"
-            value={randomNumber}
-          >
-            <Typography>=</Typography>
+      <Container disabled>
+        <DataSummary
+          icon={<CopyIcon />}
+          title="Random Number"
+          value={randomNumber}
+        >
+          <Typography>=</Typography>
 
-            <InfoBox>
-              <Typography>parseInt(</Typography>
+          <InfoBox>
+            <Typography>parseInt(</Typography>
 
-              <TextInput
-                label="Block Hash"
-                placeholder="Enter block hash"
-                value={blockHash}
-                onChangeText={onChangeBlockHash}
-              />
+            <Spacer />
 
-              <Typography>, 16) / Math.pow(2, 256)</Typography>
-            </InfoBox>
-          </DataSummary>
+            <TextInput
+              placeholder="Enter block hash"
+              value={blockHash}
+              onChangeText={onChangeBlockHash}
+            />
 
-          <Divider />
+            <Spacer />
 
-          <DataSummary
-            icon={<CopyIcon />}
-            title="Ticket Index"
-            value={ticketIndex}
-          >
-            <Typography>=</Typography>
+            <Typography>, 16) / Math.pow(2, 256)</Typography>
+          </InfoBox>
+        </DataSummary>
 
-            <InfoBox>
-              <Typography>Math.floor({randomNumber} * </Typography>
+        <Spacer />
 
-              <TextInput
-                label="Ticket Count"
-                placeholder="Enter ticket count"
-                value={ticketCount}
-                onChangeText={onChangeTicketCount}
-              />
+        <DataSummary
+          icon={<CopyIcon />}
+          title="Ticket Index"
+          value={ticketIndex}
+        >
+          <Typography>=</Typography>
 
-              <Typography>)</Typography>
-            </InfoBox>
-          </DataSummary>
-        </Card>
+          <Spacer />
+
+          <InfoBox>
+            <Typography>Math.floor({randomNumber} * </Typography>
+
+            <Spacer />
+
+            <TextInput
+              placeholder="Enter ticket count"
+              value={ticketCount}
+              onChangeText={onChangeTicketCount}
+            />
+
+            <Spacer />
+
+            <Typography>)</Typography>
+          </InfoBox>
+        </DataSummary>
       </Container>
     </ProtectedRoute>
   )
 }
+
+const Container = styled(Card, {})
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const lots = await getInactiveLots()
@@ -128,5 +137,3 @@ export const getStaticProps: GetStaticProps<
 }
 
 export default VerifyResultCalculator
-
-const Container = styled('div', {})

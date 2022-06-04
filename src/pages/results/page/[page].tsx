@@ -58,7 +58,7 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
             <>
               <LotResult key={lot.id} lot={lot} />
 
-              <Spacer size="large" />
+              <Spacer />
             </>
           ))
         ) : (

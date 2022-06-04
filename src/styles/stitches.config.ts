@@ -105,6 +105,9 @@ export const globalStyles = globalCss({
     outline: 'none',
     border: 'none',
   },
+  a: {
+    color: '$turquoise',
+  },
   '::-webkit-scrollbar': {
     width: theme.space.small,
   },

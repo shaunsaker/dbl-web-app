@@ -10,12 +10,14 @@ import { LotId } from '../../../../store/lots/models'
 import { getInactiveLots } from '../../../../server/getInactiveLots'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { ProtectedRoute } from '../../../../components/ProtectedRoute'
+import { InfoBox } from '../../../../components/InfoBox'
+import { Spacer } from '../../../../components/Spacer'
 
 interface WinnerProps {
   lotId?: LotId
 }
 
-const Winner = ({ lotId }: WinnerProps): ReactElement => {
+const Winner = ({ lotId }: WinnerProps): ReactElement | null => {
   const { openLink } = useLinking()
 
   const winning = useSelector(
@@ -31,12 +33,18 @@ const Winner = ({ lotId }: WinnerProps): ReactElement => {
     openLink(winning.link)
   }, [openLink, winning])
 
+  if (!winning) {
+    return null
+  }
+
   return (
     <ProtectedRoute>
       <Container>
-        <Typography>Holy shit, you just won 🎉</Typography>
+        <InfoBox>
+          Holy shit, you won 🎉 Follow the link below to withdraw your BTC...
+        </InfoBox>
 
-        <Typography>Follow the link below to withdraw your BTC...</Typography>
+        <Spacer />
 
         <PrimaryButton onClick={onWithdrawClick}>
           SET UP WITHDRAWAL

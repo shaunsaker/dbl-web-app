@@ -17,7 +17,12 @@ export const Card = ({
   ...props
 }: CardProps): ReactElement => {
   return (
-    <Container kind={kind} disabled={disabled} onClick={onClick} {...props}>
+    <Container
+      kind={kind}
+      disabled={disabled}
+      onClick={!disabled ? onClick : undefined}
+      {...props}
+    >
       {children}
 
       {!disabled && (

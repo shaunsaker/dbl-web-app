@@ -34,6 +34,8 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
     selectTicketIdsByLotId(state, lot.id),
   )
 
+  const hadTickets = tickets.length
+
   const hasConfirmedTickets =
     ticketsGroupedByStatus[InvoiceStatus.confirmed].length
 
@@ -62,7 +64,7 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
   }, [dispatch, lot.id])
 
   return (
-    <Container onClick={onClick}>
+    <Container disabled={!hadTickets} onClick={onClick}>
       <Typography kind="title">
         You {isActiveLot ? 'have' : 'had'}{' '}
         {maybePluralise(tickets.length, 'ticket')}

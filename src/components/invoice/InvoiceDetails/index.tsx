@@ -1,12 +1,14 @@
 import React, { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
 import { styled } from '../../../styles/stitches.config'
-import { BlockchainAddress } from '../../BlockchainAddress'
+import { CopyValue } from '../../CopyValue'
 import { Typography } from '../../Typography'
-import { InvoiceId } from '../../../store/invoices/models'
+import { InvoiceId, InvoiceStatus } from '../../../store/invoices/models'
 import { selectInvoiceById } from '../../../store/invoices/selectors'
 import { ApplicationState } from '../../../store/reducers'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
+import { Card } from '../../Card'
+import { Spacer } from '../../Spacer'
 
 interface InvoiceDetailsProps {
   invoiceId: InvoiceId
@@ -19,25 +21,37 @@ export const InvoiceDetails = ({
     selectInvoiceById(state, invoiceId),
   )
 
+  const hasExpired = invoice?.status === InvoiceStatus.expired
+
   if (!invoice) {
     return null
   }
 
   return (
-    <Container>
-      <Typography>Invoice amount</Typography>
+    <Container disabled>
+      <Typography kind="small">Invoice amount</Typography>
 
-      <Typography>{invoice.amountBTC} BTC</Typography>
+      <CopyValue value={invoice.amountBTC}>{invoice.amountBTC} BTC</CopyValue>
 
-      <Typography>Invoice date</Typography>
+      <Spacer />
 
-      <Typography>{getFormattedTime(invoice.dateCreated)}</Typography>
+      <Typography kind="small">Invoice date</Typography>
 
-      <Typography>Invoice address</Typography>
+      <Typography kind="paragraph" bold>
+        {getFormattedTime(invoice.dateCreated, true)}
+      </Typography>
 
-      <BlockchainAddress>{invoice.address}</BlockchainAddress>
+      {!hasExpired && (
+        <>
+          <Spacer />
+
+          <Typography kind="small">Invoice address</Typography>
+
+          <CopyValue value={invoice.address}>{invoice.address}</CopyValue>
+        </>
+      )}
     </Container>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled(Card, {})

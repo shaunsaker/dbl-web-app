@@ -6,14 +6,14 @@ import { ButtonBase } from './ButtonBase'
 import { CopyIcon } from './icons/CopyIcon'
 
 interface CopyIconProps {
-  value: string
+  value: string | number
 }
 
 export const CopyButton = ({ value }: CopyIconProps): ReactElement => {
   const dispatch = useDispatch()
 
   const onCopyClick = useCallback(async () => {
-    navigator.clipboard.writeText(value)
+    navigator.clipboard.writeText(value.toString())
 
     dispatch(
       showSnackbar({

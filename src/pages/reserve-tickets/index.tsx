@@ -21,6 +21,7 @@ import { selectTicketIdsByLotIdGroupedByStatus } from '../../store/invoices/sele
 import { ProtectedRoute } from '../../components/ProtectedRoute'
 import { Spacer } from '../../components/Spacer'
 import { InfoBox } from '../../components/InfoBox'
+import { LoadingModal } from '../../components/LoadingModal'
 
 interface ReserveTicketsProps {}
 
@@ -167,9 +168,11 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
 
         <FooterContainer>
           <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
-            {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
+            RESERVE TICKETS
           </PrimaryButton>
         </FooterContainer>
+
+        {loading && <LoadingModal>Reserving your tickets...</LoadingModal>}
       </Container>
     </ProtectedRoute>
   )

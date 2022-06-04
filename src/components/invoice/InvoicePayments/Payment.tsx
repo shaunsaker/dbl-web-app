@@ -4,7 +4,8 @@ import { Payment as PaymentType } from '../../../store/payments/models'
 import { getFormattedTime } from '../../../utils/getFormattedTime'
 import { Typography } from '../../Typography'
 import { useLinking } from '../../useLinking'
-import { OpenIcon } from '../../icons/OpenIcon'
+import { Card } from '../../Card'
+import { Spacer } from '../../Spacer'
 
 type PaymentProps = PaymentType
 
@@ -23,13 +24,21 @@ export const Payment = ({
 
   return (
     <Container onClick={onClick}>
-      <Typography>{getFormattedTime(receivedDate)}</Typography>
+      <Typography kind="small">Date</Typography>
 
-      <Typography>{amountBTC} BTC</Typography>
+      <Typography kind="paragraph" bold>
+        {getFormattedTime(receivedDate)}
+      </Typography>
 
-      <OpenIcon width={16} height={16} style={{}} />
+      <Spacer />
+
+      <Typography kind="small">Amount</Typography>
+
+      <Typography kind="paragraph" bold>
+        {amountBTC} BTC
+      </Typography>
     </Container>
   )
 }
 
-const Container = styled('button', {})
+const Container = styled(Card, {})

@@ -6,15 +6,15 @@ import React, {
   useCallback,
 } from 'react'
 import { styled, theme } from '../styles/stitches.config'
-import { ElementContainer } from './ElementContainer'
 import { Typography } from './Typography'
 
 export interface TextInputProps extends HTMLAttributes<HTMLInputElement> {
   inputRef?: ForwardedRef<HTMLInputElement>
   type?: 'text' | 'email' | 'password'
-  label: string
+  label?: string
   value: string
-  onChangeText: (text: string) => void
+  disabled?: boolean
+  onChangeText?: (text: string) => void
   children?: React.ReactNode
 }
 
@@ -22,26 +22,30 @@ export const TextInput = ({
   inputRef,
   type = 'text',
   label,
+  disabled = false,
   onChangeText,
   children,
   ...props
 }: TextInputProps): ReactElement => {
   const onChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      onChangeText(event.target.value)
+      onChangeText && onChangeText(event.target.value)
     },
     [onChangeText],
   )
 
   return (
     <Container>
-      <LabelContainer>
-        <Typography kind="small">{label}</Typography>
-      </LabelContainer>
+      {label && (
+        <LabelContainer>
+          <Typography kind="small">{label}</Typography>
+        </LabelContainer>
+      )}
 
       <InputContainer>
         <StyledTextInput
           type={type}
+          disabled={disabled}
           onChange={onChange}
           {...props}
           ref={inputRef}
@@ -76,9 +80,14 @@ const StyledTextInput = styled('input', {
   fontWeight: 700,
   color: '$white',
   caretColor: '$turquoise',
-  cursor: 'pointer',
 
-  '&:focus, &:hover': {
-    backgroundColor: '$transWhite',
+  variants: {
+    disabled: {
+      false: {
+        '&:focus, &:hover': {
+          backgroundColor: '$transWhite',
+        },
+      },
+    },
   },
 })

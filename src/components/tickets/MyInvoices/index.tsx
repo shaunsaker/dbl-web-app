@@ -7,6 +7,8 @@ import { selectInvoicesDataLoading } from '../../../store/invoices/selectors'
 import { Typography } from '../../Typography'
 import { InvoiceTickets } from './InvoiceTickets'
 import { selectInvoicesByLotId } from '../../../store/invoices/selectors'
+import { Spacer } from '../../Spacer'
+import { LoadingModal } from '../../LoadingModal'
 
 interface MyTicketsProps {
   lotId: LotId
@@ -22,17 +24,23 @@ export const MyInvoices = ({ lotId }: MyTicketsProps): ReactElement => {
 
   return (
     <Container>
-      {loading ? (
-        <div>Loading</div>
-      ) : invoices.length ? (
+      {invoices.length ? (
         invoices.map(invoice => (
-          <InvoiceTickets key={invoice.id} {...invoice} />
+          <>
+            <InvoiceTickets key={invoice.id} {...invoice} />
+
+            <Spacer />
+          </>
         ))
       ) : (
-        <Typography>You have no tickets, shame on you!</Typography>
+        <Typography>You had no tickets, shame on you!</Typography>
       )}
+
+      {loading && <LoadingModal>Fetching tickets...</LoadingModal>}
     </Container>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  flexCenter: '',
+})
