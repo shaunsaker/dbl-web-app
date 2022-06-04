@@ -17,6 +17,7 @@ import { sortArrayOfObjectsByKey } from '../../utils/sortArrayOfObjectsByKey'
 import { LotResult } from '../../components/LotResult'
 import { Spacer } from '../../components/Spacer'
 import { TextButton } from '../../components/TextButton'
+import { Typography } from '../../components/Typography'
 
 interface HomeProps {
   latestInactiveLot?: Lot
@@ -45,7 +46,11 @@ const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
   return (
     <ProtectedRoute>
       <Container>
-        {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
+        {latestInactiveLot && (
+          <LotResult lot={latestInactiveLot}>
+            <Typography kind="heading">Yesterday&apos;s Winner</Typography>
+          </LotResult>
+        )}
 
         <Spacer size="large" />
 

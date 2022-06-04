@@ -27,6 +27,7 @@ interface LotResultProps extends HTMLAttributes<HTMLDivElement> {
 
 export const LotResult = ({
   lot,
+  children,
   ...props
 }: LotResultProps): ReactElement | null => {
   const dispatch = useDispatch()
@@ -85,7 +86,7 @@ export const LotResult = ({
 
   return (
     <Container {...props} onClick={onClick}>
-      <Typography kind="heading">Yesterday&apos;s Winner</Typography>
+      {children}
 
       <Typography kind="small">{getFormattedTime(lotDate)}</Typography>
 

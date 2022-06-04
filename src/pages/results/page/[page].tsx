@@ -43,22 +43,6 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
   return (
     <ProtectedRoute>
       <Container>
-        <ContentContainer>
-          {lots && lots.length ? (
-            lots.map(lot => (
-              <>
-                <LotResult key={lot.id} lot={lot} />
-
-                <Spacer size="large" />
-              </>
-            ))
-          ) : (
-            <Typography>No results yet.</Typography>
-          )}
-        </ContentContainer>
-
-        <Spacer size="large" />
-
         <PaginationContainer>
           <Pagination
             page={page}
@@ -66,33 +50,33 @@ const Results = ({ lots, page, totalPages }: ResultsProps): ReactElement => {
             onChange={onPaginationClick}
           />
         </PaginationContainer>
+
+        <Spacer size="large" />
+
+        {lots && lots.length ? (
+          lots.map(lot => (
+            <>
+              <LotResult key={lot.id} lot={lot} />
+
+              <Spacer size="large" />
+            </>
+          ))
+        ) : (
+          <Typography>No results yet.</Typography>
+        )}
+
+        <Spacer size="large" />
       </Container>
     </ProtectedRoute>
   )
 }
 
-const Container = styled('div', {
-  // necessary for ContentContainer scrolling
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  right: -32, // TODO: use theme
-  left: -32, // TODO: use theme
-  overflow: 'hidden',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-})
-
-const ContentContainer = styled('div', {
-  width: '100%',
-  height: '100%',
-  overflow: 'auto',
-  padding: '0 $large',
-})
+const Container = styled('div', {})
 
 const PaginationContainer = styled('div', {
   padding: '0 $large',
+  display: 'flex',
+  justifyContent: 'center',
 })
 
 export const getStaticPaths: GetStaticPaths = async () => {

@@ -11,7 +11,7 @@ interface CardProps {
 
 export const Card = ({
   kind = 'secondary',
-  disabled,
+  disabled = false,
   children,
   onClick,
   ...props
