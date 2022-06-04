@@ -18,15 +18,13 @@ export const Card = ({
 }: CardProps): ReactElement => {
   return (
     <Container kind={kind} disabled={disabled} onClick={onClick} {...props}>
-      <ContentContainer>
-        {children}
+      {children}
 
-        {!disabled && (
-          <OpenButtonContainer>
-            <OpenButton disabled />
-          </OpenButtonContainer>
-        )}
-      </ContentContainer>
+      {!disabled && (
+        <OpenButtonContainer>
+          <OpenButton disabled />
+        </OpenButtonContainer>
+      )}
     </Container>
   )
 }
@@ -35,6 +33,9 @@ const Container = styled('div', {
   width: '100%',
   transition: 'backgroundColor $default',
   borderRadius: '$borderRadius$default',
+  position: 'relative',
+  padding: '$default $large',
+  flexCenter: '',
 
   variants: {
     kind: {
@@ -56,12 +57,6 @@ const Container = styled('div', {
       },
     },
   },
-})
-
-const ContentContainer = styled('div', {
-  position: 'relative',
-  padding: '$small $large',
-  flexCenter: '',
 })
 
 const OpenButtonContainer = styled('div', {

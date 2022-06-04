@@ -22,8 +22,6 @@ export const MyInvoices = ({ lotId }: MyTicketsProps): ReactElement => {
 
   return (
     <Container>
-      <Typography>My Tickets</Typography>
-
       {loading ? (
         <div>Loading</div>
       ) : invoices.length ? (

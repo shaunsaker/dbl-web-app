@@ -7,7 +7,7 @@ export const Typography = styled('span', {
         fontSize: '$small',
         lineHeight: '$small',
         fontWeight: 400,
-        color: '$white',
+        color: 'rgba(255, 255, 255, 0.9)',
       },
       paragraph: {
         fontSize: '$regular',
@@ -33,6 +33,11 @@ export const Typography = styled('span', {
         lineHeight: '$small',
         fontWeight: 700,
         color: '$turquoise',
+      },
+    },
+    center: {
+      true: {
+        textAlign: 'center',
       },
     },
   },

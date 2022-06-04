@@ -19,6 +19,8 @@ import { showSnackbar } from '../../store/snackbars/actions'
 import { SnackbarType } from '../../store/snackbars/models'
 import { selectTicketIdsByLotIdGroupedByStatus } from '../../store/invoices/selectors'
 import { ProtectedRoute } from '../../components/ProtectedRoute'
+import { Spacer } from '../../components/Spacer'
+import { InfoBox } from '../../components/InfoBox'
 
 interface ReserveTicketsProps {}
 
@@ -117,35 +119,80 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
   return (
     <ProtectedRoute>
       <Container>
-        <Typography>How many tickets would you like to buy?</Typography>
+        <Typography kind="title" center>
+          How many tickets would you like to buy?
+        </Typography>
 
-        <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
+        <Spacer size="large" />
 
-        <Typography>{ticketCount}</Typography>
+        <TicketCountContainer>
+          <div>
+            <PrimaryButton onClick={() => onAddTickets(-1)}>-</PrimaryButton>
+          </div>
 
-        <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
+          <Typography kind="title">{ticketCount}</Typography>
 
-        <Typography>
+          <div>
+            <PrimaryButton onClick={() => onAddTickets(1)}>+</PrimaryButton>
+          </div>
+        </TicketCountContainer>
+
+        <Spacer size="large" />
+
+        <Typography kind="heading">
           {maybePluralise(ticketCount, 'ticket')} ~ {ticketsValueBTC} BTC* ($
           {ticketsValueUSD})
         </Typography>
 
-        <Typography>
+        <Spacer size="small" />
+
+        <Typography kind="small">
           *Exact BTC value will be confirmed once reserved
         </Typography>
+
+        <Spacer />
 
         <Typography>
           Your odds of winning would be {ticketOdds || 'Infinity'}%
         </Typography>
 
-        <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
-          {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
-        </PrimaryButton>
+        <Spacer size="large" />
+
+        <InfoBox>
+          After clicking Reserve, your tickets will be reserved for a total of
+          15 minutes for you to make payment.
+        </InfoBox>
+
+        <Spacer size="large" />
+
+        <FooterContainer>
+          <PrimaryButton disabled={isSubmitDisabled} onClick={onSubmitClick}>
+            {loading ? 'RESERVING YOUR TICKETS' : 'RESERVE TICKETS'}
+          </PrimaryButton>
+        </FooterContainer>
       </Container>
     </ProtectedRoute>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  height: '100%',
+  flexCenter: '',
+})
+
+const TicketCountContainer = styled('div', {
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+})
+
+const FooterContainer = styled('div', {
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+})
 
 export default ReserveTickets
