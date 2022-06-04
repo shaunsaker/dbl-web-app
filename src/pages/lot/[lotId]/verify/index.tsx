@@ -16,7 +16,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../../server/getInactiveLots'
 import { ProtectedRoute } from '../../../../components/ProtectedRoute'
 import { Spacer } from '../../../../components/Spacer'
-import { Typography } from '../../../../components/Typography'
 import { CopyValue } from '../../../../components/CopyValue'
 
 interface VerifyResultProps {
