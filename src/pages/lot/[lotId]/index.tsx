@@ -6,6 +6,7 @@ import { Lot, LotId } from '../../../store/lots/models'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getInactiveLots } from '../../../server/getInactiveLots'
 import { ProtectedRoute } from '../../../components/ProtectedRoute'
+import { Spacer } from '../../../components/Spacer'
 
 interface ResultProps {
   lot?: Lot
@@ -20,6 +21,8 @@ const Result = ({ lot }: ResultProps): ReactElement | null => {
     <ProtectedRoute>
       <Container>
         <LotStats lot={lot} />
+
+        <Spacer size="large" />
 
         <TicketsSummary lot={lot} />
       </Container>

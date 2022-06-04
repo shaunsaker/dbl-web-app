@@ -64,17 +64,21 @@ export const LotStats = ({
 
       <Spacer size="small" />
 
-      <Divider />
+      {isTodaysLot && (
+        <>
+          <Divider />
 
-      <Spacer />
+          <Spacer />
 
-      <DataSummary
-        icon={<ClockIcon />}
-        title="TIME UNTIL DRAW"
-        subtitle="Ticket sales close 1 hour before"
-      >
-        {lot && lot.active && <CountdownTimer timestamp={lot.drawTime} />}
-      </DataSummary>
+          <DataSummary
+            icon={<ClockIcon />}
+            title="TIME UNTIL DRAW"
+            subtitle="Ticket sales close 1 hour before"
+          >
+            {lot && lot.active && <CountdownTimer timestamp={lot.drawTime} />}
+          </DataSummary>
+        </>
+      )}
 
       {children}
 

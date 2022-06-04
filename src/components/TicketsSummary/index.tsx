@@ -72,20 +72,20 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
         {ticketsGroupedByStatus[InvoiceStatus.reserved].length ? (
           <Typography>
             {ticketsGroupedByStatus[InvoiceStatus.reserved].length} Awaiting
-            Payment
+            Payment |{' '}
           </Typography>
         ) : null}
 
         {ticketsGroupedByStatus[InvoiceStatus.paymentReceived].length ? (
           <Typography kind="small">
             {ticketsGroupedByStatus[InvoiceStatus.paymentReceived].length}{' '}
-            Payment Received
+            Payment Received |{' '}
           </Typography>
         ) : null}
 
         {ticketsGroupedByStatus[InvoiceStatus.confirmed].length ? (
           <Typography kind="small">
-            {ticketsGroupedByStatus[InvoiceStatus.confirmed].length} Confirmed
+            {ticketsGroupedByStatus[InvoiceStatus.confirmed].length} Confirmed |{' '}
           </Typography>
         ) : null}
 
