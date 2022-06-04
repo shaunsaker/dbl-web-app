@@ -39,18 +39,16 @@ export const TextInput = ({
         <Typography kind="small">{label}</Typography>
       </LabelContainer>
 
-      <ElementContainer>
-        <InputContainer>
-          <StyledTextInput
-            type={type}
-            onChange={onChange}
-            {...props}
-            ref={inputRef}
-          />
+      <InputContainer>
+        <StyledTextInput
+          type={type}
+          onChange={onChange}
+          {...props}
+          ref={inputRef}
+        />
 
-          {children}
-        </InputContainer>
-      </ElementContainer>
+        {children}
+      </InputContainer>
     </Container>
   )
 }
@@ -65,6 +63,8 @@ const LabelContainer = styled('div', {
 const InputContainer = styled('div', {
   position: 'relative',
   width: '100%',
+  border: '2px solid $transWhite',
+  borderRadius: '$borderRadius$default',
 })
 
 const StyledTextInput = styled('input', {

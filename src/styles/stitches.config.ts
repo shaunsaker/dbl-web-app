@@ -21,7 +21,7 @@ export const {
       transTurquoise: 'rgba(10, 189, 198, 0.33)',
       blue: '#133e7c',
       black: '#091833',
-      transBlack: 'rgba(9, 24, 51, 0.85)',
+      transBlack: 'rgba(9, 24, 51, 0.9)',
       white: '#FFFFFF',
       transWhite: 'rgba(255, 255, 255, 0.167)',
     },
@@ -49,8 +49,7 @@ export const {
       large: '32px',
     },
     borderRadius: {
-      default: '2px',
-      large: '4px',
+      default: '4px',
     },
     breakpoints: {
       tablet: '768px',

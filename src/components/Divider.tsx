@@ -7,4 +7,8 @@ export const Divider = ({}: DividerProps): ReactElement => {
   return <Container />
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  width: '100%',
+  height: '$borderWidths$default',
+  backgroundColor: '$transWhite',
+})

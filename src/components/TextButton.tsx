@@ -1,12 +1,17 @@
-import React, { HTMLAttributes, ReactElement } from 'react'
+import React, {
+  HTMLAttributes,
+  MouseEvent,
+  ReactElement,
+  ReactNode,
+} from 'react'
 import { styled } from '../styles/stitches.config'
 import { ButtonBase } from './ButtonBase'
 import { Typography } from './Typography'
 
 interface TextButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  children: string
+  children: ReactNode
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 export const TextButton = ({
@@ -16,7 +21,7 @@ export const TextButton = ({
 }: TextButtonProps): ReactElement => {
   return (
     <Container disabled={disabled} {...props}>
-      <StyledTypography kind="small" css={{ fontWeight: 700 }}>
+      <StyledTypography kind="paragraph" css={{ fontWeight: 700 }}>
         {children}
       </StyledTypography>
     </Container>

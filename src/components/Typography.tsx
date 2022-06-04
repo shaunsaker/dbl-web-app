@@ -6,7 +6,7 @@ export const Typography = styled('span', {
       small: {
         fontSize: '$small',
         lineHeight: '$small',
-        fontWeight: 700,
+        fontWeight: 400,
         color: '$white',
       },
       paragraph: {

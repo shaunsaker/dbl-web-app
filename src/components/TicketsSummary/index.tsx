@@ -16,6 +16,8 @@ import { getTicketOdds } from '../../utils/getTicketOdds'
 import { maybePluralise } from '../../utils/maybePluralise'
 
 import { Typography } from '../Typography'
+import { Card } from '../Card'
+import { Spacer } from '../Spacer'
 
 interface TicketsSummaryProps {
   lot: Lot
@@ -61,12 +63,12 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
 
   return (
     <Container onClick={onClick}>
-      <Typography>
+      <Typography kind="title">
         You {isActiveLot ? 'have' : 'had'}{' '}
         {maybePluralise(tickets.length, 'ticket')}
       </Typography>
 
-      <Typography>
+      <Typography kind="small">
         {ticketsGroupedByStatus[InvoiceStatus.reserved].length ? (
           <Typography>
             {ticketsGroupedByStatus[InvoiceStatus.reserved].length} Awaiting
@@ -75,30 +77,36 @@ export const TicketsSummary = ({ lot }: TicketsSummaryProps): ReactElement => {
         ) : null}
 
         {ticketsGroupedByStatus[InvoiceStatus.paymentReceived].length ? (
-          <Typography>
+          <Typography kind="small">
             {ticketsGroupedByStatus[InvoiceStatus.paymentReceived].length}{' '}
             Payment Received
           </Typography>
         ) : null}
 
         {ticketsGroupedByStatus[InvoiceStatus.confirmed].length ? (
-          <Typography>
+          <Typography kind="small">
             {ticketsGroupedByStatus[InvoiceStatus.confirmed].length} Confirmed
           </Typography>
         ) : null}
 
         {ticketsGroupedByStatus[InvoiceStatus.expired].length ? (
-          <Typography>
+          <Typography kind="small">
             {ticketsGroupedByStatus[InvoiceStatus.expired].length} Expired
           </Typography>
         ) : null}
       </Typography>
 
       {hasConfirmedTickets ? (
-        <Typography>Your odds of winning would be {ticketOdds}%</Typography>
+        <>
+          <Spacer size="small" />
+
+          <Typography kind="small">
+            Your odds of winning would be {ticketOdds}%
+          </Typography>
+        </>
       ) : null}
     </Container>
   )
 }
 
-const Container = styled('button', {})
+const Container = styled(Card, {})

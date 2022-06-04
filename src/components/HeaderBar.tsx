@@ -20,6 +20,7 @@ import {
 } from '../router/utils'
 import { Drawer, DrawerItem } from './Drawer'
 import { objectToArray } from '../utils/objectToArray'
+import { ButtonBase } from './ButtonBase'
 
 const DRAWER_ITEMS: DrawerItem[] = [
   ...objectToArray(Routes)
@@ -96,9 +97,9 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement | null => {
         {showBack ? (
           <StyledBackButton onClick={onBackClick} />
         ) : (
-          <button onClick={onLogoClick}>
+          <ButtonBase onClick={onLogoClick}>
             <Typography kind="logo">DBL</Typography>
-          </button>
+          </ButtonBase>
         )}
       </ItemContainer>
 
@@ -111,9 +112,9 @@ export const HeaderBar = ({}: HeaderBarProps): ReactElement | null => {
       <ItemContainer position="right">
         {showMenu ? (
           <>
-            <button onClick={onMenuClick}>
+            <ButtonBase onClick={onMenuClick}>
               <StyledMenuIcon />
-            </button>
+            </ButtonBase>
 
             <Drawer
               open={drawerOpen}

@@ -1,13 +1,15 @@
 import React, { ReactElement, ReactNode } from 'react'
 import { styled } from '../styles/stitches.config'
+import { ButtonBase } from './ButtonBase'
 import { OpenIcon } from './icons/OpenIcon'
+import { Spacer } from './Spacer'
 import { Typography } from './Typography'
 
 interface DataSummaryProps {
   icon: ReactNode
   title: string
   value?: string | number
-  subtitle?: string
+  subtitle?: string | number
   children?: ReactNode
   onClick?: () => void
 }
@@ -22,23 +24,40 @@ export const DataSummary = ({
 }: DataSummaryProps): ReactElement => {
   return (
     <Container>
-      {icon}
+      <TitleContainer>
+        <StyledIcon>{icon}</StyledIcon>
 
-      <Typography>{title}</Typography>
+        <Spacer size="verySmall" />
 
-      <Typography>{value}</Typography>
+        <Typography kind="small">{title}</Typography>
+      </TitleContainer>
 
-      {subtitle && <Typography>{subtitle}</Typography>}
+      <Typography kind="title">{value}</Typography>
 
       {children}
 
+      {subtitle && <Typography kind="small">{subtitle}</Typography>}
+
       {onClick && (
-        <button onClick={onClick}>
+        <ButtonBase onClick={onClick}>
           <OpenIcon />
-        </button>
+        </ButtonBase>
       )}
     </Container>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+const TitleContainer = styled('div', {
+  display: 'flex',
+})
+
+const StyledIcon = styled('div', {
+  fontSize: 16,
+  color: '$white',
+})

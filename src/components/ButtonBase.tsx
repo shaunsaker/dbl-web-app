@@ -5,11 +5,11 @@ export const ButtonBase = styled('button', {
   color: '$white',
   transition: 'color $default',
 
-  '&:hover, &[active]': {
+  '&:hover > *, &[active] > *': {
     color: '$turquoise',
   },
 
-  '&[disabled]': {
+  '&[disabled] > *': {
     fontWeight: 400,
     color: '$transWhite',
   },

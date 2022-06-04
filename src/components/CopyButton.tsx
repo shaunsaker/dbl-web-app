@@ -2,6 +2,7 @@ import React, { ReactElement, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { showSnackbar } from '../store/snackbars/actions'
 import { SnackbarType } from '../store/snackbars/models'
+import { ButtonBase } from './ButtonBase'
 import { CopyIcon } from './icons/CopyIcon'
 
 interface CopyIconProps {
@@ -23,8 +24,8 @@ export const CopyButton = ({ value }: CopyIconProps): ReactElement => {
   }, [value, dispatch])
 
   return (
-    <button onClick={onCopyClick}>
+    <ButtonBase onClick={onCopyClick}>
       <CopyIcon />
-    </button>
+    </ButtonBase>
   )
 }

@@ -15,7 +15,8 @@ import { getInactiveLots } from '../../server/getInactiveLots'
 import { Lot } from '../../store/lots/models'
 import { sortArrayOfObjectsByKey } from '../../utils/sortArrayOfObjectsByKey'
 import { LotResult } from '../../components/LotResult'
-import { Typography } from '../../components/Typography'
+import { Spacer } from '../../components/Spacer'
+import { TextButton } from '../../components/TextButton'
 
 interface HomeProps {
   latestInactiveLot?: Lot
@@ -46,19 +47,49 @@ const Home = ({ latestInactiveLot }: HomeProps): ReactElement => {
       <Container>
         {latestInactiveLot && <LotResult lot={latestInactiveLot} />}
 
-        <PrimaryButton onClick={onViewMoreResultsClick}>
-          <Typography>View More Results</Typography>
-        </PrimaryButton>
+        <Spacer size="large" />
 
-        {activeLot && <LotStats lot={activeLot} />}
+        <TextButton onClick={onViewMoreResultsClick}>Past Results</TextButton>
 
-        <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
+        <Spacer size="large" />
 
-        {activeLot && hasTickets ? <TicketsSummary lot={activeLot} /> : null}
+        {activeLot && (
+          <>
+            <LotStats lot={activeLot} />
+
+            <Spacer />
+          </>
+        )}
+
+        <FooterContainer>
+          <PrimaryButton onClick={onBuyTicketsClick}>BUY TICKETS</PrimaryButton>
+
+          {activeLot && hasTickets ? (
+            <>
+              <Spacer />
+
+              <TicketsSummary lot={activeLot} />
+            </>
+          ) : null}
+        </FooterContainer>
       </Container>
     </ProtectedRoute>
   )
 }
+
+const Container = styled('div', {
+  height: '100%',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+})
+
+const FooterContainer = styled('div', {
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+})
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const lots = await getInactiveLots()
@@ -69,5 +100,3 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 }
 
 export default Home
-
-const Container = styled('div', {})

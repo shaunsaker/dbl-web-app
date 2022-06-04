@@ -1,5 +1,9 @@
-import moment from 'moment'
-import React, { HTMLAttributes, ReactElement, useCallback } from 'react'
+import React, {
+  HTMLAttributes,
+  MouseEvent,
+  ReactElement,
+  useCallback,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { styled } from '../../styles/stitches.config'
 import { lotIdParam, Routes } from '../../router/models'
@@ -10,9 +14,12 @@ import { navigate } from '../../store/navigation/actions'
 import { ApplicationState } from '../../store/reducers'
 import { selectUserWinningByLotId } from '../../store/userProfile/selectors'
 import { numberToDigits } from '../../utils/numberToDigits'
-import { PrimaryButton } from '../PrimaryButton'
 
 import { Typography } from '../Typography'
+import { Card } from '../Card'
+import { getFormattedTime } from '../../utils/getFormattedTime'
+import { Spacer } from '../Spacer'
+import { TextButton } from '../TextButton'
 
 interface LotResultProps extends HTMLAttributes<HTMLDivElement> {
   lot: Lot
@@ -34,68 +41,81 @@ export const LotResult = ({
     ),
   )
 
-  // we use the last call time because drawTime is midnight (technically the next day)
-  const lotDate = lot?.lastCallTime
+  const lotDate = lot?.id
+
   const didLotHaveWinner = Boolean(lot?.winnerUsername)
 
-  const onViewMoreClick = useCallback(() => {
+  const onClick = useCallback(() => {
     dispatch(
       navigate({ route: Routes.result.path.replace(lotIdParam, lot.id) }),
     )
   }, [dispatch, lot.id])
 
-  const onViewWinningDetailsClick = useCallback(() => {
-    dispatch(
-      navigate({ route: Routes.winner.path.replace(lotIdParam, lot.id) }),
-    )
-  }, [dispatch, lot.id])
+  const onViewWinningDetailsClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
 
-  const onVerifyResultClick = useCallback(() => {
-    if (!lot) {
-      return
-    }
+      dispatch(
+        navigate({ route: Routes.winner.path.replace(lotIdParam, lot.id) }),
+      )
+    },
+    [dispatch, lot.id],
+  )
 
-    dispatch(
-      navigate({ route: Routes.verifyResult.path.replace(lotIdParam, lot.id) }),
-    )
-  }, [lot, dispatch])
+  const onVerifyResultClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
+
+      if (!lot) {
+        return
+      }
+
+      dispatch(
+        navigate({
+          route: Routes.verifyResult.path.replace(lotIdParam, lot.id),
+        }),
+      )
+    },
+    [lot, dispatch],
+  )
 
   if (!lot) {
     return null
   }
 
   return (
-    <Container {...props}>
-      <Typography>{moment(lotDate).format('dddd, DD MMMM YYYY')}</Typography>
+    <Container {...props} onClick={onClick}>
+      <Typography kind="heading">Yesterday&apos;s Winner</Typography>
 
-      <Typography>{lot.winnerUsername}</Typography>
+      <Typography kind="small">{getFormattedTime(lotDate)}</Typography>
 
-      <Typography>
-        {lot.totalBTC} BTC ($
-        {numberToDigits(lot?.totalBTC * rate, 0)})
-      </Typography>
+      <Spacer size="small" />
 
-      <PrimaryButton disabled={!onViewMoreClick} onClick={onViewMoreClick}>
-        <Typography>View Result</Typography>
-      </PrimaryButton>
-
-      {didUserWinThisLot && (
-        <>
-          <Typography>You won this one 🎉</Typography>
-
-          <PrimaryButton onClick={onViewWinningDetailsClick}>
-            <Typography>View Winning Details</Typography>
-          </PrimaryButton>
-        </>
+      {didUserWinThisLot ? (
+        <TextButton onClick={onViewWinningDetailsClick}>
+          {lot.winnerUsername || 'You'} 🎉
+        </TextButton>
+      ) : (
+        <Typography kind="title">{lot.winnerUsername || '-'}</Typography>
       )}
 
+      <Spacer size="small" />
+
+      <Typography kind="title">{lot.totalBTC} BTC</Typography>
+
+      <Typography kind="small">
+        ${numberToDigits(lot?.totalBTC * rate, 0)}
+      </Typography>
+
       {didLotHaveWinner && (
-        <PrimaryButton onClick={onVerifyResultClick}>
-          Verify Result
-        </PrimaryButton>
+        <>
+          <Spacer />
+
+          <TextButton onClick={onVerifyResultClick}>Verify</TextButton>
+        </>
       )}
     </Container>
   )
 }
 
-const Container = styled('div', {})
+const Container = styled(Card, {})

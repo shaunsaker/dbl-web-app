@@ -15,8 +15,8 @@ export const CountdownTimer = ({ timestamp }: TimerProps): ReactElement => {
 
   return (
     <Container>
-      <Typography>
-        {hours}h {minutes}min {seconds}sec to go
+      <Typography kind="title">
+        {hours}h {minutes}min {seconds}sec
       </Typography>
     </Container>
   )

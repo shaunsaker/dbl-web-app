@@ -34,6 +34,8 @@ const Container = styled('button', {
   height: 50,
   backgroundColor: '$transWhite',
   transition: 'backgroundColor,opacity $default',
+  borderRadius: '$borderRadius$default',
+  overflow: 'hidden',
 
   '&:hover:not([disabled]), &[active]': {
     backgroundColor: '$transTurquoise',

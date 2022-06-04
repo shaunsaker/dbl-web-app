@@ -146,6 +146,6 @@ const ReserveTickets = ({}: ReserveTicketsProps): ReactElement => {
   )
 }
 
-export default ReserveTickets
-
 const Container = styled('div', {})
+
+export default ReserveTickets
